@@ -228,6 +228,11 @@
                         <span *ngIf="!loading; else spinner">Get OTP</span>
                     </button>
                 </div>
+                <div *ngIf="showResendBtn">
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="resendOtp()">
+                        <span *ngIf="!loading; else spinner">Resend OTP</span>
+                    </button>
+                </div>
                 <!-- verify otp field and btn  -->
                 <div *ngIf="showVerifyBtn">
                     <div class="col-12  mb-1">
@@ -262,7 +267,7 @@
             </div>
         </form>
     </div>
-    <div class="registration__card_2 px-4" *ngIf="showMessage">
+    <div class="registration__card_2 px-4 py-4 mt-4" *ngIf="showMessage">
         <h1 class="message-style">You have been successfully registered</h1>
     </div>
 </div>

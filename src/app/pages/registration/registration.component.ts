@@ -89,6 +89,7 @@ export class RegistrationComponent implements OnInit {
     testCenterId!: string;
     showMessage: boolean = false;
     showOtpBtn: boolean = true;
+    showResendBtn:boolean = false;
 
 
     ngOnInit(): void {
@@ -196,6 +197,7 @@ export class RegistrationComponent implements OnInit {
                         this.loading = false;
                         this.showVerifyBtn = true;
                         this.showOtpBtn = false;
+                        this.showResendBtn = true;
                     },
                     error: () => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
@@ -241,6 +243,66 @@ export class RegistrationComponent implements OnInit {
         // };
 
         // }
+    }
+
+    resendOtp() {
+        if (this.tForm.invalid) {
+            this.tForm.markAllAsTouched();
+        } else {
+            this.loading = true;
+            //   const newOtp = this.helperService.generateOtp();
+            const mobileNo = this.tForm.value.mobile_no;
+            const mode = this.tForm.value.mode;
+
+            // let testCenterId;
+            if (mode === 'online') {
+                this.testCenterId = "";
+            } else if (mode === 'offline') {
+                if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
+                    this.testCenterId = 'arnold-7-jan'
+                } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
+                    this.testCenterId = 'arnold-14-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
+                    this.testCenterId = 'annie-7-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
+                    this.testCenterId = 'annie-14-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
+                    this.testCenterId = 'prestige-7-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
+                    this.testCenterId = 'prestige-14-jan'
+
+                }
+
+            }
+            this.apiService
+                // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
+                .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
+                .subscribe({
+                    next: () => {
+                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                        this.loading = false;
+                        this.showVerifyBtn = true;
+                        this.showOtpBtn = false;
+                        this.showResendBtn = true;
+                    },
+                    error: () => {
+                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        // this.router.navigate(['/verify']);
+                        this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+                        this.loading = false;
+                    }
+                });
+        }
     }
 
     registerNow() {
