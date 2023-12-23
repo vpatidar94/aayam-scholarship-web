@@ -1,8 +1,15 @@
 import { Routes } from '@angular/router';
+import { RegistrationIndoreComponent } from '@pages/registration copy/registration-indore.component';
 import { RegistrationComponent } from '@pages/registration/registration.component';
 
 export const appRoutes: Routes = [
-    {
+    
+  {
+    path: "register-indore",
+    component:  RegistrationIndoreComponent
+  },
+  
+  {
         path: "",
         component: RegistrationComponent
       },
