@@ -29,7 +29,8 @@ export class RegistrationComponent implements OnInit {
     streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
     modeOptions = ["online", "offline"] as Array<ModeType>;
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
-    testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore"] as Array<TestCenterType>;
+    testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore", "Prestige Institute of Engineering"] as Array<TestCenterType>;
+
 
 
     offlineDateOptions = [{
@@ -86,6 +87,8 @@ export class RegistrationComponent implements OnInit {
     showVerifyBtn = false;
     showRegisteredNow = false;
     testCenterId!: string;
+    showMessage: boolean = false;
+    showOtpBtn: boolean = true;
 
 
     ngOnInit(): void {
@@ -172,6 +175,15 @@ export class RegistrationComponent implements OnInit {
                     this.testCenterId = 'annie-14-jan'
 
                 }
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                    this.testCenterId = 'prestige-7-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                    this.testCenterId = 'prestige-14-jan'
+
+                }
+
             }
             this.apiService
                 // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
@@ -183,6 +195,7 @@ export class RegistrationComponent implements OnInit {
                         this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
                         this.loading = false;
                         this.showVerifyBtn = true;
+                        this.showOtpBtn = false;
                     },
                     error: () => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
@@ -200,24 +213,34 @@ export class RegistrationComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
-            .subscribe({
-                next: () => {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                    this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                    this.loading = false;
-                    this.showVerifyBtn = false;
-                    this.showRegisteredNow = true;
+            .subscribe(
+                (res) => {
+                    // console.log("response", res)
+                    if (res.status_code === 'success') {
+                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                        this.loading = false;
+                        this.showVerifyBtn = false;
+                        // this.showRegisteredNow = true;
+                        this.registerNow();
+                        this.showMessage = true;
+                    }
                 },
-                error: () => {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify']);
-                    this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-                    this.loading = false;
-
+                (error) => {
+                    console.error("Error sending otp", error);
                 }
-            });
+            )
+        // error: () => {
+        //     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+        //     // this.router.navigate(['/verify']);
+        //     this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+        //     this.loading = false;
 
+        // }
+        // };
+
+        // }
     }
 
     registerNow() {
@@ -268,9 +291,17 @@ export class RegistrationComponent implements OnInit {
                 this.testCenterId = 'annie-14-jan'
 
             }
+            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                this.testCenterId = 'prestige-7-jan'
+
+            }
+            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                this.testCenterId = 'prestige-14-jan'
+
+            }
         }
 
-        const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId:this.testCenterId };
+        const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId: this.testCenterId };
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
@@ -294,7 +325,7 @@ export class RegistrationComponent implements OnInit {
 
     changeStream() {
         const stream = this.tForm.get('stream')?.value;
-        if (stream === '11' || stream === '12' || stream === 'DROPPER') {
+        if (stream === '11' || stream === '12') {
             this.tForm.get('subject')?.addValidators(Validators.required);
         } else {
             this.tForm.get('subject')?.clearValidators();

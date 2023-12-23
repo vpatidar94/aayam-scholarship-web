@@ -29,7 +29,7 @@ export class RegistrationIndoreComponent implements OnInit {
     streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
     modeOptions = ["offline"] as Array<ModeIndoreType>;
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
-    testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore"] as Array<TestCenterType>;
+    testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore", "Prestige Institute of Engineering"] as Array<TestCenterType>;
 
 
     offlineDateOptions = [{
@@ -86,6 +86,7 @@ export class RegistrationIndoreComponent implements OnInit {
     showVerifyBtn = false;
     showRegisteredNow = false;
     testCenterId!: string;
+    showMessage: boolean = false;
 
 
     ngOnInit(): void {
@@ -172,6 +173,14 @@ export class RegistrationIndoreComponent implements OnInit {
                     this.testCenterId = 'annie-14-jan'
 
                 }
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                    this.testCenterId = 'prestige-7-jan'
+
+                }
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                    this.testCenterId = 'prestige-14-jan'
+
+                }
             }
             this.apiService
                 // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
@@ -201,13 +210,19 @@ export class RegistrationIndoreComponent implements OnInit {
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
             .subscribe({
-                next: () => {
+                // next: () => {        
+                    next: (res) => {
+                        if (res.status_code === 'success') {
                     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                     // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
                     this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                    this.loading = false;
+                    // this.loading = false;
                     this.showVerifyBtn = false;
-                    this.showRegisteredNow = true;
+                    // this.showRegisteredNow = true;
+                    this.registerNow()
+                        }
+                    this.loading = false;
+
                 },
                 error: () => {
                     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
@@ -266,6 +281,14 @@ export class RegistrationIndoreComponent implements OnInit {
             }
             else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
                 this.testCenterId = 'annie-14-jan'
+
+            }
+            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                this.testCenterId = 'prestige-7-jan'
+
+            }
+            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                this.testCenterId = 'prestige-14-jan'
 
             }
         }
