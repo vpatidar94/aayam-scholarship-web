@@ -1,0 +1,262 @@
+<div class="bg__body">
+    <org-dashboard-header title="" subTitle="" [showLogout]="true">
+    </org-dashboard-header>
+
+    <div class="registration__card px-4 py-4">
+        <h4 class="text-center py-4 text-grey mb-4">Scholarship Test Registration</h4>
+        <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
+
+            <!-- Student name -->
+            <div class="col-12  mb-1">
+                <label for="name-field" class="mb-2 text__body-dark">Student's Name</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="text" formControlName="student_name"
+                        class="form-control ifield ifield-login mobile__field" id="name-field" value=""
+                        placeholder="Enter your name">
+                </div>
+                <!-- validation messages -->
+                <org-field-validation-message [control]="tForm.controls['student_name']"></org-field-validation-message>
+            </div>
+
+            <!-- Student mobile no -->
+            <div class="col-12  mb-1">
+                <label for="mobile-field" class="mb-2 text__body-dark">Mobile Number</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="text" maxlength="10" formControlName="mobile_no"
+                        class="form-control ifield ifield-login mobile__field" id="mobile-field" value=""
+                        placeholder="XXXXXXXXXX">
+                </div>
+                <!-- validation messages -->
+                <org-field-validation-message [control]="tForm.controls['mobile_no']"></org-field-validation-message>
+            </div>
+
+            <!-- Father name -->
+            <div class="col-12  mb-1">
+                <label for="mobile-field" class="mb-2 text__body-dark">Father's Name</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="text" formControlName="father_name"
+                        class="form-control ifield ifield-login mobile__field" id="mobile-field" value=""
+                        placeholder="Enter father's name">
+                </div>
+                <org-field-validation-message [control]="tForm.controls['father_name']"></org-field-validation-message>
+            </div>
+
+            <!-- Father mobile no -->
+            <div class="col-12  mb-1">
+                <label for="mobile-field" class="mb-2 text__body-dark">Father's Mobile Number</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="text" maxlength="10" formControlName="father_mobile_no"
+                        class="form-control ifield ifield-login mobile__field" id="mobile-field" value=""
+                        placeholder="XXXXXXXXXX">
+                </div>
+                <!-- validation messages -->
+                <org-field-validation-message
+                    [control]="tForm.controls['father_mobile_no']"></org-field-validation-message>
+            </div>
+
+            <!-- DOB -->
+            <div class="col-12  mb-1">
+                <label for="dob-field" class="mb-2 text__body-dark">DOB</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="date" formControlName="dob" class="form-control ifield ifield-login mobile__field"
+                        id="dob-field" value="" placeholder="Enter date of birth">
+                </div>
+                <org-field-validation-message [control]="tForm.controls['dob']"></org-field-validation-message>
+            </div>
+
+            <!-- Select Class -->
+            <div class="col-12 mt-4 mb-2">
+                <label for="stream-field" class="mb-2 text__body-dark">Select Class</label>
+                <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of streamOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="stream" [id]="'radio-' + option"
+                                formControlName="stream" [value]="option" (change)="changeStream()" />
+                            <label class="form-check-label" [for]="'radio-' + option">
+                                {{ option }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <org-field-validation-message [control]="tForm.controls['stream']"></org-field-validation-message>
+            </div>
+            <div class="col-12 mt-4 mb-2" *ngIf="
+                  tForm.value.stream === '11' ||
+                  tForm.value.stream === '12'
+                ">
+                <label for="mobile-field" class="mb-2 text__body-dark">Select Subject</label>
+                <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of subjectOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [id]="'radio-' + option"
+                                formControlName="subject" [value]="option" />
+                            <label class="form-check-label" [for]="'radio-' + option">
+                                {{ option }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <org-field-validation-message [control]="tForm.controls['subject']"></org-field-validation-message>
+            </div>
+
+            <!--School Name -->
+            <div class="col-12  mb-1">
+                <label for="school-field" class="mb-2 text__body-dark">School Name</label>
+                <div class="position-relative">
+                    <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                    <input type="text" formControlName="school_name"
+                        class="form-control ifield ifield-login mobile__field" id="school-field" value=""
+                        placeholder="Enter School Name">
+                </div>
+                <org-field-validation-message [control]="tForm.controls['school_name']"></org-field-validation-message>
+            </div>
+
+            <!-- city -->
+            <div class="col-12  mb-1">
+                <label for="city-field" class="mb-2 text__body-dark">City</label>
+                <div class="position-relative">
+                    <input type="text" formControlName="city_name"
+                        class="form-control ifield ifield-login mobile__field" id="city-field" value=""
+                        placeholder="Enter City Name">
+                </div>
+                <org-field-validation-message [control]="tForm.controls['city_name']"></org-field-validation-message>
+            </div>
+
+            <!-- District -->
+            <div class="col-12  mb-1">
+                <label for="district-field" class="mb-2 text__body-dark">District</label>
+                <div class="position-relative">
+                    <input type="text" formControlName="district_name"
+                        class="form-control ifield ifield-login mobile__field" id="district-field" value=""
+                        placeholder="Enter District Name">
+                </div>
+                <org-field-validation-message
+                    [control]="tForm.controls['district_name']"></org-field-validation-message>
+            </div>
+
+            <!-- Mode -->
+            <div class="col-12 mb-1">
+                <label for="mode-field" class="mb-2 text__body-dark">Select Mode</label>
+                <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of modeOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mode" [id]="'radio-' + option"
+                                formControlName="mode" [value]="option" (change)="changeMode()" />
+                            <label class="form-check-label text-dark" [for]="'radio-' + option">
+                                {{ option }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <org-field-validation-message [control]="tForm.controls['mode']"></org-field-validation-message>
+            </div>
+
+            <!-- Test Center -->
+            <!-- test center and test date for offline mode -->
+            <div class="col-12  mb-1" *ngIf="
+            tForm.value.mode === 'offline'
+          ">
+                <label for="test-center-field" class="mb-2 text__body-dark">Select Test Center</label>
+                <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of testCenterOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="test_center" [id]="'radio-' + option"
+                                formControlName="test_center" [value]="option" (change)="changeTestCenter()" />
+                            <label class="form-check-label" [for]="'radio-' + option">
+                                {{ option }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <org-field-validation-message [control]="tForm.controls['test_center']"></org-field-validation-message>
+            </div>
+
+            <!-- Offline test date -->
+            <div class="col-12  mb-1" *ngIf="tForm.value.mode === 'offline'">
+                <label for="offline_test_date" class="mb-2 text__body-dark">Select Test Date</label>
+                <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of offlineDateOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="offline_test_date"
+                                [id]="'radio-' + option.date" formControlName="offline_test_date" [value]="option.value"
+                                (change)="changeOfflineTestDate()" />
+                            <label class="form-check-label" [for]="'radio-' + option.date">
+                                {{ option.date }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <org-field-validation-message
+                    [control]="tForm.controls['offline_test_date']"></org-field-validation-message>
+            </div>
+
+            <!-- Test date for online mode -->
+            <div class="col-12  mb-1" *ngIf="tForm.value.mode === 'online'">
+                <label for="online_test_date" class="mb-2 text__body-dark">Select Test Date</label>
+                <!-- <div class="d-flex">
+                    <div class="me-4" *ngFor="let option of onlineDateOptions">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="online_test_date"
+                                [id]="'radio-' + option.date" formControlName="online_test_date" [value]="option.value"
+                                (change)="changeOnlineTestDate()" />
+                            <label class="form-check-label" [for]="'radio-' + option.date">
+                                {{ option.date }}
+                            </label>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="me-4">
+                    <select class="form-select" name="online_test_date" formControlName="online_test_date"
+                        (change)="changeOnlineTestDate()">
+                        <option *ngFor="let option of onlineDateOptions" [value]="option.value">{{ option.date }}
+                        </option>
+                    </select>
+                </div>
+                <org-field-validation-message
+                    [control]="tForm.controls['online_test_date']"></org-field-validation-message>
+            </div>
+
+            <!-- Buttons -->
+            <div class="col-12 ">
+                <button type="submit" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
+                    <span *ngIf="!loading; else spinner">Get OTP</span>
+                </button>
+                <!-- verify otp field and btn  -->
+                <div *ngIf="showVerifyBtn">
+                    <div class="col-12  mb-1">
+                        <label for="otp-field" class="mb-2 text__body-dark"> Verify OTP</label>
+                        <div class="position-relative">
+                            <input type="text" formControlName="verify_otp"
+                                class="form-control ifield ifield-login mobile__field" id="otp-field" value=""
+                                placeholder="Enter the otp sent on your Mobile No">
+                        </div>
+                        <org-field-validation-message
+                            [control]="tForm.controls['otp_field']"></org-field-validation-message>
+                    </div>
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
+                        <span (click)="verifyOtp()">verify OTP</span>
+                    </button>
+                </div>
+                <ng-template #spinner>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </ng-template>
+            </div>
+
+            <!-- Register Now btn -->
+            <div *ngIf="showRegisteredNow">
+                <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
+                    <span (click)="registerNow()">Register</span>
+                </button>
+            </div>
+
+            <div class="col-12 mt-4 text__grey text-center">
+                <span class="me-2">For more details visit our website</span><a class="text__action__primary"
+                    href="https://www.aayamcareerinstitute.com/">click here</a>
+            </div>
+        </form>
+    </div>

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
+import { RegistrationComponent } from '@pages/registration/registration.component';
 
 export const appRoutes: Routes = [
     {
         path: "",
-        redirectTo: "register",
-        pathMatch: "full",
+        component: RegistrationComponent
       },
 
       // {
@@ -16,9 +16,8 @@ export const appRoutes: Routes = [
 
       {
         path: "register",
-        // component:  LoginComponent,
-        loadComponent: () =>
-          import('./pages/registration/registration.component').then((x) => x.RegistrationComponent),
-      },
+        component:  RegistrationComponent
+      }
+       
 
 ];
