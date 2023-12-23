@@ -240,7 +240,7 @@ export class ApiService {
       city: string,
       testDate: TestCenterType,
       mode: ModeType,
-      testCenterId: string
+      testCenterId: any;
     }
   ): Observable<CustomHttpResponse<any>> {
     return this.http

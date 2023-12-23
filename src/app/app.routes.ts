@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const appRoutes: Routes = [
     {
         path: "",
-        redirectTo: "registration",
+        redirectTo: "register",
         pathMatch: "full",
       },
 
@@ -15,7 +15,7 @@ export const appRoutes: Routes = [
       // },
 
       {
-        path: "registration",
+        path: "register",
         // component:  LoginComponent,
         loadComponent: () =>
           import('./pages/registration/registration.component').then((x) => x.RegistrationComponent),

@@ -234,7 +234,7 @@ export class RegistrationComponent implements OnInit {
         // const stream = this.tForm.value.stream;
         const tVal = this.tForm.value;
         let streamVal = tVal.stream;
-        if (tVal.stream === '11' || tVal.stream === '12' || tVal.stream === 'DROPPER')
+        if (tVal.stream === '11' || tVal.stream === '12')
             streamVal = tVal.stream + '-' + tVal.subject;
 
         const schoolName = this.tForm.value.school_name;
@@ -251,26 +251,24 @@ export class RegistrationComponent implements OnInit {
             // You might want to set a default value or show an error message.
         }
 
-        // let testCenterId;
         if (mode === 'online') {
             this.testCenterId = "";
         } else if (mode === 'offline') {
-            if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School") {
+            if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
                 this.testCenterId = 'arnold-7-jan'
-            } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School") {
+            } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
                 this.testCenterId = 'arnold-14-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School") {
+            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
                 this.testCenterId = 'annie-7-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School") {
+            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
                 this.testCenterId = 'annie-14-jan'
 
             }
         }
-
 
         const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId:this.testCenterId };
         this.apiService
