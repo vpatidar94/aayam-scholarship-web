@@ -6,7 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { VALIDATE } from 'src/app/core/constant/validate';
 import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
 import { HelperService } from 'src/app/core/services/helper';
-import { CONSTANTS, ClassType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
+import { CONSTANTS, ClassType, ModeIndoreType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
 import { ApiService } from '@core/services/api.service';
 import { AlertService } from '@core/services/alert.service';
 import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
@@ -27,7 +27,7 @@ export class RegistrationIndoreComponent implements OnInit {
     tForm!: FormGroup;
     loading = false;
     streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
-    modeOptions = ["online", "offline"] as Array<ModeType>;
+    modeOptions = ["offline"] as Array<ModeIndoreType>;
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
     testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore"] as Array<TestCenterType>;
 
