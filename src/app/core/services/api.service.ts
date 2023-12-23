@@ -117,7 +117,7 @@ export class ApiService {
     return this.http
       .post<CustomHttpResponse<any>>(
         CONSTANTS.API.SEND_SMS_OTP,
-        { mobileNo, testCenterId, mode}
+        { mobileNo, testCenterId, mode }
       )
       .pipe(
         map((res) => {
@@ -126,7 +126,7 @@ export class ApiService {
       );
   }
 
-  verifyOtp(mobileNo: string, enteredOtp:string): Observable<any> {
+  verifyOtp(mobileNo: string, enteredOtp: string): Observable<any> {
     return this.http
       .post<CustomHttpResponse<any>>(
         CONSTANTS.API.VERIFY_OTP,
@@ -229,7 +229,8 @@ export class ApiService {
 
   // update name api calling
   register(
-    payload: {  mobileNo: string,
+    payload: {
+      mobileNo: string,
       name: string,
       dob: string,
       fatherName: string,
@@ -238,7 +239,9 @@ export class ApiService {
       schoolName: string,
       city: string,
       testDate: TestCenterType,
-      mode: ModeType }
+      mode: ModeType,
+      testCenterId: string
+    }
   ): Observable<CustomHttpResponse<any>> {
     return this.http
       .put<CustomHttpResponse<any>>(
