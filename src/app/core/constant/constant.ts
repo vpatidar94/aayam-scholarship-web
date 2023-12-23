@@ -38,6 +38,7 @@ export const CONSTANTS = Object.freeze({
       GENERATED_RANK_SUCCESS: 'Generated rank successfully.',
       ERROR_SENDING_MESSAGE: 'Error in sending otp. Please try again.',
       OTP_VERIFY: 'Otp is successfully verified'
+      
     },
     VALIDATE: {
       PASSWORD_MAX_LENGTH: 8,

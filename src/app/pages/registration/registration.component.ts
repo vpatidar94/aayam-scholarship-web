@@ -189,8 +189,10 @@ export class RegistrationComponent implements OnInit {
             this.apiService
                 // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
                 .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
-                .subscribe({
-                    next: () => {
+                .subscribe(
+                    (res) => {
+                        console.log(res);
+                        if (res.status_code === 'success') {
                         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
                         this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
@@ -198,14 +200,15 @@ export class RegistrationComponent implements OnInit {
                         this.showVerifyBtn = true;
                         this.showOtpBtn = false;
                         this.showResendBtn = true;
-                    },
-                    error: () => {
+                    }
+                },
+                    (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
                         this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-                        this.loading = false;
+                        console.error("something went wrong", error)
                     }
-                });
+                );
         }
     }
 
@@ -371,7 +374,7 @@ export class RegistrationComponent implements OnInit {
                 next: () => {
                     this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                     // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                    this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
                     this.loading = false;
                     //   this.showVerifyBtn = true;
                 },

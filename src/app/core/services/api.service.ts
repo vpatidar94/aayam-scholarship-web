@@ -121,7 +121,7 @@ export class ApiService {
       )
       .pipe(
         map((res) => {
-          return res?.data;
+          return res;
         })
       );
   }
