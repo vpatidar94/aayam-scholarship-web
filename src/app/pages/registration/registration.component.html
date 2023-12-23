@@ -1,4 +1,4 @@
-<div class="bg__body" >
+<div class="bg__body">
     <org-dashboard-header title="" subTitle="" [showLogout]="true">
     </org-dashboard-header>
 
@@ -224,10 +224,10 @@
             <!-- Buttons -->
             <div class="col-12 ">
                 <div *ngIf="showOtpBtn">
-                <button type="submit" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
-                    <span *ngIf="!loading; else spinner">Get OTP</span>
-                </button>
-            </div>
+                    <button type="submit" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
+                        <span *ngIf="!loading; else spinner">Get OTP</span>
+                    </button>
+                </div>
                 <!-- verify otp field and btn  -->
                 <div *ngIf="showVerifyBtn">
                     <div class="col-12  mb-1">
@@ -262,7 +262,7 @@
             </div>
         </form>
     </div>
-    <div *ngIf="showMessage">
-<h1>You have been successfully registered</h1>
+    <div class="registration__card px-4 py-4 mt-4" *ngIf="showMessage">
+        <h1>You have been successfully registered</h1>
     </div>
 </div>

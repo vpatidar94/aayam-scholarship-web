@@ -87,6 +87,8 @@ export class RegistrationIndoreComponent implements OnInit {
     showRegisteredNow = false;
     testCenterId!: string;
     showMessage: boolean = false;
+    showOtpBtn: boolean = true;
+
 
 
     ngOnInit(): void {
@@ -192,6 +194,8 @@ export class RegistrationIndoreComponent implements OnInit {
                         this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
                         this.loading = false;
                         this.showVerifyBtn = true;
+                        this.showOtpBtn = false;
+
                     },
                     error: () => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
@@ -209,29 +213,25 @@ export class RegistrationIndoreComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
-            .subscribe({
-                // next: () => {        
-                    next: (res) => {
-                        if (res.status_code === 'success') {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                    this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                    // this.loading = false;
-                    this.showVerifyBtn = false;
-                    // this.showRegisteredNow = true;
-                    this.registerNow()
-                        }
-                    this.loading = false;
-
+            .subscribe(
+                (res) => {
+                    // console.log("response", res)
+                    if (res.status_code === 'success') {
+                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                        this.loading = false;
+                        this.showVerifyBtn = false;
+                        // this.showRegisteredNow = true;
+                        this.registerNow();
+                        this.showMessage = true;
+                    }
                 },
-                error: () => {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify']);
-                    this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-                    this.loading = false;
-
+                (error) => {
+                    console.error("Error sending otp", error);
                 }
-            });
+            )
+            
 
     }
 
