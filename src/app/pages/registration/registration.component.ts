@@ -129,9 +129,9 @@ export class RegistrationComponent implements OnInit {
                 Validators.required,
             ]),
 
-            district_name: new FormControl(null, [
-                Validators.required,
-            ]),
+            // district_name: new FormControl(null, [
+            //     Validators.required,
+            // ]),
 
             mode: new FormControl(null, [
                 Validators.required,

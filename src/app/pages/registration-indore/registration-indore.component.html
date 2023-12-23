@@ -128,7 +128,7 @@
             </div>
 
             <!-- District -->
-            <div class="col-12  mb-1">
+            <!-- <div class="col-12  mb-1">
                 <label for="district-field" class="mb-2 text__body-dark">District</label>
                 <div class="position-relative">
                     <input type="text" formControlName="district_name"
@@ -137,7 +137,7 @@
                 </div>
                 <org-field-validation-message
                     [control]="tForm.controls['district_name']"></org-field-validation-message>
-            </div>
+            </div> -->
 
             <!-- Mode -->
             <div class="col-12 mb-1">
@@ -226,6 +226,11 @@
                 <div *ngIf="showOtpBtn">
                     <button type="submit" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
                         <span *ngIf="!loading; else spinner">Get OTP</span>
+                    </button>
+                </div>
+                <div *ngIf="showResendBtn">
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="resendOtp()">
+                        <span *ngIf="!loading; else spinner">Resend OTP</span>
                     </button>
                 </div>
                 <!-- verify otp field and btn  -->
