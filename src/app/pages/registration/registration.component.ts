@@ -221,7 +221,7 @@ export class RegistrationComponent implements OnInit {
                     if (res.status_code === 'success') {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                        this.alertService.success(CONSTANTS.MESSAGES.OTP_VERIFY);
                         this.loading = false;
                         this.showVerifyBtn = false;
                         // this.showRegisteredNow = true;
@@ -230,7 +230,7 @@ export class RegistrationComponent implements OnInit {
                     }
                 },
                 (error) => {
-                    console.error("Error sending otp", error);
+                    console.error("Wrong otp", error);
                 }
             )
         // error: () => {
