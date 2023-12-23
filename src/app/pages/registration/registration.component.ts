@@ -251,22 +251,22 @@ export class RegistrationComponent implements OnInit {
             // You might want to set a default value or show an error message.
         }
 
-        let testCenterId;
+        // let testCenterId;
         if (mode === 'online') {
-            testCenterId = "";
+            this.testCenterId = "";
         } else if (mode === 'offline') {
             if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School") {
-                testCenterId = 'arnold-7-jan'
+                this.testCenterId = 'arnold-7-jan'
             } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School") {
-                testCenterId = 'arnold-14-jan'
+                this.testCenterId = 'arnold-14-jan'
 
             }
             else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School") {
-                testCenterId = 'annie-7-jan'
+                this.testCenterId = 'annie-7-jan'
 
             }
             else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School") {
-                testCenterId = 'annie-14-jan'
+                this.testCenterId = 'annie-14-jan'
 
             }
         }
