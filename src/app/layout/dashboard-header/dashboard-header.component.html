@@ -37,7 +37,7 @@
 </button> -->
 
 <!-- LOGOUT -->
-<button
+<!-- <button
   *ngIf="showLogout"
   type="button"
   class="btn btn-light btn__action btn__action-panel ms-2 mt-2"
@@ -55,20 +55,22 @@
       d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"
     />
   </svg>
-</button>
+</button> -->
 
 <div class="py-4 header__login">
   <div class="app__logo">
-    <img src="assets/images/logo3.webp" alt="aayam-star-logo" width="220px" />
+    <img src="assets/images/scholarship/aayam-dainik.png" alt="aayam-star-logo" width="220px" />
   </div>
 
-  <div style="margin-top: 34px">
+  <div style="margin-top: 80px">
     <div
-      class="d-flex flex-column align-items-center mt-4 px-4 py-2"
+      class="d-flex flex-column align-items-center mt-5 px-4 py-2 mb-5"
       *ngIf="!title && !subTitle"
     >
-      <p class="text-center pt-1 mb-1 text__body">Powered by</p>
-      <img src="assets/images/logo.png" alt="aayam-logo" width="130px" />
+    <div class="mt-4 mb-2">
+      <!-- <p class="text-center pt-1 mb-1 text__body">Powered by</p> -->
+      <img src="assets/images/scholarship/jeet-ayam-logo.png" alt="aayam-logo" width="130px" />
+    </div>
     </div>
     <h4 *ngIf="title" class="text-center mt-4 pt-4 text__body">{{ title }}</h4>
     <h5 *ngIf="subTitle" class="text-center pt-1 text__body">{{ subTitle }}</h5>
