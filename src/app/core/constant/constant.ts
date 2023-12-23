@@ -53,7 +53,7 @@ export const CONSTANTS = Object.freeze({
   export type ModeType = 'online' | 'offline';
   export type ModeIndoreType = 'offline';
 
-  export type TestCenterType = "St. Arnold's School Indore"| "Annie Besant School Indore" | "Prestige Institute of Engineering";
+  export type TestCenterType = "St. Arnold's School (Lalaram Nagar Indore)" |"Annie Besant School (Precanco Colony, Annapurna Road,Indore)" | "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)";
   export type OfflineTestDateType = "7 Jan" | "14 Jan";
   export type OnlineTestDateType = "7 Jan"| "8 Jan" | "9 jan" |"10 Jan"| "11 jan"| "12 Jan"| "13 jan"| "14 Jan";
 

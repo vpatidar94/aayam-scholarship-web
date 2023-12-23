@@ -57,22 +57,22 @@
   </svg>
 </button> -->
 
-<div class="py-4 header__login">
-  <div class="app__logo">
+<div class="py-3 header__login">
+  <div class="d-flex flex-column align-items-center mt-4">
     <img src="assets/images/scholarship/aayam-dainik.png" alt="aayam-star-logo" width="220px" />
   </div>
 
-  <div style="margin-top: 80px">
+  <div style="margin-top: 26px">
     <div
-      class="d-flex flex-column align-items-center mt-5 px-4 py-2 mb-5"
+      class="d-flex flex-column align-items-center"
       *ngIf="!title && !subTitle"
     >
-    <div class="mt-4 mb-2">
+    <div>
       <!-- <p class="text-center pt-1 mb-1 text__body">Powered by</p> -->
       <img src="assets/images/scholarship/jeet-ayam-logo.png" alt="aayam-logo" width="130px" />
     </div>
     </div>
-    <h4 *ngIf="title" class="text-center mt-4 pt-4 text__body">{{ title }}</h4>
-    <h5 *ngIf="subTitle" class="text-center pt-1 text__body">{{ subTitle }}</h5>
+    <!-- <h4 *ngIf="title" class="text-center mt-4 pt-4 text__body">{{ title }}</h4>
+    <h5 *ngIf="subTitle" class="text-center pt-1 text__body">{{ subTitle }}</h5> -->
   </div>
 </div>

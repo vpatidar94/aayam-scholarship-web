@@ -29,7 +29,7 @@ export class RegistrationIndoreComponent implements OnInit {
     streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
     modeOptions = ["offline"] as Array<ModeIndoreType>;
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
-    testCenterOptions = ["St. Arnold's School Indore", "Annie Besant School Indore", "Prestige Institute of Engineering"] as Array<TestCenterType>;
+    testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
     offlineDateOptions = [{
@@ -161,25 +161,25 @@ export class RegistrationIndoreComponent implements OnInit {
             if (mode === 'online') {
                 this.testCenterId = "";
             } else if (mode === 'offline') {
-                if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
+                if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
                     this.testCenterId = 'arnold-7-jan'
-                } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
+                } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
                     this.testCenterId = 'arnold-14-jan'
 
                 }
-                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
                     this.testCenterId = 'annie-7-jan'
 
                 }
-                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
                     this.testCenterId = 'annie-14-jan'
 
                 }
-                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
                     this.testCenterId = 'prestige-7-jan'
 
                 }
-                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
                     this.testCenterId = 'prestige-14-jan'
 
                 }
@@ -269,25 +269,25 @@ export class RegistrationIndoreComponent implements OnInit {
         if (mode === 'online') {
             this.testCenterId = "";
         } else if (mode === 'offline') {
-            if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
+            if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
                 this.testCenterId = 'arnold-7-jan'
-            } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School Indore") {
+            } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
                 this.testCenterId = 'arnold-14-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
+            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
                 this.testCenterId = 'annie-7-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School Indore") {
+            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
                 this.testCenterId = 'annie-14-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+            else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
                 this.testCenterId = 'prestige-7-jan'
 
             }
-            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering") {
+            else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
                 this.testCenterId = 'prestige-14-jan'
 
             }
