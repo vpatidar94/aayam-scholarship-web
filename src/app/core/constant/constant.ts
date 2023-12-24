@@ -37,8 +37,9 @@ export const CONSTANTS = Object.freeze({
       SMS_OTP_SENT : "OTP has been sent to your Mobile No",
       GENERATED_RANK_SUCCESS: 'Generated rank successfully.',
       ERROR_SENDING_MESSAGE: 'Error in sending otp. Please try again.',
-      OTP_VERIFY: 'Otp is successfully verified'
-      
+      OTP_VERIFY: 'Otp is successfully verified',
+      TEST_CENTER_FULL: 'Chosen test center is full or not found. Select other center or contact on 07314058393'
+
     },
     VALIDATE: {
       PASSWORD_MAX_LENGTH: 8,

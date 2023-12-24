@@ -190,7 +190,6 @@ export class RegistrationIndoreComponent implements OnInit {
                 .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
                 .subscribe(
                     (res) => {
-                        console.log(res);
                         if (res.status_code === 'success') {
                         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
@@ -204,7 +203,7 @@ export class RegistrationIndoreComponent implements OnInit {
                     (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
-                        this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+                        this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL);
                         console.error("something went wrong", error)
                     }
                 );
