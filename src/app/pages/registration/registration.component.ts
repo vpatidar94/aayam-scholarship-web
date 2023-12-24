@@ -233,6 +233,7 @@ export class RegistrationComponent implements OnInit {
                     }
                 },
                 (error) => {
+                    this.alertService.error(CONSTANTS.MESSAGES.INVALID_OTP);
                     console.error("Wrong otp", error);
                 }
             )

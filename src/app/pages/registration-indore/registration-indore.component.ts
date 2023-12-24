@@ -88,7 +88,7 @@ export class RegistrationIndoreComponent implements OnInit {
     testCenterId!: string;
     showMessage: boolean = false;
     showOtpBtn: boolean = true;
-    showResendBtn:boolean = false;
+    showResendBtn: boolean = false;
 
 
 
@@ -191,15 +191,15 @@ export class RegistrationIndoreComponent implements OnInit {
                 .subscribe(
                     (res) => {
                         if (res.status_code === 'success') {
-                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                        this.loading = false;
-                        this.showVerifyBtn = true;
-                        this.showOtpBtn = false;
-                        this.showResendBtn = true;
-                    }
-                },
+                            this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                            // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                            this.loading = false;
+                            this.showVerifyBtn = true;
+                            this.showOtpBtn = false;
+                            this.showResendBtn = true;
+                        }
+                    },
                     (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
@@ -231,10 +231,12 @@ export class RegistrationIndoreComponent implements OnInit {
                     }
                 },
                 (error) => {
+                    this.alertService.success(CONSTANTS.MESSAGES.INVALID_OTP);
+
                     console.error("wrong otp", error);
                 }
             )
-            
+
 
     }
 
@@ -356,7 +358,7 @@ export class RegistrationIndoreComponent implements OnInit {
             }
         }
 
-        const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId:this.testCenterId };
+        const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId: this.testCenterId };
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
