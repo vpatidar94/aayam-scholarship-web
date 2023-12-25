@@ -387,17 +387,17 @@ export class ApiService {
   //     );
   // }
 
-  // getAllUsersResult(): Observable<any> {
-  //   return this.http
-  //     .get<CustomHttpResponse<any>>(
-  //       CONSTANTS.API.GET_ALL_USERS
-  //     )
-  //     .pipe(
-  //       map((res) => {
-  //         return res?.data;
-  //       })
-  //     );
-  // }
+  getAllUsersResult(): Observable<any> {
+    return this.http
+      .get<CustomHttpResponse<any>>(
+        CONSTANTS.API.GET_ALL_USERS
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
+  }
 
   // generateRank(testId: string): Observable<any> {
   //   return this.http

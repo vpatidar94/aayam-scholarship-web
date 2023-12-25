@@ -8,7 +8,8 @@ import { Alert, AlertService } from '@core/services/alert.service';
   selector: 'org-ay-alert',
   standalone: true,
   imports: [CommonModule, AlertModule],
-  templateUrl: './ay-alert.component.html'
+  templateUrl: './ay-alert.component.html',
+  styleUrls: ["./ay-alert.component.scss"],
 })
 
 export class AyAlertComponent implements OnDestroy {

@@ -14,17 +14,17 @@ export const appRoutes: Routes = [
         component: RegistrationComponent
       },
 
-      // {
-      //   path: "login",
-      //   // component:  LoginComponent,
-      //   loadComponent: () =>
-      //     import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
-      // },
-
       {
         path: "register",
         component:  RegistrationComponent
-      }
+      },
+
+      {
+        path: "admin-mayank",
+        loadComponent: () =>
+          import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
+      },
+
        
 
 ];

@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     // height: 100px;
-    height: 180px;
+    height: 200px;
 }
 .btn__action {
 position: absolute;
@@ -27,4 +27,9 @@ position: absolute;
     position: absolute;
     top: 12px;
     left: 15px;
+}
+
+.logo-style{
+    margin-bottom:-40px;
+    z-index: 1000;
 }

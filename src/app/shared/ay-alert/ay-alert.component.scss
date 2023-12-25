@@ -1,0 +1,13 @@
+.alert-style {
+    position: fixed;
+    bottom: 0px;
+    left:10%;
+}
+
+@media (min-width:768px){
+    .alert-style {
+        position: fixed;
+        bottom: 0px;
+        left:40%;
+    }
+}

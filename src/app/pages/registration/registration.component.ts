@@ -32,7 +32,6 @@ export class RegistrationComponent implements OnInit {
     testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
-
     offlineDateOptions = [{
         date: "7 Jan",
         value: "07-01-2024"
@@ -89,7 +88,7 @@ export class RegistrationComponent implements OnInit {
     testCenterId!: string;
     showMessage: boolean = false;
     showOtpBtn: boolean = true;
-    showResendBtn:boolean = false;
+    showResendBtn: boolean = false;
 
 
     ngOnInit(): void {
@@ -129,10 +128,6 @@ export class RegistrationComponent implements OnInit {
                 Validators.required,
             ]),
 
-            // district_name: new FormControl(null, [
-            //     Validators.required,
-            // ]),
-
             mode: new FormControl(null, [
                 Validators.required,
             ]),
@@ -144,8 +139,6 @@ export class RegistrationComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
-
-
         });
     }
 
@@ -191,23 +184,35 @@ export class RegistrationComponent implements OnInit {
                 .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
                 .subscribe(
                     (res) => {
-                        // console.log(res);
                         if (res.status_code === 'success') {
-                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                        this.loading = false;
-                        this.showVerifyBtn = true;
-                        this.showOtpBtn = false;
-                        this.showResendBtn = true;
-                    }
-                },
+                            this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                            // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                            this.loading = false;
+                            this.showVerifyBtn = true;
+                            this.showOtpBtn = false;
+                            setTimeout(() => {
+                                this.showResendBtn = true;
+                            }, 5000);
+                        }
+                        if (res.code == 400) {
+                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
+                        }
+
+                    },
                     (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
-                        this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL);
-                        console.error("something went wrong", error)
+                        if (error.error.code == 403) {
+                            this.alertService.error(CONSTANTS.MESSAGES.USER_EXIST)
+                            this.loading = false;
+                        }
+                        if (error.error.code == 400) {
+                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
+                            this.loading = false;
+                        }
                     }
+
                 );
         }
     }
@@ -220,7 +225,6 @@ export class RegistrationComponent implements OnInit {
             .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
             .subscribe(
                 (res) => {
-                    // console.log("response", res)
                     if (res.status_code === 'success') {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
@@ -235,18 +239,9 @@ export class RegistrationComponent implements OnInit {
                 (error) => {
                     this.alertService.error(CONSTANTS.MESSAGES.INVALID_OTP);
                     console.error("Wrong otp", error);
+                    this.loading = false;
                 }
             )
-        // error: () => {
-        //     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-        //     // this.router.navigate(['/verify']);
-        //     this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-        //     this.loading = false;
-
-        // }
-        // };
-
-        // }
     }
 
     resendOtp() {
@@ -310,11 +305,6 @@ export class RegistrationComponent implements OnInit {
     }
 
     registerNow() {
-        // if (this.tForm.invalid) {
-        //     this.tForm.markAllAsTouched();
-        //   } else {
-        //     this.loading = true;
-        //   const newOtp = this.helperService.generateOtp();
         const mobileNo = this.tForm.value.mobile_no;
         const name = this.tForm.value.student_name;
         const dob = this.tForm.value.dob;
@@ -402,22 +392,11 @@ export class RegistrationComponent implements OnInit {
 
     changeMode() {
         const mode = this.tForm.get('mode')?.value;
-        // if (stream === '11' || stream === '12' || stream === 'DROPPER') {
-        //   this.tForm.get('subject')?.addValidators(Validators.required);
-        // } else {
-        //   this.tForm.get('subject')?.clearValidators();
-        // }
-        //  this.tForm.get('subject')?.updateValueAndValidity();
+
     }
 
     changeTestCenter() {
         const test_center = this.tForm.get('test_center')?.value;
-        // if (test_center === 'Online' || test_center === 'Offline') {
-        //   this.tForm.get('subject')?.addValidators(Validators.required);
-        // } else {
-        //   this.tForm.get('subject')?.clearValidators();
-        // }
-        // this.tForm.get('test_center')?.updateValueAndValidity();
     }
 
     changeOfflineTestDate() {

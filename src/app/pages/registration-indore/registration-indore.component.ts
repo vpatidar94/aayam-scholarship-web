@@ -129,10 +129,6 @@ export class RegistrationIndoreComponent implements OnInit {
                 Validators.required,
             ]),
 
-            // district_name: new FormControl(null, [
-            //     Validators.required,
-            // ]),
-
             mode: new FormControl(null, [
                 Validators.required,
             ]),
@@ -204,7 +200,8 @@ export class RegistrationIndoreComponent implements OnInit {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
                         this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL);
-                        console.error("something went wrong", error)
+                        console.error("something went wrong", error);
+                        this.loading = false;
                     }
                 );
         }
@@ -234,6 +231,7 @@ export class RegistrationIndoreComponent implements OnInit {
                     this.alertService.success(CONSTANTS.MESSAGES.INVALID_OTP);
 
                     console.error("wrong otp", error);
+                    this.loading = false;
                 }
             )
 
@@ -301,11 +299,6 @@ export class RegistrationIndoreComponent implements OnInit {
     }
 
     registerNow() {
-        // if (this.tForm.invalid) {
-        //     this.tForm.markAllAsTouched();
-        //   } else {
-        //     this.loading = true;
-        //   const newOtp = this.helperService.generateOtp();
         const mobileNo = this.tForm.value.mobile_no;
         const name = this.tForm.value.student_name;
         const dob = this.tForm.value.dob;
@@ -393,22 +386,10 @@ export class RegistrationIndoreComponent implements OnInit {
 
     changeMode() {
         const mode = this.tForm.get('mode')?.value;
-        // if (stream === '11' || stream === '12' || stream === 'DROPPER') {
-        //   this.tForm.get('subject')?.addValidators(Validators.required);
-        // } else {
-        //   this.tForm.get('subject')?.clearValidators();
-        // }
-        //  this.tForm.get('subject')?.updateValueAndValidity();
     }
 
     changeTestCenter() {
         const test_center = this.tForm.get('test_center')?.value;
-        // if (test_center === 'Online' || test_center === 'Offline') {
-        //   this.tForm.get('subject')?.addValidators(Validators.required);
-        // } else {
-        //   this.tForm.get('subject')?.clearValidators();
-        // }
-        // this.tForm.get('test_center')?.updateValueAndValidity();
     }
 
     changeOfflineTestDate() {
