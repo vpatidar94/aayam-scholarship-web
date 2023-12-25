@@ -221,8 +221,8 @@
                         <org-field-validation-message
                             [control]="tForm.controls['otp_field']"></org-field-validation-message>
                     </div>
-                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
-                        <span (click)="verifyOtp()">verify OTP</span>
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="verifyOtp()">
+                        <span *ngIf="!loading; else spinner" >verify OTP</span>
                     </button>
                 </div>
                 <ng-template #spinner>
