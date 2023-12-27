@@ -26,6 +26,8 @@ export const CONSTANTS = Object.freeze({
 
     GET_USER_BY_ID: '/users/getUserById',
     SEND_SMS_OTP: '/users/send-signup-otp',
+    SEND_LOGIN_OTP: '/users/signin-otp',
+    SIGNIN: '/users/signin',
     VERIFY_OTP: '/users/verifyotp',
     UPDATE_REGISTERATION: '/users/signup'
   },
@@ -42,6 +44,7 @@ export const CONSTANTS = Object.freeze({
     OTP_VERIFY: 'Otp is successfully verified',
     TEST_CENTER_FULL: 'Chosen test center is full or not found. Select other center or contact on 07314058393',
     USER_EXIST: 'User already exist',
+    SOMETHING_WRONG: 'Something went wrong'
 
   },
   VALIDATE: {

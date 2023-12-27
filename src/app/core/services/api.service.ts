@@ -139,6 +139,35 @@ export class ApiService {
       );
   }
 
+
+  // FOR LOGIN PURPOSE
+
+  sendLoginOtp(mobileNo: string): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.SEND_LOGIN_OTP,
+        { mobileNo }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  signin(mobileNo: string): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.SIGNIN,
+        { mobileNo }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
   // sendLoginMessage(payload: any): Observable<any> {
   //   return this.http
   //     .post<CustomHttpResponse<any>>(

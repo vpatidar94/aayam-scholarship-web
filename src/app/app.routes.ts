@@ -25,6 +25,24 @@ export const appRoutes: Routes = [
           import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
       },
 
-       
+      {
+        path: "login",
+        loadComponent: () =>
+          import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
+      },
+
+      {
+        path: "verify",
+        // component:  LoginComponent,
+        loadComponent: () =>
+          import('./pages/auth/verify-otp/verify-otp.component').then((x) => x.VerifyOtpComponent),
+      },
+
+      {
+        path: "dashboard",
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then((x) => x.DashboardComponent),
+        // canActivate: [canActivateUser]
+      },
 
 ];

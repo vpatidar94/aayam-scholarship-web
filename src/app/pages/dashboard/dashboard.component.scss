@@ -1,0 +1,53 @@
+.card__content__title{
+    font-size: 1.125rem;
+}
+
+.card__test {
+    background-color: transparent!important; // added for gif remove it after gif removed
+    box-shadow: 1px 1px 20px 0px #ddd;
+    border: none;
+
+    .card-header{
+        color: #ffffff;
+        background: linear-gradient(45deg, var(--i-secondary-action), var(--i-secondary-action-80));
+    }
+}
+
+.w-40{
+    width: 40%;
+}
+.w-60{
+    width: 60%;
+}
+.expand__collapse__btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: rgba(255, 255, 255, 0.1882352941);
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 4px 4px 4px 8px;
+}
+
+.dashboard__result{
+    position: absolute;
+    .close__icon{
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+}
+
+.icon-box {
+    box-shadow: 1px 1px 20px 0px #ddd;
+    border: none;
+    border-radius: 10px;
+}
+
+.body__bg_gif {
+    background-image: url('https://i.gifer.com/4M57.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  

@@ -37,29 +37,30 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // if (this.tForm.invalid) {
-    //   this.tForm.markAllAsTouched();
-    // } else {
-    //   this.loading = true;
-    //   const newOtp = this.helperService.generateOtp();
-    //   const mobileNo = '91' + this.tForm.value.mobile_no;
-    //   this.apiService
-    //     // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-    //     .sendSmsOtp( mobileNo, newOtp)  // if want to send otp by text sms
-    //     .subscribe({
-    //       next: () => {
-    //         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-    //         this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-    //         this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-    //         this.loading = false;
-    //       },
-    //       error: () => {
-    //         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-    //         // this.router.navigate(['/verify']);
-    //         this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-    //         this.loading = false;
-    //       }
-    //     });
-    // }
+    if (this.tForm.invalid) {
+      this.tForm.markAllAsTouched();
+    } else {
+      this.loading = true;
+      // const newOtp = this.helperService.generateOtp();
+      const mobileNo = this.tForm.value.mobile_no;
+      this.apiService
+        // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
+        .sendLoginOtp( mobileNo)  // if want to send otp by text sms
+        .subscribe({
+          next: () => {
+            this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+            this.loading = false;
+          },
+          error: () => {
+            // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            // this.router.navigate(['/verify']);
+            this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+            this.loading = false;
+          }
+        });
+    }
   }
 }
+// }
