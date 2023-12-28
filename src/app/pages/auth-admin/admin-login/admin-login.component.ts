@@ -1,31 +1,29 @@
+// NEWLY ADDED BY JITENDRA
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthHeaderComponent } from 'src/app/layout/auth-header/auth-header.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { VALIDATE } from 'src/app/core/constant/validate';
 import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
+import { ApiService } from 'src/app/core/services/api.service';
 import { HelperService } from 'src/app/core/services/helper';
 import { CONSTANTS } from 'src/app/core/constant/constant';
-import { AlertService } from '../../../core/services/alert.service';
-import { ApiService } from '@core/services/api.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
-  selector: 'org-login',
+  selector: 'org-admin-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  constructor(private alertService: AlertService, private apiService: ApiService, private helperService: HelperService, private router: Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.referredBy = params['referredBy'];
-    });
-  }
+export class AdminLoginComponent implements OnInit {
+  constructor(private alertService: AlertService, private apiService: ApiService, private helperService: HelperService, private router: Router) { }
   tForm!: FormGroup;
   loading = false;
-  referredBy = '' as string;
+
   ngOnInit(): void {
     this.tForm = new FormGroup({
       mobile_no: new FormControl(null, [
@@ -41,18 +39,16 @@ export class LoginComponent implements OnInit {
       this.tForm.markAllAsTouched();
     } else {
       this.loading = true;
-      // const newOtp = this.helperService.generateOtp();
-      const mobileNo = this.tForm.value.mobile_no;
+      const newOtp = this.helperService.generateOtp();
+      const mobileNo = '91' + this.tForm.value.mobile_no;
       this.apiService
-        // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-        .sendLoginOtp( mobileNo)  // if want to send otp by text sms
-        .subscribe({
+        .sendOtp(
+          mobileNo, newOtp
+        ).subscribe({
           next: () => {
             this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            console.log("mob",mobileNo);
-            this.router.navigate(['/verify']);
-            console.log("see")
-            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+            this.router.navigate(['/admin-verify']);
+            this.alertService.success(CONSTANTS.MESSAGES.OTP_SENT);
             this.loading = false;
           },
           error: () => {
@@ -65,4 +61,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-// }

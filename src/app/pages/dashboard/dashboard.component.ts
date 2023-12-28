@@ -6,7 +6,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { CONSTANTS } from 'src/app/core/constant/constant';
 import { HelperService } from 'src/app/core/services/helper';
-// import { environment } from 'src/environments/environment';
+import { environment } from 'src/app/environments/environment.development';
 
 @Component({
   selector: 'org-dashboard',
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router, private apiService: ApiService, private alertService: AlertService, private helperService: HelperService)
   {
-    // this.bucketUrl = environment.BUCKET_URL;
+    this.bucketUrl = environment.BUCKET_URL;
   }
   bucketUrl = '';
   data: any = [];
@@ -41,19 +41,19 @@ export class DashboardComponent implements OnInit {
   }
 
   getDashboardDetails() {
-    // this.loading = true;
-    // this.apiService
-    //   .getDashboardDetails()
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.data = res;
-    //       this.loading = false;
-    //     },
-    //     error: (err) => {
-    //       this.alertService.error(err.message);
-    //       this.loading = false;
-    //     }
-    //   });
+    this.loading = true;
+    this.apiService
+      .getDashboardDetails()
+      .subscribe({
+        next: (res) => {
+          this.data = res;
+          this.loading = false;
+        },
+        error: (err) => {
+          this.alertService.error(err.message);
+          this.loading = false;
+        }
+      });
   }
 
   getScorePoints() {

@@ -8,8 +8,19 @@ import { FormsModule } from '@angular/forms';
 import { CONSTANTS } from 'src/app/core/constant/constant';
 import { AlertService } from 'src/app/core/services/alert.service';
 import { TimerProgressComponent } from 'src/app/shared/timer-progress/timer-progress.component';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { HelperService } from 'src/app/core/services/helper';
+import { environment } from 'src/app/environments/environment.development';
+
+
+function shuffleArray(array: any[]): any[] {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
 
 @Component({
   selector: 'org-question',
@@ -19,6 +30,7 @@ import { HelperService } from 'src/app/core/services/helper';
   styleUrls: ['./question.component.scss'],
 
 })
+
 export class QuestionComponent implements OnInit, OnDestroy {
   selectedValue: string = '';
   constructor(private router: Router, private alertService: AlertService, private route: ActivatedRoute, private apiService: ApiService,
@@ -107,6 +119,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
       this.state$.subscribe((x) => {
         this.questionDetails = x;
         this.questions = x.questions
+
+
+// NEWLY ADDED
+this.questions = this.getRandomQuestions(x.questions, 5); // Change 5 to the number of questions you want to display
+console.log('questions',this.questions);
+
+
         this.question = x.questions[0] ?? null;
         this.loading = false;
       }, (err) => {
@@ -161,6 +180,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   setQuestion() {
     this.question = this.questions[this.questionIndex] ?? null;
+
   }
 
   async submitScore(questions: any) {
@@ -211,4 +231,14 @@ export class QuestionComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     document.removeEventListener("visibilitychange", this.visibilityChange);
   }
+
+// NEWLY ADDED
+
+  getRandomQuestions(allQuestions: any[], count: number): any[] {
+    const shuffledQuestions = shuffleArray(allQuestions);
+    return shuffledQuestions.slice(0, count);
+  }
+
+
+  
 }
