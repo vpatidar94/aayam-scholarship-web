@@ -22,7 +22,7 @@ export class HelperService {
       localStorage.setItem("userDetail", JSON.stringify({ ...userDetail, name: name, stream: stream }));
       return true
     }
-    this.router.navigate(['/login'])
+    // this.router.navigate(['/login'])
     return false
   }
 
@@ -32,7 +32,7 @@ export class HelperService {
       localStorage.setItem("userDetail", JSON.stringify({...userDetail, ...other, name: name, stream: stream }));
       return true
     }
-    this.router.navigate(['/login'])
+    // this.router.navigate(['/login'])
     return false
   }
 
@@ -42,7 +42,7 @@ export class HelperService {
       localStorage.setItem("userDetail", JSON.stringify({ ...userDetail, ...data }));
       return true
     }
-    this.router.navigate(['/login'])
+    // this.router.navigate(['/login'])
     return false
   }
 

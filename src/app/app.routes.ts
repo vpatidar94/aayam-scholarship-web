@@ -27,11 +27,11 @@ export const appRoutes: Routes = [
           import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
       },
 
-      {
-        path: "login",
-        loadComponent: () =>
-          import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
-      },
+      // {
+      //   path: "login",
+      //   loadComponent: () =>
+      //     import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
+      // },
 
       {
         path: "verify",

@@ -193,15 +193,25 @@ export class RegistrationIndoreComponent implements OnInit {
                             this.loading = false;
                             this.showVerifyBtn = true;
                             this.showOtpBtn = false;
-                            this.showResendBtn = true;
+                            setTimeout(() => {
+                                this.showResendBtn = true;
+                            }, 5000);
+                        }
+                        if (res.code == 400) {
+                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
                         }
                     },
                     (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify']);
-                        this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL);
-                        console.error("something went wrong", error);
-                        this.loading = false;
+                        if (error.error.code == 403) {
+                            this.alertService.error(CONSTANTS.MESSAGES.USER_EXIST)
+                            this.loading = false;
+                        }
+                        if (error.error.code == 400) {
+                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
+                            this.loading = false;
+                        }
                     }
                 );
         }
@@ -229,7 +239,6 @@ export class RegistrationIndoreComponent implements OnInit {
                 },
                 (error) => {
                     this.alertService.success(CONSTANTS.MESSAGES.INVALID_OTP);
-
                     console.error("wrong otp", error);
                     this.loading = false;
                 }
@@ -375,7 +384,7 @@ export class RegistrationIndoreComponent implements OnInit {
 
     changeStream() {
         const stream = this.tForm.get('stream')?.value;
-        if (stream === '11' || stream === '12' || stream === 'DROPPER') {
+        if (stream === '11' || stream === '12') {
             this.tForm.get('subject')?.addValidators(Validators.required);
         } else {
             this.tForm.get('subject')?.clearValidators();
