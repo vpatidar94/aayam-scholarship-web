@@ -3,9 +3,16 @@ import { canActivateUser } from '@core/guards/can-activate-guard';
 import { RegistrationIndoreComponent } from '@pages/registration-indore/registration-indore.component';
 import { RegistrationComponent } from '@pages/registration/registration.component';
 import { QuestionComponent } from './pages/dashboard/question/question.component';
+import { VerifyOtpComponent } from './pages/auth/verify-otp/verify-otp.component';
+import { LoginComponent } from '@pages/auth/login/login.component';
 
 export const appRoutes: Routes = [
-    
+    {
+        path: "verify",
+       component:  VerifyOtpComponent,
+        // loadComponent: () =>
+        //   import('./pages/auth/verify-otp/verify-otp.component').then((x) => x.VerifyOtpComponent),
+      },
   {
     path: "register-indore",
     component:  RegistrationIndoreComponent
@@ -27,18 +34,14 @@ export const appRoutes: Routes = [
           import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
       },
 
-      // {
-      //   path: "login",
-      //   loadComponent: () =>
-      //     import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
-      // },
-
       {
-        path: "verify",
-        // component:  LoginComponent,
-        loadComponent: () =>
-          import('./pages/auth/verify-otp/verify-otp.component').then((x) => x.VerifyOtpComponent),
+        path: "login",
+        component: LoginComponent
+        // loadComponent: () =>
+        //   import('./pages/auth/login/login.component').then((x) => x.LoginComponent),
       },
+
+      
 
       {
         path: "dashboard",

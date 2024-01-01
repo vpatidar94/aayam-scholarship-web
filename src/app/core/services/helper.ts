@@ -73,7 +73,8 @@ export class HelperService {
 
   isOtpAvailable() {
     if (!localStorage.getItem("otp"))
-      this.router.navigate(['/login'])
+      // this.router.navigate(['/login'])
+    console.log("otp not")
   }
 
   matchOtp(otp: string) {

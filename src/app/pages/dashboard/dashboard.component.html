@@ -15,8 +15,7 @@
         <div class="card-body py-1">
           <div class="d-flex w-100">
             <!-- <img src="\assets\images\awards\milestone.gif" alt="milestone" class="w-100" /> -->
-            <img 
-            [src]="bucketUrl + '/' + 'milestone/milestone.gif'" alt="milestone" class="w-100" />
+            <img [src]="bucketUrl + '/' + 'milestone/milestone.gif'" alt="milestone" class="w-100" />
           </div>
         </div>
       </div>
@@ -46,6 +45,37 @@
                 </p>
               </div>
             </div>
+            <hr />
+  
+            <h3 class="card-text" *ngIf="data?.lastTestResult?.score">
+              <table>
+                <thead class="card-header">
+                  <tr>
+                    <th>Subject</th>
+                    <th>Correct</th>
+                    <th class="card-title mb-1">Incorrect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ data?.lastTestResult?.testId?.subjectName[0] }}</td>
+                    <td>{{ data?.lastTestResult?.physics?.correct }}</td>
+                    <td>{{ data?.lastTestResult?.physics?.incorrect }}</td>
+                  </tr>
+                  <tr>
+                    <td>Chemistry</td>
+                    <td>{{ data?.lastTestResult?.chemistry?.correct }}</td>
+                    <td>{{ data?.lastTestResult?.chemistry?.incorrect }}</td>
+                  </tr>
+                  <tr>
+                    <td>Maths</td>
+                    <td>{{ data?.lastTestResult?.maths?.correct }}</td>
+                    <td>{{ data?.lastTestResult?.maths?.incorrect }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </h3>
             <hr />
             <p class="card-title card__content__title">Rank</p>
             <h3 class="card-text" *ngIf="data?.lastTestResult?.rank">
@@ -187,6 +217,8 @@
             </div>
             <span class="text__action__secondary">Results</span>
           </div>
+          <button (click)="generateAdmitCardPDF()">Generate Admit Card PDF</button>
+
         </div>
         <div class="d-flex justify-content-center align-item-center mt-2">
           <div *ngIf="isUpdateProfile" class="w-30 icon-box p-3" (click)="updateProfile()">
@@ -204,6 +236,7 @@
     </div>
   </div>
 </div>
+
 
 <ng-container *ngIf="isExpandedPoints">
   <div class="dashboard__card dashboard__result px-3 py-3">
@@ -249,4 +282,6 @@
       </tbody>
     </table>
   </div>
+
+  
 </ng-container>
