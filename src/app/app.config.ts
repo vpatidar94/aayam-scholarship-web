@@ -22,7 +22,7 @@ import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
+    provideRouter(appRoutes),
     ApiService,
     importProvidersFrom(HttpClientModule, BrowserAnimationsModule),
     {
