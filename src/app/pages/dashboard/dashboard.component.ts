@@ -8,13 +8,13 @@ import { CONSTANTS } from 'src/app/core/constant/constant';
 import { HelperService } from 'src/app/core/services/helper';
 import { environment } from 'src/app/environments/environment.development';
 import html2canvas from 'html2canvas';
-import { NgxBarcode6Module } from 'ngx-barcode6';
+// import { NgxBarcode6Module } from 'ngx-barcode6';
 
 
 @Component({
   selector: 'org-dashboard',
   standalone: true,
-  imports: [CommonModule, DashboardHeaderComponent, RouterModule,NgxBarcode6Module],
+  imports: [CommonModule, DashboardHeaderComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
