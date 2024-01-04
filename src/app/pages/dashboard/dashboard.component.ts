@@ -60,7 +60,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.data = res;
           this.loading = false;
-          console.log('d', this.data.data.stream)
+          // console.log('d', this.data.data.stream)
         },
         error: (err) => {
           this.alertService.error(err.message);
