@@ -46,20 +46,46 @@ export class LoginComponent implements OnInit {
       this.apiService
         // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
         .sendLoginOtp( mobileNo)  // if want to send otp by text sms
-        .subscribe({
-          next: () => {
-            this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            this.router.navigate(['/verify']);
-            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-            this.loading = false;
+        // .subscribe({
+        //   next: () => {
+        //     this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+        //     this.router.navigate(['/verify']);
+        //     this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+        //     this.loading = false;
+        //   },
+        //   error: () => {
+        //     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+        //     // this.router.navigate(['/verify']);
+            
+        //     this.alertService.error();
+        //     this.loading = false;
+        //   }
+        // });
+
+        .subscribe(
+          (res) => {
+              if (res.status_code === 'success') {
+                this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                    this.router.navigate(['/verify']);
+                    this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                    this.loading = false;
+                  }
+
           },
-          error: () => {
-            // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            // this.router.navigate(['/verify']);
-            this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-            this.loading = false;
+          (error) => {
+              // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+              // this.router.navigate(['/verify']);
+              if (error.error.code == 404) {
+                  this.alertService.error(CONSTANTS.MESSAGES.USER_NOT_FOUND)
+                  this.loading = false;
+              }
+              else{
+                  this.alertService.error(CONSTANTS.MESSAGES.SOMETHING_WRONG)
+                  this.loading = false;
+              }
           }
-        });
+
+      );
     }
   }
 }

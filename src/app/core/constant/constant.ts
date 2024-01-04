@@ -47,7 +47,8 @@ export const CONSTANTS = Object.freeze({
     OTP_VERIFY: 'Otp is successfully verified',
     TEST_CENTER_FULL: 'Chosen test center is full or not found. Select other center or contact on 07314058393',
     USER_EXIST: 'User already exist',
-    SOMETHING_WRONG: 'Something went wrong'
+    SOMETHING_WRONG: 'Something went wrong',
+    USER_NOT_FOUND: 'User not found. Please register.'
 
   },
   VALIDATE: {
