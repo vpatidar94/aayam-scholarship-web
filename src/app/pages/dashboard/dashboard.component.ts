@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardHeaderComponent } from 'src/app/layout/dashboard-header/dashboard-header.component';
 import { Router, RouterModule } from '@angular/router';
@@ -7,20 +7,32 @@ import { AlertService } from 'src/app/core/services/alert.service';
 import { CONSTANTS } from 'src/app/core/constant/constant';
 import { HelperService } from 'src/app/core/services/helper';
 import { environment } from 'src/app/environments/environment.development';
+import html2canvas from 'html2canvas';
+import { NgxBarcode6Module } from 'ngx-barcode6';
+
 
 @Component({
   selector: 'org-dashboard',
   standalone: true,
-  imports: [CommonModule, DashboardHeaderComponent, RouterModule],
+  imports: [CommonModule, DashboardHeaderComponent, RouterModule,NgxBarcode6Module],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router, private apiService: ApiService, private alertService: AlertService, private helperService: HelperService)
-  {
+  constructor(private router: Router, private apiService: ApiService, private alertService: AlertService, private helperService: HelperService) {
     this.bucketUrl = environment.BUCKET_URL;
   }
+  @ViewChild('admitCardContainer') admitCardContainer!: ElementRef;
+  // studentDetails = {
+  //   name: 'John Doe',
+  //   rollNo: '12345',
+  //   address: '123 Main St, City',
+  //   subject: 'Mathematics',
+  //   stream: 'Science',
+  //   // Add other details like photo, signature, etc.
+  // };
+
   bucketUrl = '';
   data: any = [];
   scoreReferral = {
@@ -34,20 +46,21 @@ export class DashboardComponent implements OnInit {
   trophyCount = 0 as number;
   isExpandedPoints = false as boolean;
   isUpdateProfile = false as boolean;
+  showAdmitCardDetails: boolean = false;
 
   ngOnInit(): void {
     this.getDashboardDetails();
-    this.getScorePoints();
   }
 
   getDashboardDetails() {
     this.loading = true;
     this.apiService
-      .getDashboardDetails()
+      .getUserById()
       .subscribe({
         next: (res) => {
           this.data = res;
           this.loading = false;
+          console.log('d', this.data.data.stream)
         },
         error: (err) => {
           this.alertService.error(err.message);
@@ -56,95 +69,57 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  getScorePoints() {
-    // this.scoreLoading = true;
-    // this.apiService
-    //   .getAllScoreAndPoints()
-    //   .subscribe({
-    //     next: (res) => {
-    //       if (res?.tests.length > 0) {
-    //         this.scoreReferral.tests = res?.tests.reverse() as any;
-    //         this.scoreReferral.testsPoints = res.tests.reduce((previousVal: any, currentVal: any) => {
-    //           return (isNaN(previousVal) ? (previousVal?.points ?? 0) : (previousVal ?? 0)) + (currentVal.points ?? 0);
-    //         });
-    //       }
-    //       this.scoreReferral.userReferralPoints = res?.userReferralPoints;
-    //       this.totalPoints = this.scoreReferral.userReferralPoints + this.scoreReferral.testsPoints;
-    //       this.trophyCount = Math.floor(this.totalPoints / 2000);
-    //       this.totalPoints = this.totalPoints - this.trophyCount * 2000;
-    //       this.scoreLoading = false;
-    //     },
-    //     error: (err) => {
-    //       this.alertService.error(err.message);
-    //       this.scoreLoading = false;
-    //     }
-    //   });
-  }
-
-  generateTrophyArray(): number[] {
-    return Array.from({ length: this.trophyCount }, (_, index) => index + 1);
-  }
-
   updateProfile() {
     this.router.navigate(['/update-user-details'])
   }
 
-  redirectToInstruction(testId: string) {
-    this.router.navigate(['/instructions/' + testId]);
+  redirectToInstruction(stream: string) {
+    this.router.navigate(['/instructions/' + stream]);
   }
 
-  redirectToScheduled() {
-    this.router.navigate(['/test-schedule']);
-  }
-
-  copyToClipboard() {
-    const user = this.helperService.getUserDetails();
-    const text = `Register to Aayam Star, ${window.location.origin}/login?referredBy=${user._id}`
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(() => {
-        this.alertService.success('Referral link is copy to clipboard. Share with your friends.');
-      }, (error) => {
-        console.log(error)
-      });
-    } else {
-      this.alertService.error('Browser do not support Clipboard API');
-    }
-  }
-
-  async share() {
-    const shareText = 'Register to Aayam Star,';
-    const referralLink = this.generateReferralLink();
-    const shareUrl = window.location.href;
-    const imageUrl = 'https://aayamcareerinstitute.com/images/aayam-star/aayam-star-main.webp';
-
-    try {
-      // const response = await fetch(imageUrl);
-      // const imageBlob = await response.blob();
-      if (navigator.share) {
-        await navigator.share({
-          title: 'AAYAM STAR',
-          text: `${shareText}\n${referralLink}`,
-          // url: shareUrl,
-          //  files: [new File([imageBlob,], 'aayam-star-main.webp', { type: 'image/webp'})], // Replace with your actual image data
-        });
-      } else {
-        console.error('Web Share API not supported');
-        this.alertService.error('Browser do not support Clipboard API')
-        // Share via WhatsApp
-        window.open(`whatsapp://send?text=${encodeURIComponent(shareText + ' ' + referralLink)}`);
-      }
-    }
-    catch (error) {
-      console.error('Error sharing:', error);
-    }
-  }
-
-  generateReferralLink(): string {
-    const user = this.helperService.getUserDetails();
-    return `${window.location.origin}/login?referredBy=${user._id}`;
-  }
+  // redirectToScheduled() {
+  //   this.router.navigate(['/test-schedule']);
+  // }
 
   OnReview(testId: any) {
     this.router.navigate(["/test/" + testId + "/review"]);
+  }
+
+  downloadAdmitCard(): void {
+    const element = this.admitCardContainer.nativeElement;
+    // Use html2canvas to capture the content as an image
+    html2canvas(element).then((canvas: any) => {
+      // Convert the canvas to base64 image data
+      const imageData = canvas.toDataURL('image/jpeg');
+
+      // Create a temporary link and trigger a download
+      const link = document.createElement('a');
+      link.href = imageData;
+      link.download = 'AdmitCard.jpg';
+      link.click();
+    });
+  }
+
+  getTestCenterName(testCenterId: string): string {
+    // Replace this with your actual mapping logic
+    switch (testCenterId) {
+      case "65874cd4e197cda96785ba12":
+        return 'Prestige-7';
+      case '65874cdde197cda96785ba14':
+        return 'Prestige-14';
+      case '65874cf2e197cda96785ba16':
+        return 'Annie Besant-7 ';
+      case '65874cf9e197cda96785ba18':
+        return 'Annie Besant-14 ';
+      case '65874d04e197cda96785ba1a':
+        return 'St. Arnold-7';
+      case '65874d0ce197cda96785ba1c':
+        return 'St. Arnold-14';
+      case '65858b61511c0a359263dbd1':
+        return 'new center';
+      // Add more cases as needed for other test centers
+      default:
+        return '';
+    }
   }
 }

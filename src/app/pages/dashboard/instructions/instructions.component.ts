@@ -11,15 +11,18 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
   styleUrls: ['./instructions.component.scss'],
 })
 export class InstructionsComponent {
-  testId = '' as string | number;
+  // testId = '' as string | number;
+  stream ='' as string;
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      this.testId = params['testId'];
+      // this.testId = params['testId'];
+      this.stream = params['stream'];
+      console.log('re',this.stream);
     });
   }
 
-  redirectToStartTest(testId: string | number) {
-    this.router.navigate(['/test/' + testId]);
+  redirectToStartTest(stream:string) {
+    this.router.navigate(['/test/' + stream]);
   }
 }

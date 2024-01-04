@@ -115,6 +115,24 @@ register(
 }
 /* ********************END OF REGISTRATION PURPOSE*********************** */
 
+// FOR GENERATING SINGLE ENROLL
+generateSingleEnroll(
+    userId: string,
+): Observable<CustomHttpResponse<any>> {
+  return this.http
+    .put<CustomHttpResponse<any>>(
+      CONSTANTS.API.SINGLE_ENROLL,
+      {userId}
+    )
+    .pipe(
+      map((res) => {
+        return res;
+      })
+    );
+}
+
+
+
 // FOR LOGIN PURPOSE
 sendLoginOtp(mobileNo: string): Observable<any> {
   return this.http
@@ -315,10 +333,10 @@ sendLoginMessage(payload: any): Observable<any> {
   //     );
   // }
 
-  getQuestions(testId: string | number): Observable<any> {
+  getQuestions(stream: string): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GET_TEST + '/' + testId
+        CONSTANTS.API.GET_TEST + '/' + stream
       )
       .pipe(
         map((res) => {
@@ -376,14 +394,11 @@ sendLoginMessage(payload: any): Observable<any> {
   //     );
   // }
 
-  getAllTests(stream: string): Observable<any> {
+  getAllTests(): Observable<any> {
     let params = new HttpParams();
-    if (stream) {
-      params = params.set("stream", stream);
-    }
     return this.http
       .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GET_ALL_TEST, { params }
+        CONSTANTS.API.GET_ALL_TEST
       )
       .pipe(
         map((res) => {
@@ -425,7 +440,7 @@ sendLoginMessage(payload: any): Observable<any> {
       )
       .pipe(
         map((res) => {
-          return res
+          return res;
         })
       );
   }
@@ -564,30 +579,30 @@ sendLoginMessage(payload: any): Observable<any> {
           "policy": "deterministic",
           "code": "en"
         },
-        "name": "aayam_start_makrs",
+        "name": "jeet_makrs",
         "components": [
           {
             "type": "body",
             "parameters": [
+              // {
+              //   "type": "text",
+              //   "text": title + " test"
+              // },
               {
                 "type": "text",
-                "text": title + " test"
-              },
-              {
-                "type": "text",
-                "text": score + ''
-              },
-              {
-                "type": "text",
-                "text": outOf + ''
-              },
-              {
-                "type": "text",
-                "text": score + ''
+                "text":score + ''
               },
               {
                 "type": "text",
                 "text": outOf + ''
+              },
+              {
+                "type": "text",
+                "text": parseFloat(score) * 4 + ''
+              },
+              {
+                "type": "text",
+                "text": '240'
               }
             ]
           }

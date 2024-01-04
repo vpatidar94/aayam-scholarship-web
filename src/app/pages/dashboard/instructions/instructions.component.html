@@ -22,7 +22,7 @@
           <li>
             Test will have certain duration, you can check the timer on test
             page. On click of start button the test will get started. And if the
-            time ends, the test will automatically will be submitted.
+            time ends, the test will be submitted automatically .
           </li>
           <li>
             If you leave the test or close the browser window. You'll not be
@@ -36,10 +36,10 @@
       </div>
       <div class="p-4">
         <button
-          *ngIf="testId"
+          *ngIf="stream"
           type="button"
           class="ibtn ibtn__primary w-100 mb-3"
-          (click)="redirectToStartTest(testId)"
+          (click)="redirectToStartTest(stream)"
         >
           Start Test
         </button>

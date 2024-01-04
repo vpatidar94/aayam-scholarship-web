@@ -22,7 +22,7 @@ export class VerifyOtpComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.referredBy = params['referredBy'];
     });
-    this.helperService.isOtpAvailable()
+    // this.helperService.isOtpAvailable()
   }
   tForm!: FormGroup;
   errorMessage = "";
@@ -112,6 +112,7 @@ export class VerifyOtpComponent implements OnInit {
                       // }
                      
                     }
+                    
                   },
                   (error) => {
                     this.alertService.error(CONSTANTS.MESSAGES.SOMETHING_WRONG)

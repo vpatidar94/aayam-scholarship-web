@@ -361,21 +361,94 @@ export class RegistrationComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
-            .subscribe({
-                next: () => {
-                    this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                    this.loading = false;
-                    //   this.showVerifyBtn = true;
+            // .subscribe({
+            //     next: (res) => {
+            //         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            //         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+            //         // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+            //         this.loading = false;
+            //         //   this.showVerifyBtn = true;
+            //     },
+            //     error: () => {
+            //         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            //         // this.router.navigate(['/verify']);
+            //         this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+            //         this.loading = false;
+            //     }
+            // });
+
+
+            .subscribe(
+                (res) => {
+                    console.log('resss',res, res.data, res.data.user._id)
+                    // const userId = res.data.user._id;
+                    
+                    if (res.status_code === 'success') {
+                        console.log('suss',res.data.user._id);
+                        const userId = res.data.user._id;
+                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        console.log('usersid',userId);
+                        this.loading = false;
+
+                        this.apiService.generateSingleEnroll(userId)
+                        .subscribe({
+                                next: (res) => {
+                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                                    console.log('final',res)
+                                    this.loading = false;
+                                    //   this.showVerifyBtn = true;
+                                },
+                                error: () => {
+                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                                    // this.router.navigate(['/verify']);
+                                    this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+                                    this.loading = false;
+                                }
+                            });;
+                        console.log('gen')
+
+                    }
                 },
-                error: () => {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify']);
+                (error) => {
                     this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
                     this.loading = false;
                 }
-            });
+            )
+
+        //     .subscribe(
+        //     async (res) => {
+        //         try {
+        //             console.log('resss', res, res.data, res.data.user._id);
+                    
+        //             if (res.status_code === 'success') {
+        //                 console.log('suss');
+        //                 const userId = res.data.user._id;
+        //                 this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+        //                 console.log('usersid', userId);
+        
+        //                 // Assuming `generateSingleEnroll` returns a promise
+        //                 await this.apiService.generateSingleEnroll(userId);
+        
+        //                 console.log('gen');
+        //                 this.loading = false;
+        //             } else {
+        //                 // Handle error case
+        //                 console.error('API call failed:', res.status_code);
+        //             }
+        //         } catch (error) {
+        //             // Handle unexpected errors
+        //             console.error('An unexpected error occurred:', error);
+        //         }
+        //     },
+        //     (error) => {
+        //         // Handle HTTP error (e.g., network issues)
+        //         console.error('HTTP error occurred:', error);
+        //     }
+        // );
+
+
         //   }
     }
 

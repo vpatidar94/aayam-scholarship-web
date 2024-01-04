@@ -39,3 +39,35 @@
     font-size: 0.85rem;
     top: 0;
 }
+
+// .active-section {
+//     background-color: blue;  /* Set your desired background color for the active section */
+//     color: white;  /* Set your desired text color for the active section */
+//   }
+.active-section {
+    padding: 10px; /* Adjust the padding as needed */
+    margin: 5px; /* Adjust the margin as needed */
+    background-color: #3498db; /* Choose your desired background color */
+    color: #fff; /* Set text color to white or a contrasting color */
+    border-radius: 5px; /* Add rounded corners for a more modern look */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .active-section:hover {
+    background-color: #2980b9; /* Darken the background color on hover */
+  }
+
+  .inactive-section {
+    padding: 10px; /* Adjust the padding as needed */
+    margin: 5px; /* Adjust the margin as needed */
+    background-color: #ecf0f1; /* Choose a light background color for inactive sections */
+    color: #333; /* Set text color to a darker color for inactive sections */
+    border-radius: 5px; /* Add rounded corners for a more modern look */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .inactive-section:hover {
+    background-color: #d0d3d4; /* Darken the background color on hover for inactive sections */
+  }

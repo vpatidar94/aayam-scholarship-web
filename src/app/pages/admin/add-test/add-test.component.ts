@@ -44,12 +44,18 @@ export class AddTestComponent implements OnInit {
       path: ''
     }
   ];
+  // cityOptions = ["City 1", "City 2", "City 3"]; // Add your list of cities
+
   tForm!: FormGroup;
   // streamOptions = ["NEET", "JEE"] as Array<StreamType>;
-  streamOptions = ["9", "10", "11", "12", "DROPPER"] as Array<ClassType>;
+  // streamOptions = ["9", "10", "11", "12", "DROPPER"] as Array<ClassType>;
+  streamOptions = ["9", "10", "11-PCM", "11-PCB", "12-PCM", "12-PCB"] as Array<ClassType>;
+
   toggleOptions = ['Yes', 'No'] as Array<ToggleType>;
   subjectOptions = ["PHYSICS", "CHEMISTRY", "BIOLOGY", "MATHS"] as Array<SubjectNameType>;
   questionOptions = CONSTANTS.QUESTION_OPTIONS;
+  subjectNames:Array<SubjectNameType>=[];
+  // isActive: boolean = false;
 
 
   ngOnInit(): void {
@@ -70,45 +76,58 @@ export class AddTestComponent implements OnInit {
       stream: new FormControl('11', [
         Validators.required
       ]),
-      // stream: this.fb.array([]),
-      // stream: new FormArray([
-      //   new FormControl(true),
-      //   new FormControl(false),
-      //   new FormControl(false),
-      //   new FormControl(false),
-      //   new FormControl(false),
+     
+      // testDate: new FormControl(null, [
+      //   Validators.required
       // ]),
-      subjectName: new FormControl('PHYSICS', [
+      testDuration: new FormControl(7200, [
         Validators.required
       ]),
-      testDate: new FormControl(null, [
-        Validators.required
-      ]),
-      testDuration: new FormControl(600, [
-        Validators.required
-      ]),
-      is12DropperSame: new FormControl('No', [
+      // is12DropperSame: new FormControl('No', [
+      //   Validators.required
+      // ]),
+
+      isShowTest: new FormControl('No', [
         Validators.required
       ]),
       questions: this.fb.array([]),
     });
-    this.addDefaultQuestions();
+    // this.addDefaultQuestions();
     this.getTestDetails();
     // this.changeStream();
   }
   changeToggle() {
-    const is12DropperSame = this.tForm.get('is12DropperSame')?.value;
+    // const is12DropperSame = this.tForm.get('is12DropperSame')?.value;
+    const showTest = this.tForm.get('isShowTest')?.value;
+    // if(isShowTest=="Yes"){
+    //   this.isActive = true;
+    // }else {
+    //   this.isActive = false;
+    // }
+
   }
   changeStream() {
     const stream = this.tForm.get('stream')?.value;
     this.tForm.patchValue({
       subjectName: null
     });
-    if (stream === '11' || stream === '12' || stream === 'DROPPER') {
-      this.subjectOptions = ["PHYSICS", "CHEMISTRY", "BIOLOGY", "MATHS"]
-    } else {
-      this.subjectOptions = ["MATHS", "SCIENCE", "SOCIAL-SCIENCE"];
-    }
+    // if (stream === '11' || stream === '12' || stream === 'DROPPER') {
+    //   this.subjectOptions = ["PHYSICS", "CHEMISTRY", "BIOLOGY", "MATHS"]
+    // } else {
+    //   this.subjectOptions = ["MATHS", "SCIENCE", "SOCIAL-SCIENCE"];
+    // }
+    if (stream === '9' || stream === '10') {
+      this.subjectNames = ["SCIENCE", "SOCIAL-SCIENCE", "MATHS"];
+    } 
+    else if (stream === '11-PCM' || stream === '12-PCM') {
+      this.subjectNames = ["PHYSICS", "CHEMISTRY", "MATHS"];
+    } 
+    else {
+      this.subjectNames = ["PHYSICS", "CHEMISTRY", "BIOLOGY"];
+    };
+    this.questions.setValue([]);
+    this.addDefaultQuestions();
+
   }
 
   get questions() {
@@ -116,17 +135,27 @@ export class AddTestComponent implements OnInit {
   }
 
   addDefaultQuestions() {
-    let number = 10
+    let number = 300;
     for (var i = 0; i < number; i++) {
-      this.addQuestion();
+      console.log(i);
+      if(i>=0 && i<100){
+        this.addQuestion(this.subjectNames[0])
+      }
+      else if(i>=100 && i<200){
+        this.addQuestion(this.subjectNames[1])
+      }
+      else{
+        this.addQuestion(this.subjectNames[2])
+      }
     }
   }
 
-  addQuestion() {
+  addQuestion(subjectName:SubjectNameType) {
     const formGroup = this.fb.group({
       id: null,
       image: '{test-id}/Q{i}.webp',
       imageHindi: '{test-id}/Q{i}-h.webp',
+      subjectName: subjectName,
       correctAnswer: new FormControl('A', [
         Validators.required,
       ]),
@@ -147,8 +176,10 @@ export class AddTestComponent implements OnInit {
     } else {
       this.loading = true;
       const fromVal = this.tForm.value;
-      const testDate = fromVal.testDate.getDate() + '-' + (fromVal.testDate.getMonth() + 1) + '-' + fromVal.testDate.getFullYear();
-      const folderName = fromVal.id ?? (fromVal.stream + '-' + fromVal.subjectName + '-' + testDate);
+      // const testDate = fromVal.testDate.getDate() + '-' + (fromVal.testDate.getMonth() + 1) + '-' + fromVal.testDate.getFullYear();
+      // const folderName = fromVal.id ?? (fromVal.stream + '-' + fromVal.subjectName + '-' + testDate);
+      const folderName = fromVal.id ?? (fromVal.stream + '-'+"--");
+
 
       fromVal.questions.map((x: any, index: number) => {
         x.id = index + 1;
@@ -158,18 +189,18 @@ export class AddTestComponent implements OnInit {
         x.imageHindi = x.imageHindi.replace('{i}', index + 1);
       });
 
-      const newTestDate = new Date(
-        fromVal.testDate.getUTCFullYear(),
-        fromVal.testDate.getUTCMonth(),
-        fromVal.testDate.getUTCDate(),
-        0,
-        0,
-        0
-      );
-      newTestDate.setMinutes(newTestDate.getMinutes() - newTestDate.getTimezoneOffset());
+      // const newTestDate = new Date(
+      //   fromVal.testDate.getUTCFullYear(),
+      //   fromVal.testDate.getUTCMonth(),
+      //   fromVal.testDate.getUTCDate(),
+      //   0,
+      //   0,
+      //   0
+      // );
+      // newTestDate.setMinutes(newTestDate.getMinutes() - newTestDate.getTimezoneOffset());
 
-      const resultDate = new Date(newTestDate.toString());
-      resultDate.setDate(resultDate.getDate() + 1).toLocaleString();
+      // const resultDate = new Date(newTestDate.toString());
+      // resultDate.setDate(resultDate.getDate() + 1).toLocaleString();
 
       // let streamDb = []
       // if (fromVal.stream === '9' || fromVal.stream === '10')
@@ -183,37 +214,38 @@ export class AddTestComponent implements OnInit {
       // else
       //   streamDb = [fromVal.stream]
 
-      let streamDb: string[] = [];
-      if (fromVal.is12DropperSame === 'Yes') {
-        // Include both 'DROPPER' and '12' in the streamDb array
-        streamDb = ['DROPPER', '12'];
-      } else {
-        if (fromVal.stream === '9' || fromVal.stream === '10') {
-          streamDb = [fromVal.stream];
-        }
-        else if (fromVal.stream === 'DROPPER' || fromVal.stream === '12' || fromVal.stream === '11') {
-          // Include only the selected stream in the streamDb array
-          streamDb = [fromVal.stream];
-        }
-      }
-      if (!(fromVal.stream === '9' || fromVal.stream === '10')) {
-        if (fromVal.subjectName === 'PHYSICS' || fromVal.subjectName === 'CHEMISTRY') {
-          streamDb = streamDb.map(stream => [stream + '-PCB', stream + '-PCM']).flat();
-        } else if (fromVal.subjectName === 'BIOLOGY') {
-          streamDb = streamDb.map(stream => [stream + '-PCB']).flat();
-        } else if (fromVal.subjectName === 'MATHS') {
-          streamDb = streamDb.map(stream => [stream + '-PCM']).flat();
-        }
-      }
+      // let streamDb: string[] = [];
+      // if (fromVal.is12DropperSame === 'Yes') {
+      //   // Include both 'DROPPER' and '12' in the streamDb array
+      //   streamDb = ['DROPPER', '12'];
+      // } else {
+      //   if (fromVal.stream === '9' || fromVal.stream === '10') {
+      //     streamDb = [fromVal.stream];
+      //   }
+      //   else if (fromVal.stream === 'DROPPER' || fromVal.stream === '12' || fromVal.stream === '11') {
+      //     // Include only the selected stream in the streamDb array
+      //     streamDb = [fromVal.stream];
+      //   }
+      // }
+      // if (!(fromVal.stream === '9' || fromVal.stream === '10')) {
+      //   if (fromVal.subjectName === 'PHYSICS' || fromVal.subjectName === 'CHEMISTRY') {
+      //     streamDb = streamDb.map(stream => [stream + '-PCB', stream + '-PCM']).flat();
+      //   } else if (fromVal.subjectName === 'BIOLOGY') {
+      //     streamDb = streamDb.map(stream => [stream + '-PCB']).flat();
+      //   } else if (fromVal.subjectName === 'MATHS') {
+      //     streamDb = streamDb.map(stream => [stream + '-PCM']).flat();
+      //   }
+      // }
 
       const payload = {
         ...this.tForm.value,
         id: folderName,
         active: true,
-        testDate: newTestDate.toString(),
-        resultDate: resultDate.toString(),
+        testDate: "2023-01-01",
+        resultDate: "2023-01-02",
         passingScore: this.tForm.value.questions.length / 2,
-        stream: streamDb
+        stream: this.tForm.value.stream,
+        subjectNames: this.subjectNames,
       }
       this.loading = false;
       this.apiService
@@ -228,6 +260,7 @@ export class AddTestComponent implements OnInit {
             this.loading = false;
           }
         });
+    console.log("pay",payload);
     }
   }
 }

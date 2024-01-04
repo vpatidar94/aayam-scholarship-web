@@ -92,18 +92,17 @@ export class TestsComponent {
   ] as TableHeader<any>[];
 
   ngOnInit(): void {
-    this.getAllTestDetails('9');
+    this.getAllTestDetails();
   }
 
   changeData(e: any[]) {
     this.filteredData = e;
   }
 
-  getAllTestDetails(stream: string | null) {
-    const queryParams: any = stream;
+  getAllTestDetails() {
     this.loading = true;
     this.apiService
-      .getAllTests(queryParams)
+      .getAllTests()
       .subscribe({
         next: (res) => {
           this.data = res;
@@ -132,7 +131,7 @@ export class TestsComponent {
           next: (res) => {
             // this.data = res;
             item.btnLoading = false;
-            this.getAllTestDetails(null);
+            this.getAllTestDetails();
           },
           error: (err) => {
             this.alertService.error(err.message);
@@ -161,11 +160,5 @@ export class TestsComponent {
     //     }
     //   });
   }
-
-
-
-  filterByStream(stream: string | null) {
-    this.selectedStream = stream;
-    this.getAllTestDetails(stream)
-  }
+  
 }

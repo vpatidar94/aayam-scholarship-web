@@ -6,26 +6,6 @@
   </org-content-header>
   <div class="row">
     <div class="col col-12">
-       <!-- Filter tabs -->
-       <ul class="nav nav-tabs mb-3">    
-        <li class="nav-item">
-          <a class="nav-link" (click)="filterByStream('9')" [class.active]="selectedStream === '9' || !selectedStream">9th</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="filterByStream('10')" [class.active]="selectedStream === '10'">10th</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="filterByStream('11-PCM' && '11-PCB')"
-            [class.active]="selectedStream === '11-PCM' || selectedStream === '11-PCB'">11th</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="filterByStream('12-PCM' && '12-PCB')"
-            [class.active]="selectedStream === '12-PCM' || selectedStream === '12-PCB'">12th</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="filterByStream(null)" [class.active]="selectedStream ==='null'">All</a>
-        </li>
-      </ul>
       <div class="pb-4">
         <ng-container *ngIf="loading; else ifNoData">
           <ng-container *ngTemplateOutlet="spinner"></ng-container>

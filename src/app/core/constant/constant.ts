@@ -13,7 +13,9 @@ export const CONSTANTS = Object.freeze({
     GET_TEST_DETAIL: '/test/getTestDetail',
     GET_DASHBOARD_DETAILS: '/result/getResultDashboard',
     GET_ALL_SCORE_POINTS: '/result/getAllScorePoints',
-    GET_ALL_TEST: '/test/getAllTest',
+    // GET_ALL_TEST: '/test/getAllTest',
+    GET_ALL_TEST: '/test/alltests',
+
     GENERATE_RANK: '/result/generateRank',
     SEND_WP_MESSAGES: '/result/sendWpMessage',
     GET_RESULT_BY_TEST: '/result/getResultByTest',
@@ -24,12 +26,13 @@ export const CONSTANTS = Object.freeze({
     // GET_ALL_USERS: '/result/getAllResultsDetails',
     GET_ALL_USERS: '/users/',
 
-    GET_USER_BY_ID: '/users/getUserById',
+    GET_USER_BY_ID: '/users/user',
     SEND_SMS_OTP: '/users/send-signup-otp',
     SEND_LOGIN_OTP: '/users/signin-otp',
     SIGNIN: '/users/signin',
     VERIFY_OTP: '/users/verifyotp',
-    UPDATE_REGISTERATION: '/users/signup'
+    UPDATE_REGISTERATION: '/users/signup',
+    SINGLE_ENROLL: '/users/generate-enrolNo',
   },
   MESSAGES: {
     LOGIN_FAILURE: "Login failed",
@@ -56,7 +59,7 @@ export const CONSTANTS = Object.freeze({
 export type ButtonType = 'button' | 'submit';
 export type AlertType = 'success' | 'info' | 'danger' | 'warning' | '';
 export type ToggleType = 'Yes' | 'No';
-export type ClassType = "9" | "10" | "11" | "12";
+export type ClassType = "9" | "10" | "11-PCM" |"11-PCB" | "12-PCM" | "11-PCB";
 export type SubjectGroupType = "PCM" | "PCB";
 export type StreamType = 'NEET' | 'JEE';
 export type ModeType = 'online' | 'offline';
