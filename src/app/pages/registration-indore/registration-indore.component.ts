@@ -225,7 +225,6 @@ export class RegistrationIndoreComponent implements OnInit {
             .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
             .subscribe(
                 (res) => {
-                    // console.log("response", res)
                     if (res.status_code === 'success') {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });

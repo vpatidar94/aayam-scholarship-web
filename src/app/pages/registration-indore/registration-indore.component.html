@@ -2,7 +2,7 @@
     <org-dashboard-header title="" subTitle="" [showLogout]="true">
     </org-dashboard-header>
 
-    <div class="registration__card px-4" *ngIf="!showMessage">
+    <div class="registration__card px-4 py-4" *ngIf="!showMessage">
         <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary">JEET</span> Test Registration</h4>
         <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
 
@@ -239,6 +239,8 @@
             </div> -->
 
             <div class="col-12 mt-4 text__grey text-center">
+                <span class="me-2">If already registered. To Login</span><a class="text__action__primary"
+                  href="https://jeet.aayamcareerinstitute.com/login">click here</a><br>
                 <span class="me-2">For more details visit our website</span><a class="text__action__primary"
                     href="https://www.aayamcareerinstitute.com/jeet">click here</a>
             </div>

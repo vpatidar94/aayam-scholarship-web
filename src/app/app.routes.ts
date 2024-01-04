@@ -3,6 +3,7 @@ import { canActivateUser } from '@core/guards/can-activate-guard';
 import { RegistrationIndoreComponent } from '@pages/registration-indore/registration-indore.component';
 import { RegistrationComponent } from '@pages/registration/registration.component';
 import { QuestionComponent } from './pages/dashboard/question/question.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 
 export const appRoutes: Routes = [
     
@@ -13,7 +14,7 @@ export const appRoutes: Routes = [
   
   {
         path: "",
-        component: RegistrationComponent
+        component: LoginComponent
       },
 
       {

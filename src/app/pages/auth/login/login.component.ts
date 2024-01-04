@@ -49,9 +49,7 @@ export class LoginComponent implements OnInit {
         .subscribe({
           next: () => {
             this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            console.log("mob",mobileNo);
             this.router.navigate(['/verify']);
-            console.log("see")
             this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
             this.loading = false;
           },

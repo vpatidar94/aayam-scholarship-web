@@ -9,6 +9,9 @@ import { HelperService } from 'src/app/core/services/helper';
 import { environment } from 'src/app/environments/environment.development';
 import html2canvas from 'html2canvas';
 // import { NgxBarcode6Module } from 'ngx-barcode6';
+import JsBarcode from 'jsbarcode';
+
+
 
 
 @Component({
@@ -48,6 +51,8 @@ export class DashboardComponent implements OnInit {
   isUpdateProfile = false as boolean;
   showAdmitCardDetails: boolean = false;
 
+  barcodeValue: string = '';
+
   ngOnInit(): void {
     this.getDashboardDetails();
   }
@@ -56,17 +61,36 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     this.apiService
       .getUserById()
-      .subscribe({
-        next: (res) => {
-          this.data = res;
+      // .subscribe({
+      //   next: (res) => {
+      //     this.data = res;
+      //     this.loading = false;
+      //     // console.log('d', this.data.data.stream)
+      //     this.barcodeValue = res.data.enrollmentNo;
+      //     this.generateBarcode();
+
+      //   },
+      //   error: (err) => {
+      //     this.alertService.error(err.message);
+      //     this.loading = false;
+      //   }
+      // });
+
+      .subscribe(
+        (res) => {
+            if (res.status_code === 'success') {
+              this.data = res;
           this.loading = false;
           // console.log('d', this.data.data.stream)
-        },
-        error: (err) => {
-          this.alertService.error(err.message);
+          this.barcodeValue = res.data.enrollmentNo;
+          this.generateBarcode();
+        }
+      },
+        (error) => {
+          this.alertService.error(CONSTANTS.MESSAGES.SOMETHING_WRONG);
           this.loading = false;
         }
-      });
+    )
   }
 
   updateProfile() {
@@ -122,4 +146,20 @@ export class DashboardComponent implements OnInit {
         return '';
     }
   }
+
+  generateBarcode() {
+    // Set your barcode value dynamically
+    // this.barcodeValue = this.data.data.enrollmentNo || '';
+    // this.barcodeValue = '12345';
+
+
+    // Use jsbarcode to generate the barcode
+    JsBarcode("#yourBarcodeElement", this.barcodeValue, {
+      format: "CODE128",
+      height: 50,
+      displayValue: false
+    });
+
+
+}
 }

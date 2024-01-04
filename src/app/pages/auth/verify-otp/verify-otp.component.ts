@@ -85,7 +85,6 @@ export class VerifyOtpComponent implements OnInit {
           user.mobileNo, enteredOtp
         ).subscribe(
           (res) => {
-            console.log("ressss", res)
             if (res.status_code === 'success') {
               this.alertService.success(CONSTANTS.MESSAGES.OTP_VERIFY);
               this.loading = false;
