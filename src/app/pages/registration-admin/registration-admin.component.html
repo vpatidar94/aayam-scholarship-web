@@ -2,9 +2,10 @@
     <org-dashboard-header title="" subTitle="" [showLogout]="true">
     </org-dashboard-header>
 
-    <div class="registration__card px-4 py-4" *ngIf="!showMessage">
+    <div class="registration__card px-4 py-3" *ngIf="!showMessage">
         <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary">JEET</span> Test Registration</h4>
         <div *ngIf="!showRegistrationForm">
+
             <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
 
                 <!-- Student name -->
@@ -205,34 +206,23 @@
                 </div>
 
                 <!-- Buttons -->
-                <div class="col-12">
+                <div class="col-12 ">
                     <div *ngIf="showOtpBtn">
                         <button type="submit" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
-                            <span *ngIf="!loading; else spinner">Get OTP</span>
+                            <span *ngIf="!loading; else spinner">Register Now</span>
                         </button>
                     </div>
-                    <div *ngIf="showResendBtn">
-                        <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading"
-                            (click)="resendOtp()">
-                            <span *ngIf="!loading; else spinner">Resend OTP</span>
-                        </button>
-                    </div>
+                    <!-- <div *ngIf="showResendBtn">
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="resendOtp()">
+                        <span *ngIf="!loading; else spinner">Resend OTP</span>
+                    </button>
+                </div> -->
                     <!-- verify otp field and btn  -->
-                    <div *ngIf="showVerifyBtn">
-                        <div class="col-12  mb-3">
-                            <label for="otp-field" class="mb-2 text__body-dark"> Verify OTP</label>
-                            <div class="position-relative">
-                                <input type="text" formControlName="verify_otp"
-                                    class="form-control ifield ifield-login mobile__field" id="otp-field" value=""
-                                    placeholder="Enter the otp sent on your Mobile No">
-                            </div>
-                            <org-field-validation-message
-                                [control]="tForm.controls['otp_field']"></org-field-validation-message>
-                        </div>
-                        <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
-                            <span (click)="verifyOtp()">verify OTP</span>
-                        </button>
-                    </div>
+
+                    <!-- <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="registerNow()">
+                        <span *ngIf="!loading; else spinner" >Register</span>
+                    </button> -->
+                    <!-- </div> -->
                     <ng-template #spinner>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     </ng-template>

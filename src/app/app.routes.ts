@@ -4,6 +4,7 @@ import { RegistrationIndoreComponent } from '@pages/registration-indore/registra
 import { RegistrationComponent } from '@pages/registration/registration.component';
 import { QuestionComponent } from './pages/dashboard/question/question.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { RegistrationAdminComponent } from '@pages/registration-admin/registration-admin.component';
 
 export const appRoutes: Routes = [
     
@@ -20,6 +21,11 @@ export const appRoutes: Routes = [
       {
         path: "register",
         component:  RegistrationComponent
+      },
+
+      {
+        path: "register-admin",
+        component:  RegistrationAdminComponent
       },
 
       {
@@ -116,6 +122,7 @@ export const appRoutes: Routes = [
             loadComponent: () =>
               import('./pages/admin/add-test/add-test.component').then((x) => x.AddTestComponent),
           },
+          
     
         ]
       },

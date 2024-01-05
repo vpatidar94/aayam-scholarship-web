@@ -90,6 +90,8 @@ export class RegistrationComponent implements OnInit {
     showOtpBtn: boolean = true;
     showResendBtn: boolean = false;
 
+    showRegistrationForm: boolean = true;
+
 
     ngOnInit(): void {
         this.tForm = new FormGroup({

@@ -6,19 +6,19 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { VALIDATE } from 'src/app/core/constant/validate';
 import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
 import { HelperService } from 'src/app/core/services/helper';
-import { CONSTANTS, ClassType, ModeIndoreType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
+import { CONSTANTS, ClassType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
 import { ApiService } from '@core/services/api.service';
 import { AlertService } from '@core/services/alert.service';
 import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
 
 @Component({
-    selector: 'org-registration-indore',
+    selector: 'org-registration-admin',
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent],
-    templateUrl: './registration-indore.component.html',
-    styleUrls: ['./registration-indore.component.scss'],
+    templateUrl: './registration-admin.component.html',
+    styleUrls: ['./registration-admin.component.scss'],
 })
-export class RegistrationIndoreComponent implements OnInit {
+export class RegistrationAdminComponent implements OnInit {
     constructor(private alertService: AlertService, private apiService: ApiService, private helperService: HelperService, private router: Router, private route: ActivatedRoute) {
         this.route.queryParams.subscribe(params => {
             this.referredBy = params['referredBy'];
@@ -27,7 +27,7 @@ export class RegistrationIndoreComponent implements OnInit {
     tForm!: FormGroup;
     loading = false;
     streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
-    modeOptions = ["offline"] as Array<ModeIndoreType>;
+    modeOptions = ["online", "offline"] as Array<ModeType>;
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
     testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
@@ -93,7 +93,6 @@ export class RegistrationIndoreComponent implements OnInit {
 
 
 
-
     ngOnInit(): void {
         this.tForm = new FormGroup({
             mobile_no: new FormControl(null, [
@@ -142,8 +141,6 @@ export class RegistrationIndoreComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
-
-
         });
     }
 
@@ -182,40 +179,44 @@ export class RegistrationIndoreComponent implements OnInit {
                     this.testCenterId = 'prestige-14-jan'
 
                 }
+
             }
-            this.apiService
-                // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-                .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
-                .subscribe(
-                    (res) => {
-                        if (res.status_code === 'success') {
-                            this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                            // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                            this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                            this.loading = false;
-                            this.showVerifyBtn = true;
-                            this.showOtpBtn = false;
-                            setTimeout(() => {
-                                this.showResendBtn = true;
-                            }, 5000);
-                        }
-                        if (res.code == 400) {
-                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
-                        }
-                    },
-                    (error) => {
-                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify']);
-                        if (error.error.code == 403) {
-                            this.alertService.error(CONSTANTS.MESSAGES.USER_EXIST)
-                            this.loading = false;
-                        }
-                        if (error.error.code == 400) {
-                            this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
-                            this.loading = false;
-                        }
-                    }
-                );
+            this.registerNow();
+            // this.apiService
+            //     // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
+            //     .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
+            //     .subscribe(
+            //         (res) => {
+            //             if (res.status_code === 'success') {
+            //                 this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            //                 // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+            //                 this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+            //                 this.loading = false;
+            //                 this.showVerifyBtn = true;
+            //                 this.showOtpBtn = false;
+            //                 setTimeout(() => {
+            //                     this.showResendBtn = true;
+            //                 }, 5000);
+            //             }
+            //             if (res.code == 400) {
+            //                 this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
+            //             }
+
+            //         },
+            //         (error) => {
+            //             // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+            //             // this.router.navigate(['/verify']);
+            //             if (error.error.code == 403) {
+            //                 this.alertService.error(CONSTANTS.MESSAGES.USER_EXIST)
+            //                 this.loading = false;
+            //             }
+            //             if (error.error.code == 400) {
+            //                 this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
+            //                 this.loading = false;
+            //             }
+            //         }
+
+            //     );
         }
     }
 
@@ -239,13 +240,11 @@ export class RegistrationIndoreComponent implements OnInit {
                     }
                 },
                 (error) => {
-                    this.alertService.success(CONSTANTS.MESSAGES.INVALID_OTP);
-                    console.error("wrong otp", error);
+                    this.alertService.error(CONSTANTS.MESSAGES.INVALID_OTP);
+                    console.error("Wrong otp", error);
                     this.loading = false;
                 }
             )
-
-
     }
 
     resendOtp() {
@@ -365,9 +364,12 @@ export class RegistrationIndoreComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
+            
             .subscribe(
                 (res) => {
                     if (res.status_code === 'success') {
+                        console.log("pay is",payload);
+                        
                         const userId = res.data.user._id;
                         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         this.loading = false;
@@ -411,6 +413,7 @@ export class RegistrationIndoreComponent implements OnInit {
 
     changeMode() {
         const mode = this.tForm.get('mode')?.value;
+
     }
 
     changeTestCenter() {

@@ -50,10 +50,22 @@ export class DashboardComponent implements OnInit {
   isExpandedPoints = false as boolean;
   isUpdateProfile = false as boolean;
   showAdmitCardDetails: boolean = false;
+  showButton: boolean = false;
 
   barcodeValue: string = '';
 
+  // NEW RELATED TO SHOW DATA ON PARTICULAR DATE
+  apiResponseDate!: string; // assuming the date format is "DD-MM-YYYY"
+  currentDate!: Date;
+
   ngOnInit(): void {
+    // newly ADDED START
+    // Assuming you get the API response date during some initialization or API call
+    this.apiResponseDate = "05-01-2024";
+    // Get the current date
+    this.currentDate = new Date();
+    // newly ADDED end
+
     this.getDashboardDetails();
   }
 
@@ -61,36 +73,37 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     this.apiService
       .getUserById()
-      // .subscribe({
-      //   next: (res) => {
-      //     this.data = res;
-      //     this.loading = false;
-      //     // console.log('d', this.data.data.stream)
-      //     this.barcodeValue = res.data.enrollmentNo;
-      //     this.generateBarcode();
-
-      //   },
-      //   error: (err) => {
-      //     this.alertService.error(err.message);
-      //     this.loading = false;
-      //   }
-      // });
-
       .subscribe(
         (res) => {
-            if (res.status_code === 'success') {
-              this.data = res;
-          this.loading = false;
-          // console.log('d', this.data.data.stream)
-          this.barcodeValue = res.data.enrollmentNo;
-          this.generateBarcode();
-        }
-      },
+          if (res.status_code === 'success') {
+            this.data = res;
+            this.loading = false;
+            // console.log('d', this.data.data.stream)
+            this.barcodeValue = res.data.enrollmentNo;
+            this.generateBarcode();
+
+          // TO SHOW START TEST BTN ON TEST DATE AND TO ONLINE ONLY AND FOR ONE TEST ONLY
+            //   const apiDate = new Date(
+            //     parseInt(this.apiResponseDate.split('-')[2]),  // Year
+            //     parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
+            //     parseInt(this.apiResponseDate.split('-')[0])   // Day
+            //   );
+            //   if (
+            //   this.currentDate.toDateString() === apiDate.toDateString() &&
+            //   res.data.mode === 'online' &&
+            //   res.data.result.length < 1
+            // ) {
+            //   // If conditions are satisfied, set showButton to true
+            //   this.showButton = true;
+            // }
+
+          }
+        },
         (error) => {
           this.alertService.error(CONSTANTS.MESSAGES.SOMETHING_WRONG);
           this.loading = false;
         }
-    )
+      )
   }
 
   updateProfile() {
@@ -148,18 +161,29 @@ export class DashboardComponent implements OnInit {
   }
 
   generateBarcode() {
-    // Set your barcode value dynamically
-    // this.barcodeValue = this.data.data.enrollmentNo || '';
-    // this.barcodeValue = '12345';
-
-
     // Use jsbarcode to generate the barcode
     JsBarcode("#yourBarcodeElement", this.barcodeValue, {
       format: "CODE128",
       height: 50,
       displayValue: false
     });
+  }
 
 
+// NEWLY ADDED START
+isButtonVisible(): boolean {
+  // Convert API response date to Date object
+  const apiDate = new Date(
+    parseInt(this.apiResponseDate.split('-')[2]),  // Year
+    parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
+    parseInt(this.apiResponseDate.split('-')[0])   // Day
+  );
+
+  // Compare current date with API response date for equality
+  return this.currentDate.toDateString() === apiDate.toDateString();
 }
+
+// NEWLY ADDED END
+
+
 }
