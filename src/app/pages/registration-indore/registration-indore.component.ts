@@ -363,22 +363,37 @@ export class RegistrationIndoreComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
-            .subscribe({
-                next: () => {
-                    this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                    this.loading = false;
-                    //   this.showVerifyBtn = true;
+            .subscribe(
+                (res) => {
+                    if (res.status_code === 'success') {
+                        const userId = res.data.user._id;
+                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                        this.loading = false;
+
+                        this.apiService.generateSingleEnroll(userId)
+                            .subscribe({
+                                next: (res) => {
+                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
+                                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
+                                    // console.log('final',res)
+                                    this.loading = false;
+                                    //   this.showVerifyBtn = true;
+                                },
+                                error: () => {
+                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
+                                    // this.router.navigate(['/verify']);
+                                    this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
+                                    this.loading = false;
+                                }
+                            });;
+                    }
                 },
-                error: () => {
-                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                    // this.router.navigate(['/verify']);
+                (error) => {
                     this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
                     this.loading = false;
                 }
-            });
-        //   }
+            )
     }
 
     changeStream() {
