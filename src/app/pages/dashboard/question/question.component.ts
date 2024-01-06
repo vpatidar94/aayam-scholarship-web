@@ -170,9 +170,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.setQuestion();
   }
 
-  sendWPMessage(title: string, score: string, outOf: string) {
+  sendWPMessage(title: string, correct: string, score: string, totalQue: string) {
     const userDetail = this.helperService.getUserDetails();
-    this.apiService.sendScore('91' + userDetail.mobileNo, title, score, outOf).subscribe({
+    this.apiService.sendScore('91' + userDetail.mobileNo,  title, correct, score, totalQue).subscribe({
       next: () => {
         this.router.navigate(['/dashboard']);
         this.loading = false;
@@ -212,7 +212,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
           if (res.status_code === 'success') {
             this.result = res.data;
             this.isSubmit = true;
-            this.sendWPMessage(this.questionDetails.title, this.result.score + '', this.questions.length + '');
+            this.sendWPMessage(this.questionDetails.title,this.result.correctCount + '', this.result.score + '', this.questions.length + '');
           }
           else {
             this.alertService.error('Error in submit response. Please try again!');

@@ -584,7 +584,7 @@ export class ApiService {
   //     );
   // }
 
-  sendScore(number: string, title: string, score: string, outOf: string): Observable<{ messaging_product: string, contacts: any, messages: any }> {
+  sendScore(number: string, title: string, correct: string, score: string, totalQue: string): Observable<{ messaging_product: string, contacts: any, messages: any }> {
     const payload = {
       "to": number,
       "recipient_type": "individual",
@@ -605,15 +605,15 @@ export class ApiService {
               // },
               {
                 "type": "text",
+                "text": correct + ''
+              },
+              {
+                "type": "text",
+                "text": totalQue + ''
+              },
+              {
+                "type": "text",
                 "text": score + ''
-              },
-              {
-                "type": "text",
-                "text": outOf + ''
-              },
-              {
-                "type": "text",
-                "text": parseFloat(score) * 4 + ''
               },
               {
                 "type": "text",
