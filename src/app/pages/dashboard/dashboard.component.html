@@ -19,7 +19,6 @@
 
         
         <div class="card-body py-1">
-          <!-- <div class="d-flex"> -->
             <div *ngIf="data.data?.result.length>=1">
               <p class="card-title card__content__title">Score</p>
               <h3 class="card-test">
@@ -27,26 +26,6 @@
                 "240"
                 }}
               </h3>
-
-              <!-- SCORE IN THE TABLE FORM -->
-              <!-- <h3 class="card-text"> -->
-                <!-- <table class="score-table">
-                  <thead class="card-header">
-                    <tr>
-                      <th>Correct</th>
-                      <th >Incorrect</th>
-                      <th class="card-title mb-1">Unattempted</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{{data.data.result[0].correctCount}}</td>
-                      <td>{{data.data.result[0].incorrectCount}}</td>
-                      <td>{{data.data.result[0].unattemptedCount}}</td>
-                    </tr>
-                  </tbody>
-                </table> -->
-              <!-- </h3> -->
 
               <table class="score-table table-responsive" style="font-size: 10px;">
                 <thead class="card-header">
@@ -79,9 +58,6 @@
           <!-- </div> -->
           <hr />
           <p class="card-title card__content__title">Rank</p>
-          <!-- <h3 class="card-text" *ngIf="data?.lastTestResult?.rank">
-              {{ data?.lastTestResult?.rank }}
-            </h3> -->
           <h6 class="card-text">
             Rank will be disclosed soon.
           </h6>
