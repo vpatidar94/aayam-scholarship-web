@@ -12,15 +12,6 @@ import { TimerProgressComponent } from 'src/app/shared/timer-progress/timer-prog
 import { HelperService } from 'src/app/core/services/helper';
 import { environment } from 'src/app/environments/environment.development';
 
-
-// function shuffleArray(array: any[]): any[] {
-//   const newArray = [...array];
-//   for (let i = newArray.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-//   }
-//   return newArray;
-// }
 function shuffleArray(array: any[]): any[] {
   if (!Array.isArray(array)) {
     throw new Error('Input is not an array');
@@ -68,18 +59,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   isHindiMedium = false as boolean;
   isReview = false as boolean;
   subjects: any = []
-  // sectionOneQuestions: any = [];
-  // sectionTwoQuestions: any = [];
-  // sectionThreeQuestions: any = [];
-  // sectionRandomOneQuestions: any = [];
-  // sectionRandomTwoQuestions: any = [];
-  // sectionRandomThreeQuestions: any = [];
-  // overallRandomQuestionsArray: any = [];
-  // show dialog on visibility change
+
   visibilityChange() {
     if (!this.isSubmit && this.isReview) {
       if (document.visibilityState === "hidden") {
-        confirm('You have not submit the test paper. Are you sure you want to leave? jjjjj')
+        confirm('You have not submit the test paper. Are you sure you want to leave?')
       }
     }
   }
@@ -90,6 +74,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     if (!this.isSubmit) {
       if (confirm('You have not submit the test paper. Are you sure you want to leave?')) {
         $event.preventDefault();
+        
         return true;
       } else {
         return false;
@@ -131,7 +116,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
         this.questions = x[0].studentResponse;
         this.question = x[0].studentResponse[0] ?? null;
         this.loading = false;
-        
+
       }, (err) => {
         this.alertService.error(err.error.error);
         this.loading = false;
@@ -140,46 +125,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
     else {
       this.state$ = this.apiService.getQuestions(this.stream)
       this.state$.subscribe((x) => {
-        console.log('see it',x);
         this.questionDetails = x;
         this.questions = x.questions;
-        console.log('wue',this.questions);
-        this.testId= x.id;
-        console.log('tid',this.testId);
+        this.testId = x.id;
         this.question = x.questions[0] ?? null;
         this.subjects = x.subjectNames;
         this.loading = false;
-
-        // this.sectionOneQuestions = this.questions.slice(0, 4);
-        // this.sectionTwoQuestions = this.questions.slice(4, 8);
-        // this.sectionThreeQuestions = this.questions.slice(8, 12);
-
-
-        // this.sectionRandomOneQuestions = this.getRandomQuestions(this.sectionOneQuestions, 2);
-        // console.log("random1", this.sectionRandomOneQuestions);
-        // this.sectionRandomTwoQuestions = this.getRandomQuestions(this.sectionTwoQuestions, 2);
-        // console.log("random2", this.sectionRandomTwoQuestions);
-        // this.sectionRandomThreeQuestions = this.getRandomQuestions(this.sectionThreeQuestions, 2);
-        // console.log("random3", this.sectionRandomThreeQuestions);
-
-        // this.overallRandomQuestionsArray = [
-        //   ...this.sectionRandomOneQuestions,
-        //   ...this.sectionRandomTwoQuestions,
-        //   ...this.sectionRandomThreeQuestions
-        // ];
-
-        // console.log("Overall Random Questions Array:", this.overallRandomQuestionsArray);
-
-        // // NEWLY ADDED
-        // // this.questions = this.getRandomQuestions(x.questions, 5); // Change 5 to the number of questions you want to display
-        // // console.log('questions',this.questions);
-        // this.questions = this.overallRandomQuestionsArray;
-        // console.log('questions', this.questions);
-
-
-        // // this.question = x.questions[0] ?? null;
-        // // this.question = this.sectionRandomOneQuestions[0] ?? null;
-        // this.question = this.overallRandomQuestionsArray[0] ?? null;
 
       }, (err) => {
         if (err.status == 452) {
@@ -204,8 +155,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
       }
       else if (this.questions.length - 1 === this.questionIndex) {
-        console.log("over");
-        console.log('wuestu',this.questions)
         this.submitScore(this.questions);
       }
     }
@@ -255,7 +204,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     }
     const newPayload = JSON.parse(JSON.stringify(payload))
     this.loading = true;
-    console.log("pay",payload);
     await this.apiService
       .submitResult(
         payload
@@ -291,15 +239,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     document.removeEventListener("visibilitychange", this.visibilityChange);
   }
 
-  // // NEWLY ADDED
-
-  // getRandomQuestions(allQuestions: any[], count: number): any[] {
-  //   const shuffledQuestions = shuffleArray(allQuestions);
-  //   console.log('random', shuffledQuestions);
-  //   return shuffledQuestions.slice(0, count);
-
-  // }
-
   setSectionColors() {
     const sections = document.querySelectorAll('.mt-4 span');
     sections.forEach((section, index) => {
@@ -307,23 +246,5 @@ export class QuestionComponent implements OnInit, OnDestroy {
       section.classList.toggle('active-section', isActive);
     });
   }
-
-  // getsectionOneQuestions(){
-  //   this.questions = this.sectionRandomOneQuestions;
-  //   this.question = this.sectionRandomOneQuestions[0] ?? null;
-  //   console.log(this.question)
-  // }
-
-  // getsectionTwoQuestions(){
-  //   this.questions = this.sectionRandomTwoQuestions;
-
-  //   this.question = this.sectionRandomTwoQuestions[0] ?? null;
-  // }
-
-  // getsectionThreeQuestions(){
-  //   this.questions = this.sectionRandomThreeQuestions;
-
-  //   this.question = this.sectionRandomThreeQuestions[0] ?? null;
-  // }
 
 }

@@ -3,27 +3,14 @@
   </org-dashboard-header>
   <div class="dashboard__card question px-3 py-3">
     <div class="d-flex flex-column medium__group mt-2">
-      <!-- <label for="mobile-field" class="mb-2 text__body-dark">Select Subject</label> -->
-      <!-- <div class="btn-group btn-secondary" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" [(ngModel)]="isHindiMedium" id="radio-english" [value]="false"
-          autocomplete="off" />
-        <label class="btn btn-outline-secondary p-1" for="radio-english">English</label>
-        <input type="radio" class="btn-check" [(ngModel)]="isHindiMedium" id="radio-hindi" [value]="true"
-          autocomplete="off" />
-        <label class="btn btn-outline-secondary p-1" for="radio-hindi">Hindi</label>
-      </div> -->
     </div>
     <!-- timer -->
     <org-timer-progress class="timer" [totalDuration]="questionDetails?.testDuration"
       *ngIf="questionDetails && !!questionDetails.testDuration" (endTimer)="onTimeout()"
       (currentDuration)="updateSubmitDuration($event)"></org-timer-progress>
 
-    <!-- NEWLY ADDED 29/12/23 -->
     <!-- BTNS FOR DIFF SECTIONS -->
     <div class="mt-4 d-flex flex-row">
-      <!-- <span (click)="getsectionOneQuestions()">Section-1</span>
-<span (click)="getsectionTwoQuestions()">Section-2</span>
-<span (click)="getsectionThreeQuestions()">Section-3</span> -->
       <div
         class="ibtn"
         [ngClass]="{ 'ibtn__secondary': questionIndex >= 0 && questionIndex <= 19, 'inactive-section': questionIndex < 0 || questionIndex > 19 }">
@@ -35,8 +22,6 @@
         [ngClass]="{ 'ibtn__secondary': questionIndex >= 40 && questionIndex <= 59, 'inactive-section': questionIndex < 40 || questionIndex > 59 }">
         {{subjects[2]}}</div>
     </div>
-
-
 
 
     <!-- heading -->

@@ -200,7 +200,6 @@ export class RegistrationComponent implements OnInit {
                         if (res.code == 400) {
                             this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
                         }
-
                     },
                     (error) => {
                         // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);

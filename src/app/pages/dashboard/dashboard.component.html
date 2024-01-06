@@ -15,48 +15,68 @@
         <div class="card-header">
           <h5 class="card-title mb-1">Test Result</h5>
         </div>
+
+
+        
         <div class="card-body py-1">
-          <div class="d-flex w-100">
-            <div class="w-50" *ngIf="data.data?.result.length>=1">
+          <!-- <div class="d-flex"> -->
+            <div *ngIf="data.data?.result.length>=1">
               <p class="card-title card__content__title">Score</p>
-              <h3 class="card-text">
-                {{ data.data?.result[0].score*4 }}/{{
+              <h3 class="card-test">
+                {{ data.data?.result[0].score }}/{{
                 "240"
                 }}
               </h3>
 
               <!-- SCORE IN THE TABLE FORM -->
-              <h3 class="card-text">
-                <table>
+              <!-- <h3 class="card-text"> -->
+                <!-- <table class="score-table">
                   <thead class="card-header">
                     <tr>
-                      <th>Subject</th>
                       <th>Correct</th>
-                      <th class="card-title mb-1">Incorrect</th>
+                      <th >Incorrect</th>
+                      <th class="card-title mb-1">Unattempted</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <!-- <td>{{data.data.result[0].studentResponse[0].subjectName}}</td> -->
-                      <!-- <td>{{ data?.lastTestResult?.testId?.subjectName[0] }}</td>
-                      <td>{{ data?.lastTestResult?.physics?.correct }}</td>
-                      <td>{{ data?.lastTestResult?.physics?.incorrect }}</td> -->
-                    </tr>
-                    <tr>
-                      <!-- <td>{{data.data.result[0].studentResponse[21].subjectName}}</td> -->
-                      <!-- <td>{{ data?.lastTestResult?.chemistry?.correct }}</td>
-                      <td>{{ data?.lastTestResult?.chemistry?.incorrect }}</td> -->
-                    </tr>
-                    <tr>
-                      <!-- <td>{{data.data.result[0].studentResponse[52].subjectName}}</td> -->
-                      <!-- <td>{{ data?.lastTestResult?.maths?.correct }}</td>
-                      <td>{{ data?.lastTestResult?.maths?.incorrect }}</td> -->
+                      <td>{{data.data.result[0].correctCount}}</td>
+                      <td>{{data.data.result[0].incorrectCount}}</td>
+                      <td>{{data.data.result[0].unattemptedCount}}</td>
                     </tr>
                   </tbody>
-                </table>
-              </h3>
+                </table> -->
+              <!-- </h3> -->
+
+              <table class="score-table table-responsive" style="font-size: 10px;">
+                <thead class="card-header">
+                  <tr>
+                    <th>Subject</th>
+                    <th>Correct</th>
+                    <th>Incorrect</th>
+                    <th>Unattempted</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let subject of subjectList">
+                    <td>{{ subject }}</td>
+                    <td>{{ subjectCounts[subject]?.correct }}</td>
+                    <td>{{ subjectCounts[subject]?.incorrect }}</td>
+                    <td>{{ subjectCounts[subject]?.unattempted }}</td>
+
+                  </tr>
+                  <tr>
+                    <td style="font-weight:bold;">Total</td>
+                    <td>{{data.data.result[0].correctCount}}</td>
+                    <td>{{data.data.result[0].incorrectCount}}</td>
+                    <td>{{data.data.result[0].unattemptedCount}}</td>
+                  </tr>
+                </tbody>
+              </table> 
+
+
             </div>
-          </div>
+          <!-- </div> -->
           <hr />
           <p class="card-title card__content__title">Rank</p>
           <!-- <h3 class="card-text" *ngIf="data?.lastTestResult?.rank">
@@ -75,22 +95,13 @@
 
     <div class="px-2 py-1">
       <!-- START BTN TO BE USED FURTHER -->
-      <!-- <button *ngIf="showButton" type="button" class="ibtn ibtn__primary w-100 mb-3"
+      <button *ngIf="showButton" type="button" class="ibtn ibtn__primary w-100 mb-3"
         (click)="redirectToInstruction(data.data.stream)">
         Start Today's Test
-      </button> -->
+      </button>
       <!-- END OF START BTN TO BE USED FURTHER -->
 
-
-      <!-- <p class="text-center" *ngIf="data?.todaysTestIsAttempted">
-        You've already attempted for today's test.
-      </p>
-      <p class="text-center" *ngIf="!data?.todaysTestIsAttempted && !data?.todaysTest?.id">
-        No test in a queue for today. We will back tomorrow with next test.
-      </p> -->
-
       <!-- ************TO BE SHOWN ON TEST DATE END***********************-->
-
 
       <div class="card text-center card__test" *ngIf="data.data?.mode =='offline'">
         <hr />
@@ -122,12 +133,10 @@
               </div>
             </div>
           </div>
-
-
         </div>
         <hr />
       </div>
-      <div class="card text-center card__test" *ngIf="data.data?.mode !='offline'">
+      <div class="card text-center card__test" *ngIf="data.data?.mode !='offline' && data.data?.result.length==0  && !showButton   " >
         <hr />
         <div class="card-body py-1">
           <div class="d-flex w-100">
@@ -135,13 +144,8 @@
               <p class="card-title card__content__title"></p>
               <p class="card-title card__content__title">Your Jeet Scholarship
                 test will take place on the date you selected during the registration.</p>
-
-              <!-- SCORE IN THE TABLE FORM -->
-
             </div>
           </div>
-
-
         </div>
         <hr />
         <div class="card-footer text-muted">
@@ -149,8 +153,8 @@
         {{ data?.lastTestResult?.testId?.testDate | date }} -->
         </div>
       </div>
-
-
+      
+      <!-- Result not to be used right now -->
       <ng-container *ngIf="isExpandedPoints">
         <div class="dashboard__card dashboard__result px-3 py-3">
           <h4 class="text-center text-grey mt-1">Test Results</h4>
@@ -196,7 +200,6 @@
           </table>
         </div>
       </ng-container>
-
 
       <!-- ADMIT CARD -->
       <div #admitCardContainer class='admit-card'>
@@ -246,7 +249,7 @@
 
               <th>Session Code</th>
               <td>
-                <font color="#000">{{data.data?.testCenter.sessionCode}}</font>
+                <font color="#000">{{data.data?.testCenter?.sessionCode}}</font>
               </td>
             </tr>
 
@@ -369,8 +372,6 @@
             <th colspan="2" style="height: 160px; vertical-align: bottom; font-size: 10px; text-align: center;">
               Candidate's
               Signature<br>(To be signed on the day of examination in presence of invigilator only)
-              <!-- <tr class="">Sub-Col 1</tr>
-          <tr>Sub-Col 2</tr> -->
             </th>
           </tr>
         </table>

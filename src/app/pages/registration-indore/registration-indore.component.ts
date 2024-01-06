@@ -91,9 +91,6 @@ export class RegistrationIndoreComponent implements OnInit {
     showResendBtn: boolean = false;
     showRegistrationForm: boolean = true;
 
-
-
-
     ngOnInit(): void {
         this.tForm = new FormGroup({
             mobile_no: new FormControl(null, [
@@ -142,7 +139,6 @@ export class RegistrationIndoreComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
-
 
         });
     }
@@ -244,8 +240,6 @@ export class RegistrationIndoreComponent implements OnInit {
                     this.loading = false;
                 }
             )
-
-
     }
 
     resendOtp() {
