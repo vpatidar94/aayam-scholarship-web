@@ -87,6 +87,12 @@ export class UsersComponent {
       sortBy: '',
     },
     {
+      name: 'Roll No',
+      sorting: true,
+      key: 'enrollmentNo',
+      sortBy: '',
+    },
+    {
       name: 'Test Center',
       sorting: true,
       key: 'testCenter',
