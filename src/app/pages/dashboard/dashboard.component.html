@@ -27,7 +27,7 @@
                 }}
               </h3>
 
-              <table class="score-table table-responsive" style="font-size: 10px;">
+              <table class="score-table table-responsive m-0 mt-3" style="font-size: 12px; width:100%">
                 <thead class="card-header">
                   <tr>
                     <th>Subject</th>
@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let subject of subjectList">
-                    <td>{{ subject }}</td>
+                    <td style="font-size: 11px;">{{ subject }}</td>
                     <td>{{ subjectCounts[subject]?.correct }}</td>
                     <td>{{ subjectCounts[subject]?.incorrect }}</td>
                     <td>{{ subjectCounts[subject]?.unattempted }}</td>
@@ -46,9 +46,9 @@
                   </tr>
                   <tr>
                     <td style="font-weight:bold;">Total</td>
-                    <td>{{data.data.result[0].correctCount}}</td>
-                    <td>{{data.data.result[0].incorrectCount}}</td>
-                    <td>{{data.data.result[0].unattemptedCount}}</td>
+                    <td><b>{{data.data.result[0].correctCount}}</b></td>
+                    <td><b>{{data.data.result[0].incorrectCount}}</b></td>
+                    <td><b>{{data.data.result[0].unattemptedCount}}</b></td>
                   </tr>
                 </tbody>
               </table> 
