@@ -44,13 +44,9 @@ export class AddTestComponent implements OnInit {
       path: ''
     }
   ];
-  // cityOptions = ["City 1", "City 2", "City 3"]; // Add your list of cities
 
   tForm!: FormGroup;
-  // streamOptions = ["NEET", "JEE"] as Array<StreamType>;
-  // streamOptions = ["9", "10", "11", "12", "DROPPER"] as Array<ClassType>;
   streamOptions = ["9", "10", "11-PCM", "11-PCB", "12-PCM", "12-PCB"] as Array<ClassType>;
-
   toggleOptions = ['Yes', 'No'] as Array<ToggleType>;
   subjectOptions = ["PHYSICS", "CHEMISTRY", "BIOLOGY", "MATHS"] as Array<SubjectNameType>;
   questionOptions = CONSTANTS.QUESTION_OPTIONS;
@@ -111,11 +107,7 @@ export class AddTestComponent implements OnInit {
     this.tForm.patchValue({
       subjectName: null
     });
-    // if (stream === '11' || stream === '12' || stream === 'DROPPER') {
-    //   this.subjectOptions = ["PHYSICS", "CHEMISTRY", "BIOLOGY", "MATHS"]
-    // } else {
-    //   this.subjectOptions = ["MATHS", "SCIENCE", "SOCIAL-SCIENCE"];
-    // }
+    
     if (stream === '9' || stream === '10') {
       this.subjectNames = ["SCIENCE", "SOCIAL-SCIENCE", "MATHS"];
     } 
@@ -178,7 +170,7 @@ export class AddTestComponent implements OnInit {
       const fromVal = this.tForm.value;
       // const testDate = fromVal.testDate.getDate() + '-' + (fromVal.testDate.getMonth() + 1) + '-' + fromVal.testDate.getFullYear();
       // const folderName = fromVal.id ?? (fromVal.stream + '-' + fromVal.subjectName + '-' + testDate);
-      const folderName = fromVal.id ?? (fromVal.stream + '-'+"--");
+      const folderName = fromVal.id ?? (fromVal.stream);
 
 
       fromVal.questions.map((x: any, index: number) => {
@@ -188,54 +180,6 @@ export class AddTestComponent implements OnInit {
         x.imageHindi = x.imageHindi.replace('{test-id}', folderName);
         x.imageHindi = x.imageHindi.replace('{i}', index + 1);
       });
-
-      // const newTestDate = new Date(
-      //   fromVal.testDate.getUTCFullYear(),
-      //   fromVal.testDate.getUTCMonth(),
-      //   fromVal.testDate.getUTCDate(),
-      //   0,
-      //   0,
-      //   0
-      // );
-      // newTestDate.setMinutes(newTestDate.getMinutes() - newTestDate.getTimezoneOffset());
-
-      // const resultDate = new Date(newTestDate.toString());
-      // resultDate.setDate(resultDate.getDate() + 1).toLocaleString();
-
-      // let streamDb = []
-      // if (fromVal.stream === '9' || fromVal.stream === '10')
-      //   streamDb = [fromVal.stream]
-      // if (fromVal.subjectName === 'PHYSICS' || fromVal.subjectName === 'CHEMISTRY')
-      //   streamDb = [fromVal.stream + "-PCB", fromVal.stream + "-PCM"];
-      // else if (fromVal.subjectName === 'BIOLOGY')
-      //   streamDb = [fromVal.stream + "-PCB"];
-      // else if (fromVal.subjectName === 'MATHS')
-      //   streamDb = [fromVal.stream + "-PCM"]
-      // else
-      //   streamDb = [fromVal.stream]
-
-      // let streamDb: string[] = [];
-      // if (fromVal.is12DropperSame === 'Yes') {
-      //   // Include both 'DROPPER' and '12' in the streamDb array
-      //   streamDb = ['DROPPER', '12'];
-      // } else {
-      //   if (fromVal.stream === '9' || fromVal.stream === '10') {
-      //     streamDb = [fromVal.stream];
-      //   }
-      //   else if (fromVal.stream === 'DROPPER' || fromVal.stream === '12' || fromVal.stream === '11') {
-      //     // Include only the selected stream in the streamDb array
-      //     streamDb = [fromVal.stream];
-      //   }
-      // }
-      // if (!(fromVal.stream === '9' || fromVal.stream === '10')) {
-      //   if (fromVal.subjectName === 'PHYSICS' || fromVal.subjectName === 'CHEMISTRY') {
-      //     streamDb = streamDb.map(stream => [stream + '-PCB', stream + '-PCM']).flat();
-      //   } else if (fromVal.subjectName === 'BIOLOGY') {
-      //     streamDb = streamDb.map(stream => [stream + '-PCB']).flat();
-      //   } else if (fromVal.subjectName === 'MATHS') {
-      //     streamDb = streamDb.map(stream => [stream + '-PCM']).flat();
-      //   }
-      // }
 
       const payload = {
         ...this.tForm.value,
@@ -260,7 +204,6 @@ export class AddTestComponent implements OnInit {
             this.loading = false;
           }
         });
-    console.log("pay",payload);
     }
   }
 }
