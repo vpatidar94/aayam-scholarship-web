@@ -68,23 +68,23 @@ export class DashboardComponent implements OnInit {
             this.loading = false;
             this.barcodeValue = res.data.enrollmentNo;
             this.generateBarcode();
-            this.subjectCounts = this.data.data.result[0].subjectCounts;
+            this.subjectCounts = this.data.data.result[0]?.subjectCounts ?? 0;
 
-            this.apiResponseDate=this.data.data.testDate;
-          // TO SHOW START TEST BTN ON TEST DATE AND TO ONLINE ONLY AND FOR ONE TEST ONLY
-              const apiDate = new Date(
-                parseInt(this.apiResponseDate.split('-')[2]),  // Year
-                parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
-                parseInt(this.apiResponseDate.split('-')[0])   // Day
-              );
-              if (
+            this.apiResponseDate = this.data.data.testDate;
+            // TO SHOW START TEST BTN ON TEST DATE AND TO ONLINE ONLY AND FOR ONE TEST ONLY
+            const apiDate = new Date(
+              parseInt(this.apiResponseDate.split('-')[2]),  // Year
+              parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
+              parseInt(this.apiResponseDate.split('-')[0])   // Day
+            );
+            if (
               this.currentDate.toDateString() === apiDate.toDateString() &&
               res.data.mode === 'online' &&
               res.data.result.length < 1
             ) {
               // If conditions are satisfied, set showButton to true
               this.showButton = true;
-              
+
             }
           }
         },
@@ -159,23 +159,23 @@ export class DashboardComponent implements OnInit {
   }
 
 
-// NEWLY ADDED START
-isButtonVisible(): boolean {
-  // Convert API response date to Date object
-  const apiDate = new Date(
-    parseInt(this.apiResponseDate.split('-')[2]),  // Year
-    parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
-    parseInt(this.apiResponseDate.split('-')[0])   // Day
-  );
+  // NEWLY ADDED START
+  isButtonVisible(): boolean {
+    // Convert API response date to Date object
+    const apiDate = new Date(
+      parseInt(this.apiResponseDate.split('-')[2]),  // Year
+      parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
+      parseInt(this.apiResponseDate.split('-')[0])   // Day
+    );
 
-  // Compare current date with API response date for equality
-  return this.currentDate.toDateString() === apiDate.toDateString();
-}
+    // Compare current date with API response date for equality
+    return this.currentDate.toDateString() === apiDate.toDateString();
+  }
 
-// NEWLY ADDED END
+  // NEWLY ADDED END
 
-get subjectList(): string[] {
-  return Object.keys(this.subjectCounts);
-}
+  get subjectList(): string[] {
+    return Object.keys(this.subjectCounts);
+  }
 
 }
