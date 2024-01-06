@@ -364,12 +364,10 @@ export class RegistrationAdminComponent implements OnInit {
         this.apiService
             // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
-            
+
             .subscribe(
                 (res) => {
                     if (res.status_code === 'success') {
-                        console.log("pay is",payload);
-                        
                         const userId = res.data.user._id;
                         this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
                         this.loading = false;

@@ -56,32 +56,27 @@ export const appRoutes: Routes = [
     canActivate: [canActivateUser]
   },
 
-  {
-    path: "instructions/:stream",
-    loadComponent: () =>
-      import('./pages/dashboard/instructions/instructions.component').then((x) => x.InstructionsComponent),
-    canActivate: [canActivateUser]
-  },
-  {
-    path: "test/:stream",
-    loadComponent: () =>
-      import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
-    canActivate: [canActivateUser],
-    canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
-  },
-  {
-    path: "test/:stream/:mode",
-    loadComponent: () =>
-      import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
-    canActivate: [canActivateUser],
-    canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
-  },
-  {
-    path: "test-schedule",
-    loadComponent: () =>
-      import('./pages/dashboard/test-schedule/test-schedule.component').then((x) => x.TestScheduleComponent),
-    canActivate: [canActivateUser],
-  },
+      {
+        path: "instructions/:stream",
+        loadComponent: () =>
+          import('./pages/dashboard/instructions/instructions.component').then((x) => x.InstructionsComponent),
+        canActivate: [canActivateUser]
+      },
+      {
+        path: "test/:stream",
+        loadComponent: () =>
+          import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
+        canActivate: [canActivateUser],
+        canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
+      },
+      {
+        path: "test/:stream/:mode",
+        loadComponent: () =>
+          import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
+        canActivate: [canActivateUser],
+        canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
+      },
+      
 
   {
     path: "admin-details",

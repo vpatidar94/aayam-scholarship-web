@@ -1,57 +1,60 @@
-.card__content__title{
-    font-size: 1.125rem;
+.card__content__title {
+  font-size: 1.125rem;
 }
 
 .card__test {
-    background-color: transparent!important; // added for gif remove it after gif removed
-    box-shadow: 1px 1px 20px 0px #ddd;
-    border: none;
+  background-color: transparent !important; // added for gif remove it after gif removed
+  box-shadow: 1px 1px 20px 0px #ddd;
+  border: none;
 
-    .card-header{
-        color: #ffffff;
-        background: linear-gradient(45deg, var(--i-secondary-action), var(--i-secondary-action-80));
-    }
+  .card-header {
+    color: #ffffff;
+    background: linear-gradient(45deg, var(--i-secondary-action), var(--i-secondary-action-80));
+  }
 }
 
-.w-40{
-    width: 40%;
+.w-40 {
+  width: 40%;
 }
-.w-60{
-    width: 60%;
+
+.w-60 {
+  width: 60%;
 }
+
 .expand__collapse__btn {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    background: rgba(255, 255, 255, 0.1882352941);
-    border-radius: 6px;
-    cursor: pointer;
-    padding: 4px 4px 4px 8px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: rgba(255, 255, 255, 0.1882352941);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 4px 4px 4px 8px;
 }
 
-.dashboard__result{
+.dashboard__result {
+  position: absolute;
+
+  .close__icon {
     position: absolute;
-    .close__icon{
-        position: absolute;
-        right: 20px;
-        top: 15px;
-    }
+    right: 20px;
+    top: 15px;
+  }
 }
 
 .icon-box {
-    box-shadow: 1px 1px 20px 0px #ddd;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(39, 142, 233);
-    cursor: pointer;
+  box-shadow: 1px 1px 20px 0px #ddd;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(39, 142, 233);
+  cursor: pointer;
 }
 
 .body__bg_gif {
-    background-image: url('https://i.gifer.com/4M57.gif');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
+  background-image: url('https://i.gifer.com/4M57.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
 //   .admit-card-style{
 //     position: absolute;
@@ -69,56 +72,60 @@
 //   }
 
 .admit-card {
-    width: 210mm; /* A4 width */
-    height: 297mm; /* A4 height */
-    // margin: 50mm; /* Margins */
-    font-family: 'Segoe UI', sans-serif; /* Adjust font-family as needed */
-    text-align: center;
-    position: absolute;
-    bottom: 300%;
-  }
+  width: 210mm;
+  /* A4 width */
+  height: 297mm;
+  /* A4 height */
+  // margin: 50mm; /* Margins */
+  font-family: 'Segoe UI', sans-serif;
+  /* Adjust font-family as needed */
+  text-align: center;
+  position: absolute;
+  bottom: 300%;
+}
 
-  /* admit-card.component.css */
+/* admit-card.component.css */
 // body {
 //     font-family: 'Segoe UI', sans-serif;
 //   }
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-left: 20px;
-  }
-  
-  th, td {
-    border: 1px solid #000;
-    padding: 1px;
-    // text-align: left;
-  }
-  
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 20px;
+}
+
+th,
+td {
+  border: 1px solid #000;
+  padding: 1px;
+  // text-align: left;
+}
+
 //   th {
 //     // background-color: #5348ed;
 //     font-size: 12px;
 //     font-weight: bold;
 //   }
-  
+
 //   td {
 //     background-color: #FFF;
 //   }
-  
+
 //   img {
 //     max-width: 100%;
 //     height: auto;
 //   }
-  
+
 //   .center {
 //     text-align: center;
 //   }
-  
-  .signature {
-    height: 80px;
-    vertical-align: bottom;
-  }
-  
+
+.signature {
+  height: 80px;
+  vertical-align: bottom;
+}
+
 //   .compulsory {
 //     // font-size: 1.5rem;
 //     text-align: center;
@@ -127,72 +134,83 @@
 //   .photo-style{
 //     height: 200px;
 //   }
-  
-  
+
+
 
 //   newly added 
 .admit-card table {
-    table-layout: fixed;
-  }
-  
-  .admit-card th {
-    width: 20%; /* Adjust the width as needed */
-    box-sizing: border-box;
-    padding: 5px; /* Adjust the padding as needed */
-    text-align: left;
-  }
-  .admit-card td {
-    width: 30%; /* Adjust the width as needed */
-    box-sizing: border-box;
-    padding: 5px; /* Adjust the padding as needed */
-    text-align: left;
-  }
-  
-  .admit-card th {
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .admit-card td {
-    background-color: #FFF;
-  }
-  
-  .photo-style {
-    height: 220px;
-    width: 200px; /* Set a fixed width for the photo div */
-    border: solid 2px black;
-    box-sizing: border-box;
-    // margin-top:20px;
-    margin-left:10px;
-    margin-right:20px;
-    display: flex;
-    justify-content: center;
-    align-items: end;
+  table-layout: fixed;
+}
 
-  }
-  .style-barcode{
-    // width: 1200px;
-    // height: 555px;
-    background-color: none; /* Set the background color to ensure it's printed */
-    // padding: 10px;
-  }
-  .style-bottom-table{
-    width:95%;
-    margin-left:20px;
-    margin-bottom:20px;
-  }
-  .style-instructions{
-    font-size: 11px;
-    text-align: start;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  .instruction-heading{
-    font-size: 12px;
-    font-weight: 700;
-  }
+.admit-card th {
+  width: 20%;
+  /* Adjust the width as needed */
+  box-sizing: border-box;
+  padding: 5px;
+  /* Adjust the padding as needed */
+  text-align: left;
+}
 
-.style-note{
+.admit-card td {
+  width: 30%;
+  /* Adjust the width as needed */
+  box-sizing: border-box;
+  padding: 5px;
+  /* Adjust the padding as needed */
+  text-align: left;
+}
+
+.admit-card th {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.admit-card td {
+  background-color: #FFF;
+}
+
+.photo-style {
+  height: 220px;
+  width: 200px;
+  /* Set a fixed width for the photo div */
+  border: solid 2px black;
+  box-sizing: border-box;
+  // margin-top:20px;
+  margin-left: 10px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+
+}
+
+.style-barcode {
+  // width: 1200px;
+  // height: 555px;
+  background-color: none;
+  /* Set the background color to ensure it's printed */
+  // padding: 10px;
+}
+
+.style-bottom-table {
+  width: 95%;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.style-instructions {
+  font-size: 11px;
+  text-align: start;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.instruction-heading {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.style-note {
   border: 2px solid black;
   display: flex;
   flex-direction: column;
@@ -200,4 +218,14 @@
   align-items: center;
   height: 100px;
   font-size: 18px;
+}
+
+.score-table {
+
+  border-collapse: collapse;
+  width: 90%;
+  // margin-left: 15px;
+  // margin-right:20px;
+  align-self: center;
+
 }

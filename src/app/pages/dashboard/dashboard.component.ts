@@ -27,15 +27,6 @@ export class DashboardComponent implements OnInit {
     this.bucketUrl = environment.BUCKET_URL;
   }
   @ViewChild('admitCardContainer') admitCardContainer!: ElementRef;
-  // studentDetails = {
-  //   name: 'John Doe',
-  //   rollNo: '12345',
-  //   address: '123 Main St, City',
-  //   subject: 'Mathematics',
-  //   stream: 'Science',
-  //   // Add other details like photo, signature, etc.
-  // };
-
   bucketUrl = '';
   data: any = [];
   scoreReferral = {
@@ -58,14 +49,11 @@ export class DashboardComponent implements OnInit {
   apiResponseDate!: string; // assuming the date format is "DD-MM-YYYY"
   currentDate!: Date;
 
-  ngOnInit(): void {
-    // newly ADDED START
-    // Assuming you get the API response date during some initialization or API call
-    this.apiResponseDate = "05-01-2024";
-    // Get the current date
-    this.currentDate = new Date();
-    // newly ADDED end
+  subjectCounts: any;
 
+  ngOnInit(): void {
+    // this.apiResponseDate = "06-01-2024";
+    this.currentDate = new Date();
     this.getDashboardDetails();
   }
 
@@ -78,25 +66,26 @@ export class DashboardComponent implements OnInit {
           if (res.status_code === 'success') {
             this.data = res;
             this.loading = false;
-            // console.log('d', this.data.data.stream)
             this.barcodeValue = res.data.enrollmentNo;
             this.generateBarcode();
+            this.subjectCounts = this.data.data.result[0].subjectCounts;
 
+            this.apiResponseDate=this.data.data.testDate;
           // TO SHOW START TEST BTN ON TEST DATE AND TO ONLINE ONLY AND FOR ONE TEST ONLY
-            //   const apiDate = new Date(
-            //     parseInt(this.apiResponseDate.split('-')[2]),  // Year
-            //     parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
-            //     parseInt(this.apiResponseDate.split('-')[0])   // Day
-            //   );
-            //   if (
-            //   this.currentDate.toDateString() === apiDate.toDateString() &&
-            //   res.data.mode === 'online' &&
-            //   res.data.result.length < 1
-            // ) {
-            //   // If conditions are satisfied, set showButton to true
-            //   this.showButton = true;
-            // }
-
+              const apiDate = new Date(
+                parseInt(this.apiResponseDate.split('-')[2]),  // Year
+                parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
+                parseInt(this.apiResponseDate.split('-')[0])   // Day
+              );
+              if (
+              this.currentDate.toDateString() === apiDate.toDateString() &&
+              res.data.mode === 'online' &&
+              res.data.result.length < 1
+            ) {
+              // If conditions are satisfied, set showButton to true
+              this.showButton = true;
+              
+            }
           }
         },
         (error) => {
@@ -185,5 +174,8 @@ isButtonVisible(): boolean {
 
 // NEWLY ADDED END
 
+get subjectList(): string[] {
+  return Object.keys(this.subjectCounts);
+}
 
 }

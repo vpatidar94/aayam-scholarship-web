@@ -212,28 +212,11 @@
                             <span *ngIf="!loading; else spinner">Register Now</span>
                         </button>
                     </div>
-                    <!-- <div *ngIf="showResendBtn">
-                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="resendOtp()">
-                        <span *ngIf="!loading; else spinner">Resend OTP</span>
-                    </button>
-                </div> -->
-                    <!-- verify otp field and btn  -->
 
-                    <!-- <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading" (click)="registerNow()">
-                        <span *ngIf="!loading; else spinner" >Register</span>
-                    </button> -->
-                    <!-- </div> -->
                     <ng-template #spinner>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     </ng-template>
                 </div>
-
-                <!-- Register Now btn -->
-                <!-- <div *ngIf="showRegisteredNow">
-                <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading">
-                    <span (click)="registerNow()">Register</span>
-                </button>
-            </div> -->
 
                 <div class="col-12 mt-4 text__grey text-center">
                     <span class="me-1">If already registered.To Login</span><a class="text__action__primary"
