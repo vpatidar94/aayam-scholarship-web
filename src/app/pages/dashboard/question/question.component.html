@@ -25,13 +25,14 @@
 <span (click)="getsectionTwoQuestions()">Section-2</span>
 <span (click)="getsectionThreeQuestions()">Section-3</span> -->
       <div
-        [ngClass]="{ 'active-section': questionIndex >= 0 && questionIndex <= 19, 'inactive-section': questionIndex < 0 || questionIndex > 19 }">
+        class="ibtn"
+        [ngClass]="{ 'ibtn__secondary': questionIndex >= 0 && questionIndex <= 19, 'inactive-section': questionIndex < 0 || questionIndex > 19 }">
         {{subjects[0]}}</div>
       <div
-        [ngClass]="{ 'active-section': questionIndex >= 20 && questionIndex <= 39, 'inactive-section': questionIndex < 20 || questionIndex > 39 }">
+        [ngClass]="{ 'ibtn__secondary': questionIndex >= 20 && questionIndex <= 39, 'inactive-section': questionIndex < 20 || questionIndex > 39 }">
         {{subjects[1]}}</div>
       <div
-        [ngClass]="{ 'active-section': questionIndex >= 40 && questionIndex <= 59, 'inactive-section': questionIndex < 40 || questionIndex > 59 }">
+        [ngClass]="{ 'ibtn__secondary': questionIndex >= 40 && questionIndex <= 59, 'inactive-section': questionIndex < 40 || questionIndex > 59 }">
         {{subjects[2]}}</div>
     </div>
 
