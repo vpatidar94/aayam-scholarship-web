@@ -45,7 +45,8 @@ export class ApiService {
 
   logout() {
     localStorage.removeItem("token");
-    this.router.navigate(["/login"]);
+    localStorage.removeItem("userDetail");
+    this.router.navigate([""]);
   }
 
   canActivate(): boolean {
@@ -58,109 +59,123 @@ export class ApiService {
     }
   }
 
-// REGISTRATION PURPOSE
-
-sendSmsOtp(mobileNo: string, testCenterId: string, mode: string): Observable<any> {
-  return this.http
-    .post<CustomHttpResponse<any>>(
-      CONSTANTS.API.SEND_SMS_OTP,
-      { mobileNo, testCenterId, mode }
-    )
-    .pipe(
-      map((res) => {
-        return res;
-      })
-    );
-}
-
-verifyOtp(mobileNo: string, enteredOtp: string): Observable<any> {
-  return this.http
-    .post<CustomHttpResponse<any>>(
-      CONSTANTS.API.VERIFY_OTP,
-      { mobileNo, enteredOtp }
-    )
-    .pipe(
-      map((res) => {
-        return res;
-      })
-    );
-}
-
-
-register(
-  payload: {
-    mobileNo: string,
-    name: string,
-    dob: string,
-    fatherName: string,
-    fatherMobileNo: string,
-    stream: StreamType,
-    schoolName: string,
-    city: string,
-    testDate: TestCenterType,
-    mode: ModeType,
-    testCenterId: any;
+  canUnAuthActivate(): boolean {
+    if (this.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+      return false;
+    }
+    else {
+      // this.logout();
+      return true;
+    }
   }
-): Observable<CustomHttpResponse<any>> {
-  return this.http
-    .put<CustomHttpResponse<any>>(
-      CONSTANTS.API.UPDATE_REGISTERATION,
-      payload
-    )
-    .pipe(
-      map((res) => {
-        return res;
-      })
-    );
-}
-/* ********************END OF REGISTRATION PURPOSE*********************** */
 
-// FOR GENERATING SINGLE ENROLL
-generateSingleEnroll(
+  redirectToDashboard() {
+    this.router.navigate(["/dashboard"]);
+  }
+  // REGISTRATION PURPOSE
+
+  sendSmsOtp(mobileNo: string, testCenterId: string, mode: string): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.SEND_SMS_OTP,
+        { mobileNo, testCenterId, mode }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+  verifyOtp(mobileNo: string, enteredOtp: string): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.VERIFY_OTP,
+        { mobileNo, enteredOtp }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+
+  register(
+    payload: {
+      mobileNo: string,
+      name: string,
+      dob: string,
+      fatherName: string,
+      fatherMobileNo: string,
+      stream: StreamType,
+      schoolName: string,
+      city: string,
+      testDate: TestCenterType,
+      mode: ModeType,
+      testCenterId: any;
+    }
+  ): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .put<CustomHttpResponse<any>>(
+        CONSTANTS.API.UPDATE_REGISTERATION,
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+  /* ********************END OF REGISTRATION PURPOSE*********************** */
+
+  // FOR GENERATING SINGLE ENROLL
+  generateSingleEnroll(
     userId: string,
-): Observable<CustomHttpResponse<any>> {
-  return this.http
-    .put<CustomHttpResponse<any>>(
-      CONSTANTS.API.SINGLE_ENROLL,
-      {userId}
-    )
-    .pipe(
-      map((res) => {
-        return res;
-      })
-    );
-}
+  ): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .put<CustomHttpResponse<any>>(
+        CONSTANTS.API.SINGLE_ENROLL,
+        { userId }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 
 
 
-// FOR LOGIN PURPOSE
-sendLoginOtp(mobileNo: string): Observable<any> {
-  return this.http
-    .post<CustomHttpResponse<any>>(
-      CONSTANTS.API.SEND_LOGIN_OTP,
-      { mobileNo }
-    )
-    .pipe(
-      map((res) => {
-        return res;
-      })
-    );
-}
+  // FOR LOGIN PURPOSE
+  sendLoginOtp(mobileNo: string): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.SEND_LOGIN_OTP,
+        { mobileNo }
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
 
 
-// signin(mobileNo: string): Observable<any> {
-//   return this.http
-//     .post<CustomHttpResponse<any>>(
-//       CONSTANTS.API.SIGNIN,
-//       { mobileNo }
-//     )
-//     .pipe(
-//       map((res) => {
-//         return res;
-//       })
-//     );
-// }
-/*************************************END LOGIN PURPOSE**********************************************/ 
+  // signin(mobileNo: string): Observable<any> {
+  //   return this.http
+  //     .post<CustomHttpResponse<any>>(
+  //       CONSTANTS.API.SIGNIN,
+  //       { mobileNo }
+  //     )
+  //     .pipe(
+  //       map((res) => {
+  //         return res;
+  //       })
+  //     );
+  // }
+  /*************************************END LOGIN PURPOSE**********************************************/
 
 
 
@@ -226,9 +241,9 @@ sendLoginOtp(mobileNo: string): Observable<any> {
 
 
 
-  
 
-sendLoginMessage(payload: any): Observable<any> {
+
+  sendLoginMessage(payload: any): Observable<any> {
     return this.http
       .post<CustomHttpResponse<any>>(
         '/organisation/sendLoginMessage',
@@ -315,7 +330,7 @@ sendLoginMessage(payload: any): Observable<any> {
   }
 
   // update name api calling
- 
+
   // newly added by jitendra
 
   // updateOrgAdminDetails(
@@ -590,7 +605,7 @@ sendLoginMessage(payload: any): Observable<any> {
               // },
               {
                 "type": "text",
-                "text":score + ''
+                "text": score + ''
               },
               {
                 "type": "text",

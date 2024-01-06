@@ -1,13 +1,15 @@
 .alert-style {
     position: fixed;
     bottom: 0px;
-    left:10%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @media (min-width:768px){
     .alert-style {
         position: fixed;
         bottom: 0px;
-        left:40%;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }

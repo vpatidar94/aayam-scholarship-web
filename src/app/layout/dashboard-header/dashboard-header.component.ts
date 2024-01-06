@@ -26,7 +26,7 @@ export class DashboardHeaderComponent {
   }
 
   triggerLogout() {
-    // this.apiService.logout();
+    this.apiService.logout();
   }
 
 }

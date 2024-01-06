@@ -8,3 +8,13 @@ export const canActivateUser: CanActivateFn = () => {
   const apiService: ApiService = inject(ApiService);
   return apiService.canActivate();
 };
+
+export const canUnAuthenticateUser: CanActivateFn = () => {
+  const apiService: ApiService = inject(ApiService);
+
+  console.log('AAAAAAAAA', apiService.canUnAuthActivate());
+  // if (apiService.canUnAuthActivate()) {
+  //   apiService.redirectToDashboard()
+  // }
+  return apiService.canUnAuthActivate();
+};

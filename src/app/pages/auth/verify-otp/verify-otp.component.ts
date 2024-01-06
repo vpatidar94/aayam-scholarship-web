@@ -92,26 +92,26 @@ export class VerifyOtpComponent implements OnInit {
                 .subscribe(
                   (res) => {
                     // if (res.status_code === 'success') {
-                      this.helperService.updateUserDetails(res.user)
-                      if (res.user.type === UserTypeEnum.ADMIN) {
-                        this.router.navigate(['/admin']);
-                        this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
-                      }
-                      else if (res.userType === UserTypeEnum.SUB_ADMIN) {
-                        this.router.navigate(['/admin/organisations']);
-                        this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
-                      }
-                      else if (res.isNew || !res.user.stream) {
-                        this.router.navigate(['/user-detail']);
-                        this.alertService.success(CONSTANTS.MESSAGES.SIGNUP_SUCCESS);
-                      }
-                      else {
-                        this.router.navigate(['/dashboard']);
-                        this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
-                      // }
-                     
+                    this.helperService.updateUserDetails(res.user)
+                    if (res.user.type === UserTypeEnum.ADMIN) {
+                      this.router.navigate(['/admin']);
+                      // this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
                     }
-                    
+                    else if (res.userType === UserTypeEnum.SUB_ADMIN) {
+                      this.router.navigate(['/admin/organisations']);
+                      // this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
+                    }
+                    else if (res.isNew || !res.user.stream) {
+                      this.router.navigate(['/user-detail']);
+                      this.alertService.success(CONSTANTS.MESSAGES.SIGNUP_SUCCESS);
+                    }
+                    else {
+                      this.router.navigate(['/dashboard']);
+                      // this.alertService.success(CONSTANTS.MESSAGES.LOGIN_SUCCESS);
+                      // }
+
+                    }
+
                   },
                   (error) => {
                     this.alertService.error(CONSTANTS.MESSAGES.SOMETHING_WRONG)
