@@ -32,15 +32,16 @@ export class RegistrationIndoreComponent implements OnInit {
     testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
-    offlineDateOptions = [{
-        date: "7 Jan",
-        value: "07-01-2024"
-    },
-    {
-        date:
-            "14 Jan",
-        value: "14-01-2024"
-    }] as Array<any>;
+    offlineDateOptions = [
+        // {
+        //     date: "7 Jan",
+        //     value: "07-01-2024"
+        // },
+        {
+            date:
+                "14 Jan",
+            value: "14-01-2024"
+        }] as Array<any>;
 
 
     onlineDateOptions = [
@@ -128,11 +129,11 @@ export class RegistrationIndoreComponent implements OnInit {
                 Validators.required,
             ]),
 
-            mode: new FormControl(null, [
+            mode: new FormControl('offline', [
                 Validators.required,
             ]),
 
-            offline_test_date: new FormControl(null),
+            offline_test_date: new FormControl('14-01-2024'),
             online_test_date: new FormControl(null),
 
             test_center: new FormControl(null),

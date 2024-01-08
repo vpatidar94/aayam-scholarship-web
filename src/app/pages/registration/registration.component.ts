@@ -32,10 +32,7 @@ export class RegistrationComponent implements OnInit {
     testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
-    offlineDateOptions = [{
-        date: "7 Jan",
-        value: "07-01-2024"
-    },
+    offlineDateOptions = [
     {
         date:
             "14 Jan",
@@ -81,6 +78,18 @@ export class RegistrationComponent implements OnInit {
             value: "14-01-2024"
         },
     ] as Array<any>;
+
+    currentDate = new Date();
+
+    // Filter onlineDateOptions to include only dates greater than the current date
+    filteredOnlineDateOptions = this.onlineDateOptions.filter(option => {
+        // Split the date string and convert it to a Date object
+        const optionDateArray = option.value.split('-').map(Number);
+        const optionDate = new Date(optionDateArray[2], optionDateArray[1] - 1, optionDateArray[0]);
+
+        return optionDate > this.currentDate;
+    });
+
 
     referredBy = '' as string;
     showVerifyBtn = false;
@@ -130,11 +139,11 @@ export class RegistrationComponent implements OnInit {
                 Validators.required,
             ]),
 
-            mode: new FormControl(null, [
+            mode: new FormControl('offline', [
                 Validators.required,
             ]),
 
-            offline_test_date: new FormControl(null),
+            offline_test_date: new FormControl('14-01-2024'),
             online_test_date: new FormControl(null),
 
             test_center: new FormControl(null),
@@ -142,6 +151,8 @@ export class RegistrationComponent implements OnInit {
 
             ),
         });
+
+        console.log(this.filteredOnlineDateOptions);
     }
 
     onSubmit() {
