@@ -33,11 +33,11 @@ export class RegistrationComponent implements OnInit {
 
 
     offlineDateOptions = [
-    {
-        date:
-            "14 Jan",
-        value: "14-01-2024"
-    }] as Array<any>;
+        {
+            date:
+                "14 Jan",
+            value: "14-01-2024"
+        }] as Array<any>;
 
 
     onlineDateOptions = [
@@ -152,7 +152,6 @@ export class RegistrationComponent implements OnInit {
             ),
         });
 
-        console.log(this.filteredOnlineDateOptions);
     }
 
     onSubmit() {

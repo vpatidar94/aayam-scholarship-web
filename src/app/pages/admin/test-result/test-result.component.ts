@@ -20,7 +20,9 @@ import { ActivatedRoute } from "@angular/router";
 export class TestResultComponent {
   constructor(private route: ActivatedRoute, private apiService: ApiService, private alertService: AlertService, private helper: HelperService) {
     this.route.params.subscribe(params => {
-      this.testId = params['testId'];
+      //this.testId = params['testId'];
+      this.stream = params['stream'];
+      console.log(this.stream)
     });
 
     this.userType = this.helper.getUserType();
@@ -29,6 +31,7 @@ export class TestResultComponent {
   loading = false;
   data = [] as any;
   testId = '';
+  stream = '';
   isRankGenerated = false as boolean;
   testDetail = null as any;
   breadcrumbs = [
@@ -47,7 +50,7 @@ export class TestResultComponent {
 
   getTestDetail() {
     this.apiService
-      .getTestDetails(this.testId)
+      .getTestDetails(this.stream)
       .subscribe({
         next: (res) => {
           this.testDetail = res;
@@ -65,10 +68,11 @@ export class TestResultComponent {
   getAllResults() {
     this.loading = true;
     this.apiService
-      .getResultByTest(this.testId)
+      .getResultByTest(this.stream)
       .subscribe({
         next: (res) => {
           this.data = res;
+          console.log(res)
           this.loading = false;
         },
         error: (err) => {
@@ -79,7 +83,11 @@ export class TestResultComponent {
   }
 
   showTimeInMMSS(sec: number) {
-    return new Date(sec * 1000).toISOString().slice(14, 19);
+    const minutes = Math.floor(sec / 60);
+    const seconds = sec % 60;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+    return `${formattedMinutes}:${formattedSeconds}`;
   }
 
   sendWpMessages() {

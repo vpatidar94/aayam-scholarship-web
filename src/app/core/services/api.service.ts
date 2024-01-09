@@ -498,10 +498,10 @@ export class ApiService {
 
   }
 
-  getResultByTest(testId: string): Observable<any> {
+  getResultByTest(stream: string): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GET_RESULT_BY_TEST + '/' + testId
+        CONSTANTS.API.GET_RESULT_BY_TEST + '/' + stream
       )
       .pipe(
         map((res) => {
@@ -510,10 +510,10 @@ export class ApiService {
       );
   }
 
-  getTestDetails(testId: string | number): Observable<any> {
+  getTestDetails(stream: string | number): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GET_TEST_DETAIL + '/' + testId
+        CONSTANTS.API.GET_TEST_DETAIL + '/' + stream
       )
       .pipe(
         map((res) => {

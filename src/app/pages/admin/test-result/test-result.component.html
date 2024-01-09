@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <td>Subject:</td>
-                  <td>{{ testDetail.subjectName }}</td>
+                  <td>{{ testDetail?.subjectNames }}</td>
                 </tr>
                 <tr>
                   <td>Stream:</td>
@@ -129,23 +129,23 @@
               <th>User Name</th>
               <th *ngIf="userType === 'admin'">Mobile No.</th>
               <th>Score</th>
-              <th>Rank</th>
-              <th>Points</th>
+              <th>Cor/Incor/UnAtt</th>
               <th>Duration (MM:SS)</th>
-              <th>Date Submitted</th>
+              <th>Rank</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of data">
-              <td>{{ item.userId.name }}</td>
-              <td *ngIf="userType === 'admin'">{{ item.userId.mobileNo }}</td>
-              <td>{{ item.score }} / {{ testDetail?.questions?.length }}</td>
-              <td>{{ item.rank }}</td>
-              <td>{{ item?.points }}</td>
-              <td>
-                {{ item.duration ? showTimeInMMSS(item.duration) : "-" }}
-              </td>
-              <td>{{ item?.dateCreated | date : "MMM d, y, h:mm a" }}</td>
+              <td>{{ item?.name }}</td>
+              <td *ngIf="userType === 'admin'">{{ item?.mobileNo }}</td>
+              <td *ngIf="item.result[0]">{{ item.result[0]?.score }} / 240</td>
+              <td *ngIf="!item.result[0]"> - </td>
+
+              <td *ngIf="item.result[0]"> {{ item.result[0]?.correctCount}}, {{item.result[0]?.incorrectCount}}, {{item.result[0]?.unattemptedCount}}</td>
+              <td *ngIf="!item.result[0]"> - </td>
+              
+              <td>{{ item.result[0]?.duration ? showTimeInMMSS(item.result[0]?.duration) : "-" }}</td>
+              <td>{{ item?.rank }}</td>
             </tr>
           </tbody>
         </table>
