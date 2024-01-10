@@ -20,9 +20,7 @@ import { ActivatedRoute } from "@angular/router";
 export class TestResultComponent {
   constructor(private route: ActivatedRoute, private apiService: ApiService, private alertService: AlertService, private helper: HelperService) {
     this.route.params.subscribe(params => {
-      //this.testId = params['testId'];
       this.stream = params['stream'];
-      console.log(this.stream)
     });
 
     this.userType = this.helper.getUserType();
@@ -72,7 +70,6 @@ export class TestResultComponent {
       .subscribe({
         next: (res) => {
           this.data = res;
-          console.log(res)
           this.loading = false;
         },
         error: (err) => {

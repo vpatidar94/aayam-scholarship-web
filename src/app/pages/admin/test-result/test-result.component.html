@@ -128,10 +128,13 @@
             <tr>
               <th>User Name</th>
               <th *ngIf="userType === 'admin'">Mobile No.</th>
+              
               <th>Score</th>
               <th>Cor/Incor/UnAtt</th>
               <th>Duration (MM:SS)</th>
-              <th>Rank</th>
+              <th>Rank</th> 
+              <th *ngIf="userType === 'admin'">Father Name</th>
+              <th *ngIf="userType === 'admin'">Father Mob No.</th>      
             </tr>
           </thead>
           <tbody>
@@ -146,6 +149,8 @@
               
               <td>{{ item.result[0]?.duration ? showTimeInMMSS(item.result[0]?.duration) : "-" }}</td>
               <td>{{ item?.rank }}</td>
+              <td>{{item?.fatherName}}</td>
+              <td *ngIf="userType === 'admin'">{{ item?.fatherMobileNo }}</td>
             </tr>
           </tbody>
         </table>

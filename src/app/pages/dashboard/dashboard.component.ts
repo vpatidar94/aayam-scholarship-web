@@ -12,7 +12,14 @@ import html2canvas from 'html2canvas';
 import JsBarcode from 'jsbarcode';
 
 
-
+interface ansKeyFile {
+  '9': string;
+  '10': string;
+  '11-PCB': string;
+  '11-PCM': string;
+  '12-PCB': string;
+  '12-PCM': string;
+}
 
 @Component({
   selector: 'org-dashboard',
@@ -42,8 +49,8 @@ export class DashboardComponent implements OnInit {
   isUpdateProfile = false as boolean;
   showAdmitCardDetails: boolean = false;
   showButton: boolean = false;
-
   barcodeValue: string = '';
+  
 
   // NEW RELATED TO SHOW DATA ON PARTICULAR DATE
   apiResponseDate!: string; // assuming the date format is "DD-MM-YYYY"
@@ -78,7 +85,7 @@ export class DashboardComponent implements OnInit {
               parseInt(this.apiResponseDate.split('-')[0])   // Day
             );
             if (
-              // this.currentDate.toDateString() === apiDate.toDateString() &&
+              this.currentDate.toDateString() === apiDate.toDateString() &&
               res.data.mode === 'online' &&
               res.data.result.length < 1
             ) {
@@ -147,6 +154,19 @@ export class DashboardComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  getAnsKeyLink(stream: string): string {
+    const ansKeyFile: ansKeyFile = {
+      '9': 'File_9th244242822',
+      '10': 'File_10th244309822',
+      '11-PCB': 'File_11th244319754',
+      '11-PCM': 'File_11th244319754',
+      '12-PCB': 'File_12th244323754',
+      '12-PCM': 'File_12th244323754',
+    };
+  
+    return `https://api.aayamcareerinstitute.co.in//Uploads/Files/${(ansKeyFile as any)[stream]}.pdf`;
   }
 
   generateBarcode() {
