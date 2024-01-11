@@ -41,7 +41,7 @@
                   <td style="font-size: 11px;">{{ subject }}</td>
                   <td>{{ subjectCounts[subject]?.correct }}</td>
                   <td>{{ subjectCounts[subject]?.incorrect }}</td>
-                  <td>{{ subjectCounts[subject]?.unattempted }}</td>
+                  <td>{{ subjectCounts[subject]?.unattempted ?  subjectCounts[subject]?.unattempted: 20- subjectCounts[subject]?.correct-subjectCounts[subject]?.incorrect  }}</td>
 
                 </tr>
                 <tr>
