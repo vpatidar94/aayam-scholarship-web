@@ -4,7 +4,7 @@
 
     <div class="registration__card px-4 py-3" *ngIf="!showMessage">
         <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary">JEET</span> Test Registration</h4>
-        <div *ngIf="!showRegistrationForm">
+        <div *ngIf="showRegistrationForm">
 
             <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
 
@@ -226,7 +226,7 @@
                 </div>
             </form>
         </div>
-        <div *ngIf="showRegistrationForm">
+        <div *ngIf="!showRegistrationForm">
             <div class="card text-center card__test">
                 <hr />
                 <div class="card-body py-1">
