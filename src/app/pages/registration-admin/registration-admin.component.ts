@@ -182,130 +182,10 @@ export class RegistrationAdminComponent implements OnInit {
 
             }
             this.registerNow();
-            // this.apiService
-            //     // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-            //     .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
-            //     .subscribe(
-            //         (res) => {
-            //             if (res.status_code === 'success') {
-            //                 this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            //                 // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-            //                 this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-            //                 this.loading = false;
-            //                 this.showVerifyBtn = true;
-            //                 this.showOtpBtn = false;
-            //                 setTimeout(() => {
-            //                     this.showResendBtn = true;
-            //                 }, 5000);
-            //             }
-            //             if (res.code == 400) {
-            //                 this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
-            //             }
-
-            //         },
-            //         (error) => {
-            //             // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-            //             // this.router.navigate(['/verify']);
-            //             if (error.error.code == 403) {
-            //                 this.alertService.error(CONSTANTS.MESSAGES.USER_EXIST)
-            //                 this.loading = false;
-            //             }
-            //             if (error.error.code == 400) {
-            //                 this.alertService.error(CONSTANTS.MESSAGES.TEST_CENTER_FULL)
-            //                 this.loading = false;
-            //             }
-            //         }
-
-            //     );
         }
     }
 
-    verifyOtp() {
-        const mobileNo = this.tForm.value.mobile_no;
-        const enteredOtp = this.tForm.value.verify_otp;
-        this.apiService
-            // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-            .verifyOtp(mobileNo, enteredOtp)  // if want to send otp by text sms
-            .subscribe(
-                (res) => {
-                    if (res.status_code === 'success') {
-                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                        this.alertService.success(CONSTANTS.MESSAGES.OTP_VERIFY);
-                        this.loading = false;
-                        this.showVerifyBtn = false;
-                        // this.showRegisteredNow = true;
-                        this.registerNow();
-                        this.showMessage = true;
-                    }
-                },
-                (error) => {
-                    this.alertService.error(CONSTANTS.MESSAGES.INVALID_OTP);
-                    console.error("Wrong otp", error);
-                    this.loading = false;
-                }
-            )
-    }
-
-    resendOtp() {
-        if (this.tForm.invalid) {
-            this.tForm.markAllAsTouched();
-        } else {
-            this.loading = true;
-            //   const newOtp = this.helperService.generateOtp();
-            const mobileNo = this.tForm.value.mobile_no;
-            const mode = this.tForm.value.mode;
-
-            // let testCenterId;
-            if (mode === 'online') {
-                this.testCenterId = "";
-            } else if (mode === 'offline') {
-                if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
-                    this.testCenterId = 'arnold-7-jan'
-                } else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "St. Arnold's School (Lalaram Nagar Indore)") {
-                    this.testCenterId = 'arnold-14-jan'
-
-                }
-                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
-                    this.testCenterId = 'annie-7-jan'
-
-                }
-                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Annie Besant School (Precanco Colony, Annapurna Road,Indore)") {
-                    this.testCenterId = 'annie-14-jan'
-
-                }
-                else if (this.tForm.value.offline_test_date === "07-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
-                    this.testCenterId = 'prestige-7-jan'
-
-                }
-                else if (this.tForm.value.offline_test_date === "14-01-2024" && this.tForm.value.test_center === "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)") {
-                    this.testCenterId = 'prestige-14-jan'
-
-                }
-
-            }
-            this.apiService
-                // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
-                .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
-                .subscribe({
-                    next: () => {
-                        this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                        this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                        this.loading = false;
-                        this.showVerifyBtn = true;
-                        this.showOtpBtn = false;
-                        this.showResendBtn = true;
-                    },
-                    error: () => {
-                        // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                        // this.router.navigate(['/verify']);
-                        this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
-                        this.loading = false;
-                    }
-                });
-        }
-    }
+   
 
     registerNow() {
         const mobileNo = this.tForm.value.mobile_no;
@@ -381,6 +261,7 @@ export class RegistrationAdminComponent implements OnInit {
                                     // console.log('final',res)
                                     this.loading = false;
                                     //   this.showVerifyBtn = true;
+                                    this.showMessage = true;
                                 },
                                 error: () => {
                                     // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
