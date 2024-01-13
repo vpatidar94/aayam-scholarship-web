@@ -472,10 +472,10 @@ export class ApiService {
       );
   }
 
-  generateRank(testId: string): Observable<any> {
+  generateRank(stream: string): Observable<any> {
     return this.http
-      .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GENERATE_RANK + '/' + testId
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.GENERATE_RANK , stream
       )
       .pipe(
         map((res) => {

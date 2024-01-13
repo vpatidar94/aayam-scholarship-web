@@ -16,7 +16,7 @@ export const CONSTANTS = Object.freeze({
     // GET_ALL_TEST: '/test/getAllTest',
     GET_ALL_TEST: '/test/alltests',
 
-    GENERATE_RANK: '/result/generateRank',
+    GENERATE_RANK: '/users/generate-rank',
     SEND_WP_MESSAGES: '/result/sendWpMessage',
     GET_RESULT_BY_TEST: '/users/details',
     ADD_TEST_DETAIL: '/test/addTest',

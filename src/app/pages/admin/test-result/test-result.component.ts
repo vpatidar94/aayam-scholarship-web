@@ -92,6 +92,7 @@ export class TestResultComponent {
     const payload = {
       title: this.testDetail.title,
       testId: this.testId,
+      stream: this.stream
     }
 
     this.apiService
@@ -111,7 +112,7 @@ export class TestResultComponent {
   generateRank() {
     this.btnLoading = true;
     this.apiService
-      .generateRank(this.testId)
+      .generateRank(this.stream)
       .subscribe({
         next: (res) => {
           this.alertService.success(CONSTANTS.MESSAGES.GENERATED_RANK_SUCCESS);

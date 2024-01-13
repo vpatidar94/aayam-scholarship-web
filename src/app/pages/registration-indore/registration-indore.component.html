@@ -4,7 +4,7 @@
 
     <div class="registration__card px-4 py-4" *ngIf="!showMessage">
         <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary">JEET</span> Test Registration</h4>
-        <div *ngIf="showRegistrationForm">
+        <div *ngIf="!showRegistrationForm">
             <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
 
                 <!-- Student name -->
@@ -246,16 +246,16 @@
                 </div>
             </form>
         </div>
-        <div *ngIf="!showRegistrationForm">
+        <div *ngIf="showRegistrationForm">
             <div class="card text-center card__test">
                 <hr />
                 <div class="card-body py-1">
                     <div class="d-flex w-100">
                         <div>
                             <p class="card-title card__content__title note-style">The registration for the JEET
-                                Scholarship test has been closed. New registrations will start on <span
-                                    class="green-style">January 8th,2023</span>. If you wish to register, you can do so
-                                starting from the 8th of January.</p>
+                                Scholarship test has been closed.  Registered students kindly <span
+                                class="green-style">login </span> from below login link
+                            </p>
 
                         </div>
                     </div>
