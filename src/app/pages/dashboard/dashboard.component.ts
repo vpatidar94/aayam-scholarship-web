@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
               parseInt(this.apiResponseDate.split('-')[0])   // Day
             );
             if (
-              // this.currentDate.toDateString() === apiDate.toDateString() &&
+              this.currentDate.toDateString() === apiDate.toDateString() &&
               res.data.mode === 'online' &&
               res.data.result.length < 1
             ) {
