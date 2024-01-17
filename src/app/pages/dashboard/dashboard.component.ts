@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  getAnsKeyLink(stream: string): string {
+  getAnsKeyLink_07(stream: string): string {
     const ansKeyFile: ansKeyFile = {
       '9': 'File_9th244242822',
       '10': 'File_10th243945604',
@@ -164,6 +164,19 @@ export class DashboardComponent implements OnInit {
       '11-PCM': 'File_11th244319754',
       '12-PCB': 'File_12th244323754',
       '12-PCM': 'File_12th244323754',
+    };
+  
+    return `https://api.aayamcareerinstitute.co.in//Uploads/Files/${(ansKeyFile as any)[stream]}.pdf`;
+  }
+
+  getAnsKeyLink_14(stream: string): string {
+    const ansKeyFile: ansKeyFile = {
+      '9': 'File_9th241309822',
+      '10': 'File_10th241314067',
+      '11-PCB': 'File_11th241317583',
+      '11-PCM': 'File_11th241317583',
+      '12-PCB': 'File_12th241320848',
+      '12-PCM': 'File_12th241320848',
     };
   
     return `https://api.aayamcareerinstitute.co.in//Uploads/Files/${(ansKeyFile as any)[stream]}.pdf`;
