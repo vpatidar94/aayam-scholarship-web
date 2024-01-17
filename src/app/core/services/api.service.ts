@@ -329,24 +329,6 @@ export class ApiService {
       );
   }
 
-  // update name api calling
-
-  // newly added by jitendra
-
-  // updateOrgAdminDetails(
-  //   payload: { name: string, designation: string }
-  // ): Observable<CustomHttpResponse<any>> {
-  //   return this.http
-  //     .post<CustomHttpResponse<any>>(
-  //       CONSTANTS.API.SIGNUP_ORG_USER_DETAIL,
-  //       payload
-  //     )
-  //     .pipe(
-  //       map((res) => {
-  //         return res;
-  //       })
-  //     );
-  // }
 
   getQuestions(stream: string): Observable<any> {
     return this.http
@@ -484,6 +466,19 @@ export class ApiService {
       );
   }
 
+  generateRankByClass(selectedStream: any): Observable<any> {
+    console.log("ss", selectedStream)
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        '/users/rank-by-class' , {selectedStream}
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
+  }
+
   sendWpMessage(payload: any): Observable<any> {
     return this.http
       .post<CustomHttpResponse<any>>(
@@ -510,6 +505,18 @@ export class ApiService {
       );
   }
 
+  getResultByClass(selectedStream: string): Observable<any> {
+    return this.http
+    .post<CustomHttpResponse<any>>(
+      '/users/result-by-class', {selectedStream}
+    )
+    .pipe(
+      map((res) => {
+        return res?.data;
+      })
+    );
+  }
+  
   getTestDetails(stream: string | number): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(

@@ -105,6 +105,11 @@ export const appRoutes: Routes = [
           import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
       },
       {
+        path: "results",
+        loadComponent: () =>
+          import('./pages/admin/results/results.component').then((x) => x.ResultsComponent),
+      },
+      {
         path: "test-result/:stream",
         loadComponent: () =>
           import('./pages/admin/test-result/test-result.component').then((x) => x.TestResultComponent),
