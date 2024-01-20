@@ -78,11 +78,28 @@ export class ResultsComponent {
     }
 
     this.apiService
-      .sendWpMessage(payload)
+      .sendWpMessageByClass(payload)
       .subscribe({
         next: (res) => {
           this.alertService.success("Message send succesfully.");
           this.btnLoading = false;
+        },
+        error: (err) => {
+          this.alertService.error(err.message);
+          this.btnLoading = false;
+        }
+      });
+  }
+
+  generateNormalisedScore() {
+    this.btnLoading = true;
+    this.apiService
+      .generateRankByClass(this.selectedStream)
+      .subscribe({
+        next: (res) => {
+          this.alertService.success(CONSTANTS.MESSAGES.GENERATED_RANK_SUCCESS);
+          this.btnLoading = false;
+          this.isRankGenerated = true;
         },
         error: (err) => {
           this.alertService.error(err.message);

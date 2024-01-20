@@ -24,9 +24,15 @@
 
         <div class="ms-2" *ngIf="userType === 'admin'">
           <button
+          class="btn btn-sm btn-secondary me-2"
+          (click)="generateNormalisedScore()"    
+        >
+          <span *ngIf="!btnLoading; else spinner"> Generate Normalised Score </span>
+        </button>
+          <button
             class="btn btn-sm btn-secondary me-2"
             (click)="generateRank()"
-            *ngIf="!isRankGenerated"
+           
           
           >
             <span *ngIf="!btnLoading; else spinner"> Generate Rank </span>
@@ -39,7 +45,7 @@
             ></span>
           </ng-template>
         </div>
-        <div class="ms-2" *ngIf="userType === 'admin'">
+        <!-- <div class="ms-2" *ngIf="userType === 'admin'">
           <button
             class="btn btn-sm btn-secondary me-2"
             (click)="sendWpMessages()"
@@ -56,7 +62,7 @@
               aria-hidden="true"
             ></span>
           </ng-template>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="col col-12 mt-2">
@@ -69,6 +75,7 @@
               <th *ngIf="userType === 'admin'">Mobile No.</th>
               
               <th>Score</th>
+              <th>Norm. Score</th>
               <th>Cor/Incor/UnAtt</th>
               <th>Duration (MM:SS)</th>
               <th>Mode</th>
@@ -84,6 +91,7 @@
               <td>{{ item?.name }}</td>
               <td *ngIf="userType === 'admin'">{{ item?.mobileNo }}</td>
               <td *ngIf="item.result[0]">{{ item.result[0]?.score }} / 240</td>
+              <td *ngIf="item.result[0]">{{ item.result[0]?.normalizedScore}} / 240</td>
               <td *ngIf="!item.result[0]"> - </td>
 
               <td *ngIf="item.result[0]"> {{ item.result[0]?.correctCount}}, {{item.result[0]?.incorrectCount}}, {{item.result[0]?.unattemptedCount}}</td>

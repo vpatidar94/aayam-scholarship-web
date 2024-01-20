@@ -493,6 +493,20 @@ export class ApiService {
 
   }
 
+  sendWpMessageByClass(payload: any): Observable<any> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        '/users/send-rank-msg-by-class',
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
+
+  }
+
   getResultByTest(stream: string): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(
