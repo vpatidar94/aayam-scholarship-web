@@ -16,28 +16,30 @@
           <h5 class="card-title mb-1">Test Result</h5>
         </div>
 
-
-
         <div class="card-body py-1">
           <div *ngIf="data.data?.result.length>=1">
+            <div>
+              <p class="card-title card__content__title">Rank</p>
+              <h3 class="card-text">
+                {{data.data.result[0].rank}}
+              </h3>
+            </div>
+            <hr />
             <div class="d-flex justify-content-around">
               <div>
                 <p class="card-title card__content__title">Score</p>
                 <h4 class="card-test">
-                  {{ data.data?.result[0].score }}/{{
-                  "240"
-                  }}
+                  {{ data.data?.result[0].score }}
                 </h4>
               </div>
               <div>
                 <p class="card-title card__content__title">Normalized Score</p>
                 <h4 class="card-test">
-                  {{ data.data?.result[0].normalizedScore }}/{{
-                  "240"
-                  }}
+                  {{ data.data?.result[0].normalizedScore }}
                 </h4>
               </div>
             </div>
+
             <table class="score-table table-responsive m-0 mt-3" style="font-size: 12px; width:100%">
               <thead class="card-header">
                 <tr>
@@ -65,14 +67,7 @@
               </tbody>
             </table>
 
-
           </div>
-          <!-- </div> -->
-          <hr />
-          <p class="card-title card__content__title">Rank</p>
-          <h4 class="card-text">
-            {{data.data.result[0].rank}}
-          </h4>
         </div>
         <div class="card-footer text-muted">
           <!-- {{ data?.lastTestResult?.testId?.title }} |
