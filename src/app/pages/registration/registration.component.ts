@@ -10,11 +10,12 @@ import { CONSTANTS, ClassType, ModeType, OfflineTestDateType, SubjectGroupType, 
 import { ApiService } from '@core/services/api.service';
 import { AlertService } from '@core/services/alert.service';
 import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
+import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
 
 @Component({
     selector: 'org-registration',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent],
+    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent, ExamTitleComponent],
     templateUrl: './registration.component.html',
     styleUrls: ['./registration.component.scss'],
 })

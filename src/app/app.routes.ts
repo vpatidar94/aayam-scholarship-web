@@ -5,6 +5,7 @@ import { RegistrationComponent } from '@pages/registration/registration.componen
 import { QuestionComponent } from './pages/dashboard/question/question.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegistrationAdminComponent } from '@pages/registration-admin/registration-admin.component';
+import { RegistrationAsetComponent } from '@pages/registration-aset/registration-aset.component';
 
 export const appRoutes: Routes = [
 
@@ -23,7 +24,10 @@ export const appRoutes: Routes = [
     path: "register",
     component: RegistrationComponent
   },
-
+  {
+    path: "register-aset",
+    component: RegistrationAsetComponent
+  },
   {
     path: "register-admin",
     component: RegistrationAdminComponent
@@ -56,27 +60,27 @@ export const appRoutes: Routes = [
     canActivate: [canActivateUser]
   },
 
-      {
-        path: "instructions/:stream",
-        loadComponent: () =>
-          import('./pages/dashboard/instructions/instructions.component').then((x) => x.InstructionsComponent),
-        canActivate: [canActivateUser]
-      },
-      {
-        path: "test/:stream",
-        loadComponent: () =>
-          import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
-        canActivate: [canActivateUser],
-        canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
-      },
-      {
-        path: "test/:stream/:mode",
-        loadComponent: () =>
-          import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
-        canActivate: [canActivateUser],
-        canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
-      },
-      
+  {
+    path: "instructions/:stream",
+    loadComponent: () =>
+      import('./pages/dashboard/instructions/instructions.component').then((x) => x.InstructionsComponent),
+    canActivate: [canActivateUser]
+  },
+  {
+    path: "test/:stream",
+    loadComponent: () =>
+      import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
+    canActivate: [canActivateUser],
+    canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
+  },
+  {
+    path: "test/:stream/:mode",
+    loadComponent: () =>
+      import('./pages/dashboard/question/question.component').then((x) => x.QuestionComponent),
+    canActivate: [canActivateUser],
+    canDeactivate: [(component: QuestionComponent) => component.canDeactivate()],
+  },
+
 
   {
     path: "admin-details",

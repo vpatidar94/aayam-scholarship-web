@@ -10,6 +10,7 @@ import { environment } from 'src/app/environments/environment.development';
 import html2canvas from 'html2canvas';
 // import { NgxBarcode6Module } from 'ngx-barcode6';
 import JsBarcode from 'jsbarcode';
+import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
 
 
 interface ansKeyFile {
@@ -24,7 +25,7 @@ interface ansKeyFile {
 @Component({
   selector: 'org-dashboard',
   standalone: true,
-  imports: [CommonModule, DashboardHeaderComponent, RouterModule],
+  imports: [CommonModule, DashboardHeaderComponent, RouterModule, ExamTitleComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
@@ -80,9 +81,9 @@ export class DashboardComponent implements OnInit {
             this.apiResponseDate = this.data.data.testDate;
             // TO SHOW START TEST BTN ON TEST DATE AND TO ONLINE ONLY AND FOR ONE TEST ONLY
             const apiDate = new Date(
-              parseInt(this.apiResponseDate.split('-')[2]),  // Year
+              parseInt(this.apiResponseDate.split('-')[0]),  // Year
               parseInt(this.apiResponseDate.split('-')[1]) - 1,  // Month (zero-based)
-              parseInt(this.apiResponseDate.split('-')[0])   // Day
+              parseInt(this.apiResponseDate.split('-')[2])   // Day
             );
             if (
               this.currentDate.toDateString() === apiDate.toDateString() &&

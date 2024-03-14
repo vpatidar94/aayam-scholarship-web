@@ -1,7 +1,7 @@
 <div class="body__bg">
     <org-auth-header></org-auth-header>
     <div class="main__card px-4 py-3">
-        <h4 class="text-center py-4 text-grey mb-4">Login to <span class="text-primary">JEET</span> Scholarship Test</h4>
+        <h4 class="text-center py-4 text-grey mb-4">Login to <span class="text-primary"><app-exam-title/></span> Scholarship Test</h4>
         <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
             <div class="col-12 mt-4 mb-2">
               <label for="mobile-field" class="mb-2 text__body-dark">Enter Your Mobile Number</label>
@@ -26,9 +26,9 @@
               </ng-template>
             </div>
             <div class="col-12 mt-4 text__grey text-center">
-              <span class="me-1">If not registered.Register Now</span><a class="text__action__primary"
-                  href="https://jeet.aayamcareerinstitute.com/register">click here</a><br>
-                <span class="me-1">For more details visit our website</span><a class="text__action__primary" href="https://www.aayamcareerinstitute.com/jeet">click here</a>
+              <span class="me-1">If not registered.Register Now</span><a class="text__action__primary"  style="cursor: pointer;"
+              (click)="navigateToRegister()">click here</a><br>
+                <span class="me-1">For more details visit our website</span><a class="text__action__primary" href="https://www.aayamcareerinstitute.com/aset">click here</a>
               </div>
           </form>
     </div>

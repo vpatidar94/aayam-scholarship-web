@@ -9,11 +9,12 @@ import { HelperService } from 'src/app/core/services/helper';
 import { CONSTANTS } from 'src/app/core/constant/constant';
 import { AlertService } from '../../../core/services/alert.service';
 import { ApiService } from '@core/services/api.service';
+import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
 
 @Component({
   selector: 'org-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent],
+  imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, ExamTitleComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -87,6 +88,10 @@ export class LoginComponent implements OnInit {
 
       );
     }
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register-aset']);
   }
 }
 // }

@@ -6,20 +6,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { VALIDATE } from 'src/app/core/constant/validate';
 import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
 import { HelperService } from 'src/app/core/services/helper';
-import { CONSTANTS, ClassType, ModeIndoreType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
+import { CONSTANTS, ClassType, ModeType, OfflineTestDateType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
 import { ApiService } from '@core/services/api.service';
 import { AlertService } from '@core/services/alert.service';
 import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
 import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
 
 @Component({
-    selector: 'org-registration-indore',
+    selector: 'org-registration-aset',
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent, ExamTitleComponent],
-    templateUrl: './registration-indore.component.html',
-    styleUrls: ['./registration-indore.component.scss'],
+    templateUrl: './registration-aset.component.html',
+    styleUrls: ['./registration-aset.component.scss'],
 })
-export class RegistrationIndoreComponent implements OnInit {
+export class RegistrationAsetComponent implements OnInit {
     constructor(private alertService: AlertService, private apiService: ApiService, private helperService: HelperService, private router: Router, private route: ActivatedRoute) {
         this.route.queryParams.subscribe(params => {
             this.referredBy = params['referredBy'];
@@ -27,62 +27,70 @@ export class RegistrationIndoreComponent implements OnInit {
     }
     tForm!: FormGroup;
     loading = false;
-    streamOptions = ["9", "10", "11", "12"] as Array<ClassType>;
-    modeOptions = ["offline"] as Array<ModeIndoreType>;
+    streamOptions = [ "10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
+    modeOptions = ["online"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
-    testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
+   // testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
-    offlineDateOptions = [
-        // {
-        //     date: "7 Jan",
-        //     value: "07-01-2024"
-        // },
-        {
-            date:
-                "14 Jan",
-            value: "14-01-2024"
-        }] as Array<any>;
+    // offlineDateOptions = [
+    //     {
+    //         date:
+    //             "14 Jan",
+    //         value: "14-01-2024"
+    //     }] as Array<any>;
 
 
-    onlineDateOptions = [
-        {
-            date: "7 Jan",
-            value: "07-01-2024"
-        },
-        {
-            date:
-                "8 Jan",
-            value: "08-01-2024"
-        },
-        {
-            date: "9 Jan",
-            value: "09-01-2024"
-        },
-        {
-            date:
-                "10 Jan",
-            value: "10-01-2024"
-        },
-        {
-            date: "11 Jan",
-            value: "11-01-2024"
-        },
-        {
-            date:
-                "12 Jan",
-            value: "12-01-2024"
-        },
-        {
-            date: "13 Jan",
-            value: "13-01-2024"
-        },
-        {
-            date:
-                "14 Jan",
-            value: "14-01-2024"
-        },
-    ] as Array<any>;
+    // onlineDateOptions = [
+    //     {
+    //         date: "7 Jan",
+    //         value: "07-01-2024"
+    //     },
+    //     {
+    //         date:
+    //             "8 Jan",
+    //         value: "08-01-2024"
+    //     },
+    //     {
+    //         date: "9 Jan",
+    //         value: "09-01-2024"
+    //     },
+    //     {
+    //         date:
+    //             "10 Jan",
+    //         value: "10-01-2024"
+    //     },
+    //     {
+    //         date: "11 Jan",
+    //         value: "11-01-2024"
+    //     },
+    //     {
+    //         date:
+    //             "12 Jan",
+    //         value: "12-01-2024"
+    //     },
+    //     {
+    //         date: "13 Jan",
+    //         value: "13-01-2024"
+    //     },
+    //     {
+    //         date:
+    //             "14 Jan",
+    //         value: "14-01-2024"
+    //     },
+    // ] as Array<any>;
+
+    currentDate = new Date();
+
+    // Filter onlineDateOptions to include only dates greater than the current date
+    // filteredOnlineDateOptions = this.onlineDateOptions.filter(option => {
+    //     // Split the date string and convert it to a Date object
+    //     const optionDateArray = option.value.split('-').map(Number);
+    //     const optionDate = new Date(optionDateArray[2], optionDateArray[1] - 1, optionDateArray[0]);
+
+    //     return optionDate > this.currentDate;
+    // });
+
 
     referredBy = '' as string;
     showVerifyBtn = false;
@@ -91,7 +99,9 @@ export class RegistrationIndoreComponent implements OnInit {
     showMessage: boolean = false;
     showOtpBtn: boolean = true;
     showResendBtn: boolean = false;
+
     showRegistrationForm: boolean = true;
+
 
     ngOnInit(): void {
         this.tForm = new FormGroup({
@@ -130,19 +140,24 @@ export class RegistrationIndoreComponent implements OnInit {
                 Validators.required,
             ]),
 
-            mode: new FormControl('offline', [
+            mode: new FormControl('online', [
                 Validators.required,
             ]),
 
             offline_test_date: new FormControl('14-01-2024'),
-            online_test_date: new FormControl(null),
-
+            // online_test_date: new FormControl(null),
+            online_test_date: new FormControl('', Validators.required),
             test_center: new FormControl(null),
             verify_otp: new FormControl(null
 
             ),
-
         });
+
+         // Disable the control if the date is out of range
+    if (this.isDateOutOfRange()) {
+        this.tForm.get('online_test_date')?.disable();
+      }
+
     }
 
     onSubmit() {
@@ -180,7 +195,9 @@ export class RegistrationIndoreComponent implements OnInit {
                     this.testCenterId = 'prestige-14-jan'
 
                 }
+
             }
+            
             this.apiService
                 // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
                 .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
@@ -213,6 +230,7 @@ export class RegistrationIndoreComponent implements OnInit {
                             this.loading = false;
                         }
                     }
+
                 );
         }
     }
@@ -237,8 +255,8 @@ export class RegistrationIndoreComponent implements OnInit {
                     }
                 },
                 (error) => {
-                    this.alertService.success(CONSTANTS.MESSAGES.INVALID_OTP);
-                    console.error("wrong otp", error);
+                    this.alertService.error(CONSTANTS.MESSAGES.INVALID_OTP);
+                    console.error("Wrong otp", error);
                     this.loading = false;
                 }
             )
@@ -359,7 +377,7 @@ export class RegistrationIndoreComponent implements OnInit {
 
         const payload = { mobileNo, name, dob, fatherName, fatherMobileNo, stream: streamVal, schoolName, city, testDate, mode, testCenterId: this.testCenterId };
         this.apiService
-            // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
+            //.sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
             .register(payload)  // if want to send otp by text sms
             .subscribe(
                 (res) => {
@@ -371,16 +389,10 @@ export class RegistrationIndoreComponent implements OnInit {
                         this.apiService.generateSingleEnroll(userId)
                             .subscribe({
                                 next: (res) => {
-                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                                    // this.router.navigate(['/verify'], { queryParams: { referredBy: this.referredBy } });
-                                    // this.alertService.success(CONSTANTS.MESSAGES.SMS_OTP_SENT);
-                                    // console.log('final',res)
                                     this.loading = false;
                                     //   this.showVerifyBtn = true;
                                 },
                                 error: () => {
-                                    // this.helperService.setUserContactDetails(this.tForm.value.mobile_no);
-                                    // this.router.navigate(['/verify']);
                                     this.alertService.error(CONSTANTS.MESSAGES.ERROR_SENDING_MESSAGE);
                                     this.loading = false;
                                 }
@@ -407,6 +419,7 @@ export class RegistrationIndoreComponent implements OnInit {
 
     changeMode() {
         const mode = this.tForm.get('mode')?.value;
+
     }
 
     changeTestCenter() {
@@ -420,4 +433,24 @@ export class RegistrationIndoreComponent implements OnInit {
     changeOnlineTestDate() {
 
     }
+
+    navigateToLogin() {
+        this.router.navigate(['/login']);
+      }
+
+      getMinDate(): string {
+        const today = new Date();
+        return today.toISOString().split('T')[0]; // Get today's date in the format 'yyyy-mm-dd'
+      }
+    
+      getMaxDate(): string {
+        const maxDate = new Date('2024-04-30');
+        return maxDate.toISOString().split('T')[0]; // Get April 30, 2024, in the format 'yyyy-mm-dd'
+      }
+    
+      isDateOutOfRange(): boolean {
+        const currentDate = new Date();
+        const maxDate = new Date('2024-04-30');
+        return currentDate > maxDate;
+      }
 }

@@ -1,0 +1,47 @@
+.registration__card{
+    // position: fixed;
+    position: relative;
+    max-width: 768px;
+    margin: auto;
+    bottom: 0;
+    width: 100%;
+    // height: calc(100vh - 400px);
+    background: #ffffff;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+}
+.registration__card_2{
+    // position: fixed;
+    position: relative;
+    max-width: 768px;
+    margin: auto;
+    bottom: 0;
+    width: 100%;
+    // height: calc(100vh - 400px);
+    background: #ffffff;
+    border-top-right-radius: 40px;
+    border-top-left-radius: 40px;
+    margin-top:200px;
+    
+}
+
+.message-style{
+    padding:160px 0px;
+    text-align: center;
+    color: green;
+}
+
+.bg__body{
+    background-image: linear-gradient(var(--i-secondary-gradient-1), var(--i-secondary-gradient-2));
+    // width: 100vw;
+    // height: 100vh;
+}
+
+.note-style{
+    color:red;
+}
+
+.green-style{
+    color:green;
+}
+
