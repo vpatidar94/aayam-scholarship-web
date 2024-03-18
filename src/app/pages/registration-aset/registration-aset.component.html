@@ -277,8 +277,11 @@
 
         </div>
     </div>
-    <div class="dashboard__card px-4 py-4 mt-4" *ngIf="showMessage">
-        <h2 class="message-style card">You have been successfully registered</h2>
+    <div class="dashboard__card px-4 py-2 mt-4" *ngIf="showMessage">
+        <div class="card d-flex flex-column justify-content-center align-items-center py-4">
+            <h2 class="message-style">You have been successfully registered</h2>
+            <button type="button" class="ibtn ibtn__secondary w-25" (click)="navigateToLogin()">Login</button>
+        </div>
         <div class="col-12 mt-4 text__grey text-center">
             <span class="me-1">For Login</span><a class="text__action__primary" style="cursor: pointer;"
                 (click)="navigateToLogin()">click here</a><br>
