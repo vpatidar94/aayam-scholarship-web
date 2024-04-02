@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams, } from "@angular/common/http";
 
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { CONSTANTS, ModeType, StreamType, TestCenterType, UserTypeEnum } from "../constant/constant";
+import { CONSTANTS, ClassType, ModeType, StreamType, TestCenterType, UserTypeEnum } from "../constant/constant";
 import { Observable, catchError, map, retry, throwError } from "rxjs";
 import { AlertService } from "./alert.service";
 import { CustomHttpResponse } from "src/app/models/custom-http-response";
@@ -128,6 +128,122 @@ export class ApiService {
         })
       );
   }
+
+  // admission enuiry form api 
+
+  enquiryApi(
+    payload: {
+      mobileNo: string, firstName: string, lastName: string, gender: string, stream: string, prevClass: string, howDoYouComeToKnow: string
+    }): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        '/enquiry/add',
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+
+  // SEND enquiry welcome msg THROUGH WHATSAPP
+  sendWpMsg(number: any): Observable<{ messaging_product: string, contacts: any, messages: any }> {
+    const url = environment.WHATSAPP_URL;
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('API-KEY', atob(environment.W_API_KEY));
+
+      const payload = {
+        "to": 91 + number,
+        "recipient_type": "individual",
+        "type": "template",
+        "template": {
+            "language": {
+                "policy": "deterministic",
+                "code": "en"
+            },
+            "name": "visit",
+            "components": [
+                {
+                    "type": "body",
+                    "parameters": [
+                        {
+                            "type": "text",
+                            "text": "VARIABLE_TEXT"
+                        },
+                        {
+                            "type": "text",
+                            "text": "VARIABLE_TEXT"
+                        }
+                    ]
+                }
+            ]
+        }
+    };
+
+    // const payload = {
+    //   "to": 918871688429,
+    //   "recipient_type": "individual",
+    //   "type": "template",
+    //   "template": {
+    //     "language": {
+    //       "policy": "deterministic",
+    //       "code": "en"
+    //     },
+    //     "name": "otp",
+    //     "components": [
+    //       {
+    //         "type": "body",
+    //         "parameters": [
+    //           {
+    //             "type": "text",
+    //             "text": "OTP"
+    //           },
+    //           {
+    //             "type": "text",
+    //             "text": "Aayam Star Application login"
+    //           },
+    //           {
+    //             "type": "text",
+    //             "text": 2222
+    //           }
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // }
+    return this.http
+      .post<{ messaging_product: string, contacts: any, messages: any }>(
+        url,
+        payload,
+        { headers: headers }
+      )
+      .pipe(
+        retry(1),
+        map((res) => {
+          return res;
+        }),
+        catchError((error) => {
+          return throwError(() => error);
+        })
+      );
+  }
+
+  // GET OFFLINE ENQUIRY USERS 
+  getAllEnquiryUsers(): Observable<any> {
+    return this.http
+      .get<CustomHttpResponse<any>>(
+        CONSTANTS.API.GET_ALL_ENQUIRY_USERS
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
+  }
+
   /* ********************END OF REGISTRATION PURPOSE*********************** */
 
   // FOR GENERATING SINGLE ENROLL
@@ -457,7 +573,7 @@ export class ApiService {
   generateRank(stream: string): Observable<any> {
     return this.http
       .post<CustomHttpResponse<any>>(
-        CONSTANTS.API.GENERATE_RANK , stream
+        CONSTANTS.API.GENERATE_RANK, stream
       )
       .pipe(
         map((res) => {
@@ -470,7 +586,7 @@ export class ApiService {
     console.log("ss", selectedStream)
     return this.http
       .post<CustomHttpResponse<any>>(
-        '/users/rank-by-class' , {selectedStream}
+        '/users/rank-by-class', { selectedStream }
       )
       .pipe(
         map((res) => {
@@ -521,16 +637,16 @@ export class ApiService {
 
   getResultByClass(selectedStream: string): Observable<any> {
     return this.http
-    .post<CustomHttpResponse<any>>(
-      '/users/result-by-class', {selectedStream}
-    )
-    .pipe(
-      map((res) => {
-        return res?.data;
-      })
-    );
+      .post<CustomHttpResponse<any>>(
+        '/users/result-by-class', { selectedStream }
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
   }
-  
+
   getTestDetails(stream: string | number): Observable<any> {
     return this.http
       .get<CustomHttpResponse<any>>(

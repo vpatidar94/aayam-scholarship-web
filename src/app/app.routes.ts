@@ -6,6 +6,7 @@ import { QuestionComponent } from './pages/dashboard/question/question.component
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegistrationAdminComponent } from '@pages/registration-admin/registration-admin.component';
 import { RegistrationAsetComponent } from '@pages/registration-aset/registration-aset.component';
+import { EnquiryFormComponent } from '@pages/enquiry-form/enquiry-form.component';
 
 export const appRoutes: Routes = [
 
@@ -27,6 +28,10 @@ export const appRoutes: Routes = [
   {
     path: "register-aset",
     component: RegistrationAsetComponent
+  },
+  {
+    path: "enquiry-form",
+    component: EnquiryFormComponent
   },
   {
     path: "register-admin",
@@ -107,6 +112,11 @@ export const appRoutes: Routes = [
         path: "users",
         loadComponent: () =>
           import('./pages/admin/users/users.component').then((x) => x.UsersComponent),
+      },
+      {
+        path: "enquiry-users",
+        loadComponent: () =>
+          import('./pages/admin/enquiry-users/enquiry-users.component').then((x) => x.EnquiryUsersComponent),
       },
       {
         path: "results",

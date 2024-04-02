@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
     const modifiedRequest = request.clone({
-      url: (request.url === environment.WHATSAPP_URL ? '' : environment.BASE_API_URL) + request.url,
+      url: ((request.url === environment.WHATSAPP_URL || request.url === environment.OTHER_URL) ? '' : environment.BASE_API_URL) + request.url,
     });
     return next.handle(modifiedRequest).pipe(
       // retry(1),

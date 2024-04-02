@@ -52,6 +52,14 @@
             >Results</a
           >
         </li>
+        <li class="nav-item" *ngIf="userType === 'admin'|| userType === 'sub-admin'">
+          <a
+            class="nav-link"
+            [routerLink]="['/admin/enquiry-users']"
+            routerLinkActive="active"
+            >Enquiry Users</a
+          >
+        </li>
       </ul>
       <div class="d-flex ms-auto">
         <div class="header__icon ms-2">

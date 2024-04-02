@@ -1,7 +1,7 @@
 // It's Global constant file
 // use "UPPER_SNAKE_CASE" to define
 export const CONSTANTS = Object.freeze({
-  WHATSAPP_URL: 'https://ziper.io/api/send.php',
+  WHATSAPP_URL: 'https://crmapi.wa0.in/whatsapp/waba/v1/messages',
   API: {
     QUESTIONS: "/GetQuestionsByTestId",
     // LOGIN: "/auth/login",
@@ -25,7 +25,7 @@ export const CONSTANTS = Object.freeze({
     SIGNUP_ORG_USER_DETAIL: '/users/updateOrgAdminDetails',
     // GET_ALL_USERS: '/result/getAllResultsDetails',
     GET_ALL_USERS: '/users/',
-
+    GET_ALL_ENQUIRY_USERS: '/enquiry/all',
     GET_USER_BY_ID: '/users/user',
     SEND_SMS_OTP: '/users/send-signup-otp',
     SEND_LOGIN_OTP: '/users/signin-otp',
@@ -60,6 +60,7 @@ export const CONSTANTS = Object.freeze({
 export type ButtonType = 'button' | 'submit';
 export type AlertType = 'success' | 'info' | 'danger' | 'warning' | '';
 export type ToggleType = 'Yes' | 'No';
+export type GenderType = 'Male' | 'Female' | 'Other'
 export type ClassType = "9" | "10" | "11-PCM" |"11-PCB" | "12-PCM" | "11-PCB";
 export type SubjectGroupType = "PCM" | "PCB";
 export type StreamType = 'NEET' | 'JEE';
