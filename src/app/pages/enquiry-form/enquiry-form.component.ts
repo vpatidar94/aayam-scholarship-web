@@ -89,9 +89,9 @@ export class EnquiryFormComponent implements OnInit {
         }
     }
 
-    sendConfirmation(mobileNo: any) {
+    sendConfirmation(mobileNo: any, firstName: string) {
         this.apiService
-            .sendWpMsg(mobileNo)
+            .sendWpMsg(mobileNo, firstName)
             .subscribe({
                 next: (res) => {
                     this.alertService.success("Message sent successfully.");
@@ -112,18 +112,18 @@ export class EnquiryFormComponent implements OnInit {
         const prevClass = this.tForm.value.lastClass;  // Course as Last class field was not in thte api payload
         const stream = this.tForm.value.stream
         const tVal = this.tForm.value;
-        let lastClassVal = tVal.lastClass;
-        if (tVal.lastClass === '11' || tVal.lastClass === '12')
-            lastClassVal = tVal.lastClass + '-' + tVal.subject;
+        // let lastClassVal = tVal.lastClass ;
+        // if (tVal.lastClass === '11' || tVal.lastClass === '12')
+        //     lastClassVal = tVal.lastClass + '-' + tVal.subject;
 
         // const Mode = this.tForm.value.mode;
         const howDoYouComeToKnow = this.tForm.value.how_do_you_come_to_know
-        const payload = { mobileNo, firstName, lastName, gender, stream, prevClass: lastClassVal, howDoYouComeToKnow };
+        const payload = { mobileNo, firstName, lastName, gender, stream, prevClass, howDoYouComeToKnow };
         this.apiService
             .enquiryApi(payload)  // if want to send otp by text sms
             .subscribe({
                 next: (res) => {
-                    this.sendConfirmation(mobileNo)
+                    this.sendConfirmation(mobileNo, firstName )
                     this.loading = false;
                     this.alertService.success(res.message);
                     this.showMessage = true;
@@ -138,12 +138,12 @@ export class EnquiryFormComponent implements OnInit {
 
     changeLastClass() {
         const lastClass = this.tForm.get('lastClass')?.value;
-        if (lastClass === '11' || lastClass === '12') {
-            this.tForm.get('subject')?.addValidators(Validators.required);
-        } else {
-            this.tForm.get('subject')?.clearValidators();
-        }
-        this.tForm.get('subject')?.updateValueAndValidity();
+        // if (lastClass === '11' || lastClass === '12') {
+        //     this.tForm.get('subject')?.addValidators(Validators.required);
+        // } else {
+        //     this.tForm.get('subject')?.clearValidators();
+        // }
+        // this.tForm.get('subject')?.updateValueAndValidity();
     }
 
     changeStream() {

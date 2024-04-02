@@ -149,7 +149,7 @@ export class ApiService {
 
 
   // SEND enquiry welcome msg THROUGH WHATSAPP
-  sendWpMsg(number: any): Observable<{ messaging_product: string, contacts: any, messages: any }> {
+  sendWpMsg(number: string, firstName: string): Observable<{ messaging_product: string, contacts: any, messages: any }> {
     const url = environment.WHATSAPP_URL;
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
@@ -171,11 +171,11 @@ export class ApiService {
                     "parameters": [
                         {
                             "type": "text",
-                            "text": "VARIABLE_TEXT"
+                            "text": firstName + ''
                         },
                         {
                             "type": "text",
-                            "text": "VARIABLE_TEXT"
+                            "text": "visiting"
                         }
                     ]
                 }
@@ -183,37 +183,6 @@ export class ApiService {
         }
     };
 
-    // const payload = {
-    //   "to": 918871688429,
-    //   "recipient_type": "individual",
-    //   "type": "template",
-    //   "template": {
-    //     "language": {
-    //       "policy": "deterministic",
-    //       "code": "en"
-    //     },
-    //     "name": "otp",
-    //     "components": [
-    //       {
-    //         "type": "body",
-    //         "parameters": [
-    //           {
-    //             "type": "text",
-    //             "text": "OTP"
-    //           },
-    //           {
-    //             "type": "text",
-    //             "text": "Aayam Star Application login"
-    //           },
-    //           {
-    //             "type": "text",
-    //             "text": 2222
-    //           }
-    //         ]
-    //       }
-    //     ]
-    //   }
-    // }
     return this.http
       .post<{ messaging_product: string, contacts: any, messages: any }>(
         url,
