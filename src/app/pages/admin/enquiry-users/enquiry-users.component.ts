@@ -39,7 +39,7 @@ export class EnquiryUsersComponent {
   attenderOptions = ["Sapna Pandey", "Juhi Singh", "Aditi Rajput", "Prachi Thakur", "Other"];
   statusOptions = ['DONE', 'PENDING', 'NOT_INTERESTED', 'INTERESTED'];
   userType: string = '';
-  searchFilterKeys = ['firstName', 'lastName', 'mobileNo'];
+  searchFilterKeys = ['firstName', 'lastName', 'mobileNo', 'stream', 'prevClass', 'counsellor', 'excecutive', 'admissionStatus', 'createdAt' ];
   searchPlaceHolder = "Search by name, mobile no."
   breadcrumbs = [
     {
@@ -116,13 +116,13 @@ export class EnquiryUsersComponent {
     {
       name: 'Enquiry Date',
       sorting: true,
-      key: 'enquiryDate',
+      key: 'createdAt',
       sortBy: '',
     },
     {
       name: 'Updated Date',
       sorting: true,
-      key: 'updateDate',
+      key: 'updatedAt',
       sortBy: '',
     },
     {

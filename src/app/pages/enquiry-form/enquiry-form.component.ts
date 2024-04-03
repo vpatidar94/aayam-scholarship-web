@@ -74,7 +74,9 @@ export class EnquiryFormComponent implements OnInit {
                 Validators.required,
             ]),
 
-            how_do_you_come_to_know: new FormControl(null),
+            how_do_you_come_to_know: new FormControl(null, [
+                Validators.required,
+            ]),
             verify_otp: new FormControl(null
 
             ),
