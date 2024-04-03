@@ -1,8 +1,4 @@
 <div class="">
-  <!-- <org-content-header title="Users" [breadcrumbs]="breadcrumbs">
-  </org-content-header> -->
-  <!-- <org-dashboard-header title="" subTitle="" [showLogout]="true">
-  </org-dashboard-header> -->
   <div class="row">
     <div class="col col-12">
       <div class="pb-4">
@@ -26,6 +22,12 @@
                 <td>{{userItem.stream}}</td>
                 <td>{{userItem.prevClass}}</td>
                 <td>{{userItem.howDoYouComeToKnow}}</td>
+                <td>{{userItem.counsellor}}</td>
+                <td>{{userItem.attender}}</td>
+                <td>{{userItem.admissionStatus}}</td>
+                <td>{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
+                <td>{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td>
+                <td> <button class="btn btn-success" (click)="openModel(userItem)">Edit</button></td>
               </tr>
             </org-ay-data-table>
           </ng-template>
@@ -40,3 +42,53 @@
     <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
   </div>
 </ng-template>
+
+<div class="modal" id="enquiryModal">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{userData.firstName}} {{userData.lastName}}</h4>
+        <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
+          <div class="col-12 col-md-3  mb-1">
+            <label for="counsellor" class="mb-2 text__body-dark">Counsellor</label>
+            <div class="me-4">
+              <select class="form-select" name="counsellor" formControlName="counsellor" (change)="changeCounsellor()">
+                <option *ngFor="let option of counsellorOptions" [value]="option">{{ option }}
+                </option>
+              </select>
+            </div>
+            <org-field-validation-message [control]="tForm.controls['counsellor']"></org-field-validation-message>
+          </div>
+          <div class="col-12 col-md-3 mb-1">
+            <label for="attender" class="mb-2 text__body-dark">Excecutive</label>
+            <div class="me-4">
+              <select class="form-select" name="attender" formControlName="attender" (change)="changeAttender()">
+                <option *ngFor="let option of attenderOptions" [value]="option">{{ option }}
+                </option>
+              </select>
+            </div>
+            <org-field-validation-message [control]="tForm.controls['attender']"></org-field-validation-message>
+          </div>
+          <div class="col-12 col-md-3 mb-1">
+            <label for="status" class="mb-2 text__body-dark">Admission Status</label>
+            <div class="me-4">
+              <select class="form-select" name="status" formControlName="status" (change)="changeAdmissionStatus()">
+                <option *ngFor="let option of statusOptions" [value]="option">{{ option }}
+                </option>
+              </select>
+            </div>
+            <org-field-validation-message [control]="tForm.controls['status']"></org-field-validation-message>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="saveChanges()" data-bs-dismiss="modal">Save
+          Changes</button>
+        <button type="button" class="btn btn-danger" (click)="CloseModel()" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

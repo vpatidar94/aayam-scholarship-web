@@ -137,7 +137,7 @@ export class ApiService {
     }): Observable<CustomHttpResponse<any>> {
     return this.http
       .post<CustomHttpResponse<any>>(
-        '/enquiry/add',
+        CONSTANTS.API.ADD_ENQUIRY,
         payload
       )
       .pipe(
@@ -155,32 +155,32 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('API-KEY', atob(environment.W_API_KEY));
 
-      const payload = {
-        "to": 91 + number,
-        "recipient_type": "individual",
-        "type": "template",
-        "template": {
-            "language": {
-                "policy": "deterministic",
-                "code": "en"
-            },
-            "name": "visit",
-            "components": [
-                {
-                    "type": "body",
-                    "parameters": [
-                        {
-                            "type": "text",
-                            "text": firstName + ''
-                        },
-                        {
-                            "type": "text",
-                            "text": "visiting"
-                        }
-                    ]
-                }
+    const payload = {
+      "to": 91 + number,
+      "recipient_type": "individual",
+      "type": "template",
+      "template": {
+        "language": {
+          "policy": "deterministic",
+          "code": "en"
+        },
+        "name": "visit",
+        "components": [
+          {
+            "type": "body",
+            "parameters": [
+              {
+                "type": "text",
+                "text": firstName + ''
+              },
+              {
+                "type": "text",
+                "text": "visiting"
+              }
             ]
-        }
+          }
+        ]
+      }
     };
 
     return this.http
@@ -212,6 +212,25 @@ export class ApiService {
         })
       );
   }
+
+  //update enquiry 
+  enquiryUpdateApi(
+    payload: {
+      userId: string, counsellor: string, attender: string, admissionStatus: string
+    }
+  ): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .put<CustomHttpResponse<any>>(
+        CONSTANTS.API.UPDATE_ENQUIRY,
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
 
   /* ********************END OF REGISTRATION PURPOSE*********************** */
 

@@ -33,6 +33,8 @@ export const CONSTANTS = Object.freeze({
     VERIFY_OTP: '/users/verifyotp',
     UPDATE_REGISTERATION: '/users/signup',
     SINGLE_ENROLL: '/users/generate-enrolNo',
+    ADD_ENQUIRY: '/enquiry/add',
+    UPDATE_ENQUIRY: '/enquiry/update',
   },
   MESSAGES: {
     LOGIN_FAILURE: "Login failed",

@@ -3,18 +3,19 @@ import { CommonModule } from "@angular/common";
 import { ContentHeaderComponent } from "src/app/shared/content-header/content-header.component";
 import { ApiService } from "src/app/core/services/api.service";
 import { AlertService } from "src/app/core/services/alert.service";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CONSTANTS, UserTypeEnum } from "src/app/core/constant/constant";
 import { RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HelperService } from "src/app/core/services/helper";
 import { TableHeader } from "src/app/models/table.model";
 import { AyDataTableComponent } from "src/app/shared/ay-data-table/ay-data-table.component";
-import { DashboardHeaderComponent } from "@layout/dashboard-header/dashboard-header.component";
+import { FieldValidationMessageComponent } from "@shared/field-validation-message/field-validation-message.component";
 
 @Component({
   selector: "org-users",
   standalone: true,
-  imports: [CommonModule, ContentHeaderComponent, RouterModule, FormsModule, AyDataTableComponent,],
+  imports: [CommonModule, ReactiveFormsModule, ContentHeaderComponent, FieldValidationMessageComponent, RouterModule, FormsModule, AyDataTableComponent,],
   templateUrl: "./enquiry-users.component.html",
   styleUrls: ["./enquiry-users.component.scss"],
 })
@@ -27,13 +28,16 @@ export class EnquiryUsersComponent {
     //   this.thead = this.thead.filter((x) => x.key !== 'mobileNo' && x.key !== 'orgCode');
     // }
   }
+  tForm!: FormGroup;
   loading = false;
   testId = '';
   btnLoading = false;
   data = [] as any;
   filteredData = [] as any;
   userData = [] as any;
-  resultData = [] as any;
+  counsellorOptions = ["Rakesh Sharma", "Juhi Singh", "Mayank Patidar", "Sapna Pandey", "Other"];
+  attenderOptions = ["Sapna Pandey", "Juhi Singh", "Aditi Rajput", "Prachi Thakur", "Other"];
+  statusOptions = ['DONE', 'PENDING', 'NOT_INTERESTED', 'INTERESTED'];
   userType: string = '';
   searchFilterKeys = ['firstName', 'lastName', 'mobileNo'];
   searchPlaceHolder = "Search by name, mobile no."
@@ -66,7 +70,7 @@ export class EnquiryUsersComponent {
       sorting: true,
       key: 'mobileNo',
       sortBy: '',
-    }, 
+    },
     {
       name: 'Gender',
       sorting: true,
@@ -91,11 +95,49 @@ export class EnquiryUsersComponent {
       key: 'howDoYouComeToKnow',
       sortBy: '',
     },
+    {
+      name: 'Counsellor',
+      sorting: true,
+      key: 'counsellor',
+      sortBy: '',
+    },
+    {
+      name: 'Executive',
+      sorting: true,
+      key: 'excecutive',
+      sortBy: '',
+    },
+    {
+      name: 'Admission Status',
+      sorting: true,
+      key: 'admissionStatus',
+      sortBy: '',
+    },
+    {
+      name: 'Enquiry Date',
+      sorting: true,
+      key: 'enquiryDate',
+      sortBy: '',
+    },
+    {
+      name: 'Updated Date',
+      sorting: true,
+      key: 'updateDate',
+      sortBy: '',
+    },
+    {
+      name: '',
 
+    },
   ] as TableHeader<any>[];
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.tForm = new FormGroup({
+      counsellor: new FormControl(null),
+      attender: new FormControl(null),
+      status: new FormControl(null)
+    });
   }
 
   changeData(e: any[]) {
@@ -120,4 +162,80 @@ export class EnquiryUsersComponent {
       });
   }
 
+  openModel(userItem: any) {
+    const modelDiv = document.getElementById('enquiryModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'block';
+    }
+    this.userData = userItem;
+
+    // Prefill the form controls with the user's data
+    this.tForm.patchValue({
+      counsellor: userItem.counsellor,
+      attender: userItem.attender,
+      status: userItem.admissionStatus
+    });
+  }
+
+  CloseModel() {
+    const modelDiv = document.getElementById('enquiryModal');
+    if (modelDiv != null) {
+      modelDiv.style.display = 'none';
+    }
+  }
+
+  // Method to save changes and trigger the update API call
+  saveChanges() {
+    const counsellor = this.tForm.value.counsellor;
+    const attender = this.tForm.value.attender;
+    const admissionStatus = this.tForm.value.status;
+    const userId = this.userData._id;
+
+    const payload = { userId, counsellor, attender, admissionStatus };
+    this.apiService
+      .enquiryUpdateApi(payload)
+      .subscribe({
+        next: (res) => {
+          this.loading = false;
+          this.alertService.success(res.message);
+          this.CloseModel();
+          this.updateTableData();
+        },
+        error: (err) => {
+          console.log("err", err)
+          this.alertService.error(err.error.message);
+          this.loading = false;
+        }
+      })
+
+  }
+
+  updateTableData() {
+    // Find the index of the updated user in the data array
+    const index = this.data.findIndex((user: any) => user._id === this.userData._id);
+    // Update the user in the data array
+    if (index !== -1) {
+      this.data[index].counsellor = this.tForm.value.counsellor;
+      this.data[index].attender = this.tForm.value.attender;
+      this.data[index].admissionStatus = this.tForm.value.status;
+    }
+    // Update the filteredData array
+    this.filteredData = [...this.data];
+  }
+
+  changeCounsellor() {
+    const counsellor = this.tForm.get('counsellor')?.value;
+  }
+
+  changeAttender() {
+
+  }
+
+  changeAdmissionStatus() {
+
+  }
+
+  onSubmit() {
+
+  }
 }
