@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegistrationAdminComponent } from '@pages/registration-admin/registration-admin.component';
 import { RegistrationAsetComponent } from '@pages/registration-aset/registration-aset.component';
 import { EnquiryFormComponent } from '@pages/enquiry-form/enquiry-form.component';
+import { HealthcareFormComponent } from '@pages/healthcare-form/healthcare-form.component';
 
 export const appRoutes: Routes = [
 
@@ -36,6 +37,11 @@ export const appRoutes: Routes = [
   {
     path: "register-admin",
     component: RegistrationAdminComponent
+  },
+
+  {
+    path: "healthcare-form",
+    component: HealthcareFormComponent
   },
 
   {

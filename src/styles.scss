@@ -334,6 +334,31 @@
       border-color: var(--i-danger)
     }
   }
+
+  .ifield-text-area {
+    background-color: var(--i-body-bg);
+    color: var(--i-body-text);
+    font-size: 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 6px 16px;
+    height: 100px;
+    margin: 0;
+  
+    &::placeholder {
+      // color: inherit;
+      color: var(--i-body-text-60);
+    }
+
+    &-login{
+      font-size: 1.15rem !important;
+      // letter-spacing: 2px;
+    }
+
+    &.ng-touched.ng-invalid{
+      border-color: var(--i-danger)
+    } 
+  }
   
   .line__clamp {
     &-3,

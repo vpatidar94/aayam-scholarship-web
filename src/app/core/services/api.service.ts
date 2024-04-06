@@ -148,6 +148,23 @@ export class ApiService {
   }
 
 
+  // doctor-form-info-api
+  doctorInfoApi(
+    payload: {
+      mobileNo: string, name: string, maritalStatus: string, gender: string, age: string, email: string, address: string, qualification: string, speciality: string, fellowship: string, jobPattern: string, achievements: string, awards: string, dreams: string,
+    }): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.ADD_DOCTOR,
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
   // SEND enquiry welcome msg THROUGH WHATSAPP
   sendWpMsg(number: string, firstName: string): Observable<{ messaging_product: string, contacts: any, messages: any }> {
     const url = environment.WHATSAPP_URL;
