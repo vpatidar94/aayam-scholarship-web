@@ -15,7 +15,7 @@
             <org-ay-data-table [list]="data" [tableHeader]="thead" (updateData)="changeData($event)"
               [searchFilterKeys]="searchFilterKeys" [searchPlaceHolder]="searchPlaceHolder">
               <tr *ngFor="let userItem of filteredData; let i = index" tBody>
-                <td>{{ i + 1 }}</td>
+                <td>{{ calculateStartIndex(i)}}</td>
                 <td>{{userItem.firstName}} {{userItem.lastName}}</td>
                 <td>{{userItem.mobileNo}}</td>
                 <td>{{userItem.gender}}</td>
@@ -27,7 +27,7 @@
                 <td>{{userItem.admissionStatus}}</td>
                 <td>{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
                 <td>{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td>
-                <td> <button class="btn btn-success" (click)="openModel(userItem)">Edit</button></td>
+                <td> <button class="btn btn-secondary" (click)="openModel(userItem)">Edit</button></td>
               </tr>
             </org-ay-data-table>
           </ng-template>

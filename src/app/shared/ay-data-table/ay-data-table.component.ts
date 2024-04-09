@@ -30,7 +30,9 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
   @Input() tableHeader: TableHeader<T>[] = [];
   @Input() searchFilterKeys: Array<keyof T> = [];
   @Input() searchPlaceHolder = 'Search' as string;
-  @Output() updateData: EventEmitter<T[]> = new EventEmitter();
+  // @Output() updateData: EventEmitter<T[]> = new EventEmitter();
+  @Output() updateData: EventEmitter<{ data: T[], paginate: any }> = new EventEmitter<{ data: T[], paginate: any }>();
+
 
   listLoading = false as boolean;
   filteredList: T[] = [];
@@ -39,7 +41,7 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
   itemsPerPageOptions = [10, 20, 30, 50, 100, 10000];
 
   paginate = {
-    itemsPerPage: 100 as number,
+    itemsPerPage: 20 as number,
     currentPage: 1 as number,
     data: [] as T[],
   };
@@ -130,9 +132,10 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
   filterPaginateData(pageNumber: number) {
     this.paginate.data = this.filteredList.slice(
       this.paginate.itemsPerPage * pageNumber - this.paginate.itemsPerPage,
-      this.paginate.itemsPerPage * pageNumber - 1,
+      this.paginate.itemsPerPage * pageNumber ,
     );
-    this.updateData.emit(this.paginate.data);
+    // this.updateData.emit(this.paginate.data);
+    this.updateData.emit({ data: this.paginate.data, paginate: this.paginate });
   }
 
   resetPaginate() {

@@ -51,7 +51,8 @@ export class EnquiryUsersComponent {
       name: 'Users'
     },
   ];
-
+   paginate: { currentPage: number, itemsPerPage: number, data: any[] } = { currentPage: 1, itemsPerPage: 10, data: [] };
+  // filterData: any[] = [];
   thead = [
     {
       name: 'S.No.',
@@ -140,17 +141,19 @@ export class EnquiryUsersComponent {
     });
   }
 
-  changeData(e: any[]) {
-    this.filteredData = e;
+  // changeData(e: any[]) {
+  //   this.filteredData = e;
+  // }
+  changeData(e: { data: any[], paginate: any }) {
+    this.paginate = e.paginate;
+    this.filteredData = e.data;
   }
-
   getAllUsers() {
     this.loading = true;
     this.apiService
       .getAllEnquiryUsers()
       .subscribe({
         next: (res) => {
-          console.log(res)
           this.data = res;
           this.filteredData = res;
           this.loading = false;
@@ -238,4 +241,8 @@ export class EnquiryUsersComponent {
   onSubmit() {
 
   }
+  calculateStartIndex(index: number) {
+    return (this.paginate.currentPage - 1) * this.paginate.itemsPerPage + index + 1;
+  }
+  
 }

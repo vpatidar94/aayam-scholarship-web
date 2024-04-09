@@ -131,8 +131,11 @@ export class UsersComponent {
     // }]
   }
 
-  changeData(e: any[]) {
-    this.filteredData = e;
+  changeData(e: { data: any[], paginate: any }) {
+    // this.paginate = e.paginate;
+    // this.paginate.data = e.data;
+    // this.paginate.currentPage = 1;
+    this.filteredData = e.data;
   }
 
   getAllUsers() {
