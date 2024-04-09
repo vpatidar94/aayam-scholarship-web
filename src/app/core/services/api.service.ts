@@ -172,34 +172,150 @@ export class ApiService {
       .set('Content-Type', 'application/json')
       .set('API-KEY', atob(environment.W_API_KEY));
 
-    const payload = {
+    const payload ={
       "to": 91 + number,
       "recipient_type": "individual",
       "type": "template",
       "template": {
-        "language": {
-          "policy": "deterministic",
-          "code": "en"
-        },
-        "name": "visit",
-        "components": [
-          {
-            "type": "body",
-            "parameters": [
+          "language": {
+              "policy": "deterministic",
+              "code": "en"
+          },
+          "name": "welcome",
+          "components": [
               {
-                "type": "text",
-                "text": firstName + ''
+                  "type": "body",
+                  "parameters": [
+                      {
+                          "type": "text",
+                          "text": firstName + ''
+                      },
+                      {
+                          "type": "text",
+                          "text": "visiting"
+                      }
+                  ]
               },
               {
-                "type": "text",
-                "text": "visiting"
+                  "type": "carousel",
+                  "cards": [
+                      {
+                          "card_index": 0,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_courses243621741.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 1,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_newbatch243621975.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 2,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_successsto243621991.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 3,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_fee-str243621897.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 4,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_scholarshi243621975.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 5,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_aset243621547.jpeg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "card_index": 6,
+                          "components": [
+                              {
+                                  "type": "header",
+                                  "parameters": [
+                                      {
+                                          "type": "image",
+                                          "image": {
+                                              "link": "https://api.aayamcareerinstitute.co.in//Uploads/Files/File_brochure240516303.jpg"
+                                          }
+                                      }
+                                  ]
+                              }
+                          ]
+                      }
+                  ]
               }
-            ]
-          }
-        ]
+          ]
       }
-    };
-
+  }
     return this.http
       .post<{ messaging_product: string, contacts: any, messages: any }>(
         url,
@@ -216,6 +332,7 @@ export class ApiService {
         })
       );
   }
+  
 
   // GET OFFLINE ENQUIRY USERS 
   getAllEnquiryUsers(): Observable<any> {
