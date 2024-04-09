@@ -32,6 +32,20 @@
                         [control]="tForm.controls['first_name']"></org-field-validation-message>
                 </div>
 
+                <!-- dob -->
+                <div class="col-12  mb-1">
+                    <label for="dob-field" class="mb-2 text__body-dark">DOB</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="date" formControlName="dob"
+                            class="form-control ifield ifield-login mobile__field" id="dob-field" value=""
+                            placeholder="DOB">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['dob']"></org-field-validation-message>
+                </div>
+
                 <!-- age -->
                 <div class="col-12  mb-1">
                     <label for="age-field" class="mb-2 text__body-dark">Age</label>
@@ -83,7 +97,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="marital-status"
                                     [id]="'radio-' + option" formControlName="marital_status" [value]="option"
-                                    (change)="changeMode()" />
+                                    (change)="changeMaritalStatus()" />
                                 <label class="form-check-label text-dark" [for]="'radio-' + option">
                                     {{ option }}
                                 </label>
@@ -92,6 +106,24 @@
                     </div>
                     <org-field-validation-message
                         [control]="tForm.controls['marital_status']"></org-field-validation-message>
+                </div>
+
+                <!-- date of anniversary -->
+                <!-- <div class="col-12  mb-1" *ngIf="
+            tForm.value.mode === 'offline'
+          "> -->
+                <div class="col-12  mb-1"  *ngIf="
+                tForm.value.marital_status=== 'Married'">
+                    <label for="doa-field" class="mb-2 text__body-dark">Date Of Anniversary</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="date" formControlName="doa"
+                            class="form-control ifield ifield-login mobile__field" id="doa-field" value=""
+                            placeholder="Date Of Anniversary">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['doa']"></org-field-validation-message>
                 </div>
 
                 <!-- address -->
@@ -160,8 +192,22 @@
                         [control]="tForm.controls['super_specialty']"></org-field-validation-message>
                 </div>
 
+                <!-- registration number -->
+                <div class="col-12  mb-1">
+                    <label for="registration-number-field" class="mb-2 text__body-dark">Registration Number</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="registration_number"
+                            class="form-control ifield ifield-login mobile__field" id="registration-number-field" value=""
+                            placeholder="registration number">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['registration_number']"></org-field-validation-message>
+                </div>
+
                 <!-- job pattern -->
-                <div class="col-12 mb-1">
+                <!-- <div class="col-12 mb-1">
                     <label for="job-pattern-field" class="mb-2 text__body-dark">Job Pattern</label>
                     <div class="d-flex">
                         <div class="me-4" *ngFor="let option of jobPatternOptions">
@@ -173,6 +219,19 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['job_pattern']"></org-field-validation-message>
+                </div> -->
+
+                <div class="col-12  mb-1">
+                    <label for="job-pattern-field" class="mb-2 text__body-dark">Job Pattern</label>
+                    <div class="me-4">
+                        <select class="form-select" name="job_pattern" formControlName="job_pattern"
+                            (change)="changeMode()">
+                            <option *ngFor="let option of jobPatternOptions" [value]="option">{{ option }}
+                            </option>
+                        </select>
                     </div>
                     <org-field-validation-message
                         [control]="tForm.controls['job_pattern']"></org-field-validation-message>
@@ -234,8 +293,8 @@
     </div>
     <div class="dashboard__card px-4 py-2 mt-4" *ngIf="showMessage">
         <div class="card d-flex flex-column justify-content-center align-items-center py-4 mt-5">
-            <h2 class="message-style">Thank You! For Visiting Aayam<br /><br />
-                आपकी सफलता का आयाम</h2>
+            <h2 class="message-style">Thank You! For Your Valuable Time<br /><br />
+            </h2>
         </div>
     </div>
 

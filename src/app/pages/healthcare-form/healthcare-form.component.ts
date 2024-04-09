@@ -28,7 +28,7 @@ export class HealthcareFormComponent implements OnInit {
     loading = false;
     genderOptions = ["Male", "Female", "Other"] as Array<GenderType>;
     jobPatternOptions = ["Govt.", "Private", "Self Employed", "Clinic or Hospital"];
-    maritalOptions = ["Married", "Unmarried", "Divorced", "Widowed"]
+    maritalOptions = ["Married", "Unmarried"]
     lastClassOptions = ["10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
     modeOptions = ["offline"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
@@ -58,8 +58,14 @@ export class HealthcareFormComponent implements OnInit {
             first_name: new FormControl(null, [
                 Validators.required,
             ]),
+            dob: new FormControl(null, [
+                Validators.required
+            ]),
             marital_status: new FormControl(null, [
                 Validators.required,
+            ]),
+            doa: new FormControl(null, [
+                Validators.required
             ]),
             age: new FormControl(null, [
                 Validators.required,
@@ -79,6 +85,8 @@ export class HealthcareFormComponent implements OnInit {
             specialty: new FormControl(null),
 
             super_specialty: new FormControl(null),
+
+            registration_number: new FormControl(null),
             
             job_pattern: new FormControl(null, [
                 Validators.required,
@@ -125,18 +133,21 @@ export class HealthcareFormComponent implements OnInit {
     registerNow() {
         const mobileNo = this.tForm.value.mobile_no;
         const name = this.tForm.value.first_name;
+        const dob = this.tForm.value.dob;
         const maritalStatus = this.tForm.value.marital_status;
+        const doa = this.tForm.value.doa;
         const gender = this.tForm.value.gender;
         const address = this.tForm.value.address;
         const age = this.tForm.value.age;  // Course as Last class field was not in thte api payload
-        const email = this.tForm.value.email_id
+        const email = this.tForm.value.email_id;
         const qualification = this.tForm.value.qualifications;
-        const speciality = this.tForm.value.specialty
-        const fellowship = this.tForm.value.super_specialty
-        const jobPattern = this.tForm.value.job_pattern
-        const achievements = this.tForm.value.achievements
-        const awards = this.tForm.value.awards
-        const dreams = this.tForm.value.dreams
+        const speciality = this.tForm.value.specialty;
+        const fellowship = this.tForm.value.super_specialty;
+        const registrationNo = this.tForm.value.registration_number;
+        const jobPattern = this.tForm.value.job_pattern;
+        const achievements = this.tForm.value.achievements;
+        const awards = this.tForm.value.awards;
+        const dreams = this.tForm.value.dreams;
 
 
 
@@ -147,7 +158,7 @@ export class HealthcareFormComponent implements OnInit {
 
         // const Mode = this.tForm.value.mode;
 
-        const payload = { mobileNo, name, maritalStatus, gender, address, age, email, qualification, speciality, fellowship, jobPattern, achievements, awards, dreams };
+        const payload = { mobileNo, name, dob, maritalStatus, doa, gender, address, age, email, qualification, speciality, fellowship, registrationNo, jobPattern, achievements, awards, dreams };
         this.apiService
             .doctorInfoApi(payload)  // if want to send otp by text sms
             .subscribe({
@@ -184,7 +195,9 @@ export class HealthcareFormComponent implements OnInit {
         const mode = this.tForm.get('mode')?.value;
 
     }
-
+    changeMaritalStatus(){
+        const marital_status = this.tForm.get("marital_status")?.value;
+    }
     howDoYouComeToKnow() {
         const howDoYouComeToKnow = this.tForm.get('howDoYouComeToKnow')?.value;
     }

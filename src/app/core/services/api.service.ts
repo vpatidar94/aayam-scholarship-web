@@ -151,7 +151,7 @@ export class ApiService {
   // doctor-form-info-api
   doctorInfoApi(
     payload: {
-      mobileNo: string, name: string, maritalStatus: string, gender: string, age: string, email: string, address: string, qualification: string, speciality: string, fellowship: string, jobPattern: string, achievements: string, awards: string, dreams: string,
+      mobileNo: string, name: string, maritalStatus: string, dob:Date, doa: Date, gender: string, age: string, email: string, address: string, qualification: string, speciality: string, fellowship: string, registrationNo:string, jobPattern: string, achievements: string, awards: string, dreams: string,
     }): Observable<CustomHttpResponse<any>> {
     return this.http
       .post<CustomHttpResponse<any>>(
