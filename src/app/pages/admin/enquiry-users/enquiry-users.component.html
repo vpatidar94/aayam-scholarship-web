@@ -24,7 +24,9 @@
                 <td>{{userItem.howDoYouComeToKnow}}</td>
                 <td>{{userItem.counsellor}}</td>
                 <td>{{userItem.attender}}</td>
-                <td>{{userItem.admissionStatus}}</td>
+                <td
+                  [ngClass]="{'text-success': userItem.admissionStatus === 'DONE', 'text-warning': userItem.admissionStatus === 'PENDING', 'text-danger': userItem.admissionStatus === 'INTERESTED', 'fw-bold': userItem.admissionStatus}">
+                  {{userItem.admissionStatus}}</td>
                 <td>{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
                 <td>{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td>
                 <td> <button class="btn btn-secondary" (click)="openModel(userItem)">Edit</button></td>
@@ -48,6 +50,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">{{userData.firstName}} {{userData.lastName}}</h4>
+        <h6 class="modal-title ms-2">({{userData.enquiryNo}})</h6>
         <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
