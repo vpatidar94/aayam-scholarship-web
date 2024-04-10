@@ -350,7 +350,7 @@ export class ApiService {
   //update enquiry 
   enquiryUpdateApi(
     payload: {
-      userId: string, counsellor: string, attender: string, admissionStatus: string
+      userId: string, counsellor: string, attender: string, admissionStatus: string, remark: string
     }
   ): Observable<CustomHttpResponse<any>> {
     return this.http

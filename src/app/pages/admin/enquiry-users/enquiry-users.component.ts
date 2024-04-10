@@ -115,6 +115,10 @@ export class EnquiryUsersComponent {
       sortBy: '',
     },
     {
+      name: 'Remark',
+      key: 'remark'
+    },
+    {
       name: 'Enquiry Date',
       sorting: true,
       key: 'createdAt',
@@ -137,7 +141,8 @@ export class EnquiryUsersComponent {
     this.tForm = new FormGroup({
       counsellor: new FormControl(null),
       attender: new FormControl(null),
-      status: new FormControl(null)
+      status: new FormControl(null),
+      remark: new FormControl(null),
     });
   }
 
@@ -176,7 +181,8 @@ export class EnquiryUsersComponent {
     this.tForm.patchValue({
       counsellor: userItem.counsellor,
       attender: userItem.attender,
-      status: userItem.admissionStatus
+      status: userItem.admissionStatus,
+      remark: userItem?.remark
     });
   }
 
@@ -192,9 +198,10 @@ export class EnquiryUsersComponent {
     const counsellor = this.tForm.value.counsellor;
     const attender = this.tForm.value.attender;
     const admissionStatus = this.tForm.value.status;
+    const remark = this.tForm.value.remark;
     const userId = this.userData._id;
 
-    const payload = { userId, counsellor, attender, admissionStatus };
+    const payload = { userId, counsellor, attender, admissionStatus, remark };
     this.apiService
       .enquiryUpdateApi(payload)
       .subscribe({
@@ -221,6 +228,7 @@ export class EnquiryUsersComponent {
       this.data[index].counsellor = this.tForm.value.counsellor;
       this.data[index].attender = this.tForm.value.attender;
       this.data[index].admissionStatus = this.tForm.value.status;
+      this.data[index].remark = this.tForm.value.remark;
     }
     // Update the filteredData array
     this.filteredData = [...this.data];

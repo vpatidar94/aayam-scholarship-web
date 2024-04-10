@@ -44,6 +44,7 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
     itemsPerPage: 20 as number,
     currentPage: 1 as number,
     data: [] as T[],
+    // totalPages: 1 as number,
   };
 
   ngOnInit() {
@@ -132,7 +133,7 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
   filterPaginateData(pageNumber: number) {
     this.paginate.data = this.filteredList.slice(
       this.paginate.itemsPerPage * pageNumber - this.paginate.itemsPerPage,
-      this.paginate.itemsPerPage * pageNumber ,
+      this.paginate.itemsPerPage * pageNumber,
     );
     // this.updateData.emit(this.paginate.data);
     this.updateData.emit({ data: this.paginate.data, paginate: this.paginate });
@@ -140,6 +141,12 @@ export class AyDataTableComponent<T> implements OnInit, OnChanges {
 
   resetPaginate() {
     this.paginate.currentPage = 1;
+    // USE THIS CODE WHEN NAVIGATING TO LAST PAGE DIRECTLY---------
+    // this.paginate.totalPages = Math.ceil(
+    //   this.filteredList.length / this.paginate.itemsPerPage
+    // );
+    // this.paginate.currentPage = this.paginate.totalPages;
+    // ------------------------------------------------------------
     this.filterPaginateData(this.paginate.currentPage);
   }
 
