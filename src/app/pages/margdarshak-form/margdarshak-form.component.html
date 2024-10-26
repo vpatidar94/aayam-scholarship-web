@@ -1,0 +1,288 @@
+<div class="bg__body">
+    <button *ngIf="showMessage" type="button" class="btn btn-light btn__action btn__action-panel ms-2 mt-2"
+        (click)="showEnquiryForm()">
+        <svg class="pb-1" xmlns="http://www.w3.org/2000/svg" fill="#16506D" height="24" viewBox="0 -960 960 960"
+            width="24">
+            <path
+                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" />
+        </svg>
+    </button>
+    <org-custom-header title="" subTitle="" [showLogout]="false">
+    </org-custom-header>
+
+
+    <div class="registration__card px-4 py-3 " *ngIf="!showMessage">
+        <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary">Margdarshak Form</span>
+        </h4>
+
+        <div *ngIf="showRegistrationForm">
+            <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
+
+                <!-- Code -->
+                <div class="col-12  mb-1">
+                    <label for="code-field" class="mb-2 text__body-dark">Code</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="code" class="form-control ifield ifield-login mobile__field"
+                            id="code-field" value="" placeholder="Code">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['code']"></org-field-validation-message>
+                </div>
+                <!-- First name -->
+                <div class="col-12  mb-1">
+                    <label for="first-name-field" class="mb-2 text__body-dark">Name</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="first_name"
+                            class="form-control ifield ifield-login mobile__field" id="first-name-field" value=""
+                            placeholder="Name">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['first_name']"></org-field-validation-message>
+                </div>
+
+
+                <!-- age -->
+                <!-- <div class="col-12  mb-1">
+                    <label for="age-field" class="mb-2 text__body-dark">Age</label>
+                    <div class="position-relative">
+                        <input type="text" formControlName="age" class="form-control ifield ifield-login mobile__field"
+                            id="age-field" value="" placeholder="Age">
+                    </div> -->
+                <!-- validation messages -->
+                <!-- <org-field-validation-message [control]="tForm.controls['age']"></org-field-validation-message>
+                </div> -->
+
+                <!-- mobile no -->
+                <div class="col-12  mb-1">
+                    <label for="mobile-field" class="mb-2 text__body-dark">Mobile Number</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" maxlength="10" formControlName="mobile_no"
+                            class="form-control ifield ifield-login mobile__field" id="mobile-field" value=""
+                            placeholder="XXXXXXXXXX">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['mobile_no']"></org-field-validation-message>
+                </div>
+
+                <!-- dob -->
+                <div class="col-12  mb-1">
+                    <label for="dob-field" class="mb-2 text__body-dark">DOB</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="date" formControlName="dob" class="form-control ifield ifield-login mobile__field"
+                            id="dob-field" value="" placeholder="DOB">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['dob']"></org-field-validation-message>
+                </div>
+
+                <!-- Select Gender -->
+                <div class="col-12 mb-1">
+                    <label for="gender-field" class="mb-2 text__body-dark">Select Gender</label>
+                    <div class="d-flex">
+                        <div class="me-4" *ngFor="let option of genderOptions">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" [id]="'radio-' + option"
+                                    formControlName="gender" [value]="option" (change)="changeMode()" />
+                                <label class="form-check-label text-dark" [for]="'radio-' + option">
+                                    {{ option }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <org-field-validation-message [control]="tForm.controls['gender']"></org-field-validation-message>
+                </div>
+
+                <!-- marital status -->
+                <!-- <div class="col-12 mb-1">
+                    <label for="gender-field" class="mb-2 text__body-dark">Marital Status</label>
+                    <div class="d-flex">
+                        <div class="me-4" *ngFor="let option of maritalOptions">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="marital-status"
+                                    [id]="'radio-' + option" formControlName="marital_status" [value]="option"
+                                    (change)="changeMaritalStatus()" />
+                                <label class="form-check-label text-dark" [for]="'radio-' + option">
+                                    {{ option }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['marital_status']"></org-field-validation-message>
+                </div> -->
+
+                <!-- date of anniversary -->
+                <!-- <div class="col-12  mb-1" *ngIf="
+            tForm.value.mode === 'offline'
+          "> -->
+                <!-- <div class="col-12  mb-1"  *ngIf="
+                tForm.value.marital_status=== 'Married'">
+                    <label for="doa-field" class="mb-2 text__body-dark">Date Of Anniversary</label>
+                    <div class="position-relative">
+                        <input type="date" formControlName="doa"
+                            class="form-control ifield ifield-login mobile__field" id="doa-field" value=""
+                            placeholder="Date Of Anniversary">
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['doa']"></org-field-validation-message>
+                </div> -->
+
+                <!-- address -->
+                <div class="col-12  mb-1">
+                    <label for="address-field" class="mb-2 text__body-dark">Address</label>
+                    <div class="position-relative">
+                        <textarea formControlName="address"
+                            class="form-control ifield-text-area ifield-login mobile__field" id="address-field" value=""
+                            placeholder="address" rows="4"></textarea>
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['address']"></org-field-validation-message>
+                </div>
+
+                <!-- city -->
+                <div class="col-12  mb-1">
+                    <label for="city-field" class="mb-2 text__body-dark">City</label>
+                    <div class="position-relative">
+                        <input type="text" formControlName="city"
+                        class="form-control ifield ifield-login mobile__field" id="city-field" value=""
+                            placeholder="city" rows="4">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['city']"></org-field-validation-message>
+                </div>
+
+                <!-- district -->
+                <div class="col-12  mb-1">
+                    <label for="district-field" class="mb-2 text__body-dark">District</label>
+                    <div class="position-relative">
+                        <input type="text" formControlName="district"
+                        class="form-control ifield ifield-login mobile__field" id="district-field"
+                            value="" placeholder="district" rows="4">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['district']"></org-field-validation-message>
+                </div>
+
+                <!-- Email_id -->
+                <div class="col-12  mb-1">
+                    <label for="email-id-field" class="mb-2 text__body-dark">Email id</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="email" formControlName="email_id"
+                            class="form-control ifield ifield-login mobile__field" id="email-id-field" value=""
+                            placeholder="email id">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['email_id']"></org-field-validation-message>
+                </div>
+
+                <!-- Occupation -->
+                <div class="col-12  mb-1">
+                    <label for="occupation-field" class="mb-2 text__body-dark">Occupation</label>
+                    <div class="position-relative">
+                        <input formControlName="occupation"
+                        class="form-control ifield ifield-login mobile__field" id="occupation-field"
+                            value="" placeholder="occupation" rows="4">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['occupation']"></org-field-validation-message>
+                </div>
+
+                <!-- org-name -->
+                <div class="col-12  mb-1">
+                    <label for="org-name-field" class="mb-2 text__body-dark">Org Name</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="org_name"
+                            class="form-control ifield ifield-login mobile__field" id="org-name-field" value=""
+                            placeholder="org-name">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message [control]="tForm.controls['org_name']"></org-field-validation-message>
+                </div>
+
+                <!-- Margdarshak Category -->
+                <div class="col-12  mb-1">
+                    <label for="margdarshak-category" class="mb-2 text__body-dark">Margdarshak Category</label>
+                    <div class="me-4">
+                        <select class="form-select" name="margdarshak-category" formControlName="margdarshak_category"
+                            (change)="changeMode()">
+                            <option *ngFor="let option of margdarshakCategoryOptions" [value]="option">{{ option }}
+                            </option>
+                        </select>
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['margdarshak_category']"></org-field-validation-message>
+                </div>
+
+                <!-- account-no -->
+                <div class="col-12  mb-1">
+                    <label for="account-no-field" class="mb-2 text__body-dark">Account No</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="account_no"
+                            class="form-control ifield ifield-login mobile__field" id="account-no-field" value=""
+                            placeholder="account-no">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['account_no']"></org-field-validation-message>
+                </div>
+
+                <!--ifsc code-->
+                <div class="col-12  mb-1">
+                    <label for="ifsc-code-field" class="mb-2 text__body-dark">IFSC Code</label>
+                    <div class="position-relative">
+                        <!-- <span class="mobile__field__prefix">+91 - </span> -->
+                        <input type="text" formControlName="ifsc_code"
+                            class="form-control ifield ifield-login mobile__field" id="ifsc-code-field" value=""
+                            placeholder="IFSC CODE">
+                    </div>
+                    <!-- validation messages -->
+                    <org-field-validation-message
+                        [control]="tForm.controls['ifsc-code']"></org-field-validation-message>
+                </div>
+
+                <!-- Associated by -->
+                <div class="col-12  mb-1">
+                    <label for="associated-by" class="mb-2 text__body-dark">Associated By</label>
+                    <div class="me-4">
+                        <select class="form-select" name="associated-by" formControlName="associated_by"
+                            (change)="changeMode()">
+                            <option *ngFor="let option of associatedByOptions" [value]="option">{{ option }}
+                            </option>
+                        </select>
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['associated_by']"></org-field-validation-message>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="col-12 ">
+                    <button type="button" class="ibtn ibtn__primary w-100 mb-3" [disabled]="loading"
+                        (click)="onSubmit()">
+                        <span *ngIf="!loading; else spinner">Submit</span>
+                    </button>
+                </div>
+                <ng-template #spinner>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </ng-template>
+
+            </form>
+        </div>
+    </div>
+    <div class="dashboard__card px-4 py-2 mt-4" *ngIf="showMessage">
+        <div class="card d-flex flex-column justify-content-center align-items-center py-4 mt-5">
+            <h2 class="message-style">Thank You! For Your Valuable Time<br /><br />
+            </h2>
+        </div>
+    </div>
+
+</div>

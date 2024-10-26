@@ -8,6 +8,7 @@ import { RegistrationAdminComponent } from '@pages/registration-admin/registrati
 import { RegistrationAsetComponent } from '@pages/registration-aset/registration-aset.component';
 import { EnquiryFormComponent } from '@pages/enquiry-form/enquiry-form.component';
 import { HealthcareFormComponent } from '@pages/healthcare-form/healthcare-form.component';
+import { MargdarshakFormComponent } from '@pages/margdarshak-form/margdarshak-form.component';
 
 export const appRoutes: Routes = [
 
@@ -43,6 +44,12 @@ export const appRoutes: Routes = [
     path: "healthcare-form",
     component: HealthcareFormComponent
   },
+
+  {
+    path: "margdarshak-form",
+    component: MargdarshakFormComponent
+  },
+
 
   {
     path: "admin-mayank",

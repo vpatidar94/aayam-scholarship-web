@@ -165,6 +165,27 @@ export class ApiService {
       );
   }
 
+
+  // doctor-form-info-api
+  margdarshakInfoApi(
+    payload: {
+      code:string, mobileNo: string, name: string, dob:Date, gender: string, email: string, address: string, city: string, district: string, occupation: string, orgName: string, margdarshakCategory: string, accountNo: string, ifscCode: string, associatedBy: string
+    }): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.ADD_MARGDARSHAK,
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+
+
+
   // SEND enquiry welcome msg THROUGH WHATSAPP
   sendWpMsg(number: string, firstName: string): Observable<{ messaging_product: string, contacts: any, messages: any }> {
     const url = environment.WHATSAPP_URL;

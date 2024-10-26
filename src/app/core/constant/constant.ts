@@ -35,6 +35,7 @@ export const CONSTANTS = Object.freeze({
     SINGLE_ENROLL: '/users/generate-enrolNo',
     ADD_ENQUIRY: '/enquiry/add',
     ADD_DOCTOR: '/doctor/add',
+    ADD_MARGDARSHAK: '/margdarshak/add',
     UPDATE_ENQUIRY: '/enquiry/update',
   },
   MESSAGES: {
