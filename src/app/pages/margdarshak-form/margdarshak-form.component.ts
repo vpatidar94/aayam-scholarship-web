@@ -134,8 +134,23 @@ export class MargdarshakFormComponent implements OnInit {
             // verify_otp: new FormControl(null
 
             // ),
+
         });
+        this.generateUniqueCode();
+
     }
+
+
+    // ngOnInit(): void {
+    //     this.generateUniqueCode();
+    //   }
+    
+      generateUniqueCode() {
+        const randomNumber = Math.floor(100 + Math.random() * 900); // Generates a number from 100 to 999
+        const uniqueCode = `MAAY${randomNumber}`;
+        this.tForm.get('code')?.setValue(uniqueCode);
+      }
+
 
     onSubmit() {
         if (this.tForm.invalid) {
