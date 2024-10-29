@@ -151,6 +151,11 @@ export const appRoutes: Routes = [
         loadComponent: () =>
           import('./pages/admin/add-test/add-test.component').then((x) => x.AddTestComponent),
       },
+      {
+        path: "margdarshaks",
+        loadComponent: () =>
+          import('./pages/admin/margdarshaks/margdarshaks.component').then((x) => x.MargdarshaksComponent),
+      },
     ]
   },
 ];

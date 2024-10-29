@@ -166,7 +166,7 @@ export class ApiService {
   }
 
 
-  // doctor-form-info-api
+  // margdarshak-form-info-api
   margdarshakInfoApi(
     payload: {
       code:string, mobileNo: string, name: string, dob:Date, gender: string, email: string, address: string, city: string, district: string, occupation: string, orgName: string, margdarshakCategory: string, accountNo: string, ifscCode: string, associatedBy: string
@@ -179,6 +179,20 @@ export class ApiService {
       .pipe(
         map((res) => {
           return res;
+        })
+      );
+  }
+
+
+  getAllMargdarshakss(): Observable<any> {
+    let params = new HttpParams();
+    return this.http
+      .get<CustomHttpResponse<any>>(
+        CONSTANTS.API.GET_ALL_MARGDARSHAKS
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
         })
       );
   }

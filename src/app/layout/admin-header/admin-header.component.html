@@ -60,6 +60,14 @@
             >Enquiry Users</a
           >
         </li>
+        <li class="nav-item" *ngIf="userType === 'admin'|| userType === 'sub-admin'">
+          <a
+            class="nav-link"
+            [routerLink]="['/admin/margdarshaks']"
+            routerLinkActive="active"
+            >Margdarshaks</a
+          >
+        </li>
       </ul>
       <div class="d-flex ms-auto">
         <div class="header__icon ms-2">
