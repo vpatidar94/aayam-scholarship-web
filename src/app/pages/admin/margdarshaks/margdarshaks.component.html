@@ -1,5 +1,8 @@
-<h1>Margdarshaks List</h1>
-
+<!-- <h1>Margdarshaks List</h1> -->
+<org-content-header
+    title="Margdarshaks"
+    [breadcrumbs]="breadcrumbs"
+  ></org-content-header>
 <div class="">
     <div class="row">
       <div class="col col-12">
@@ -33,10 +36,10 @@
                   <td>{{userItem.accountNo}}</td>
                   <td>{{userItem.ifscCode|| "NA" }}</td>
                   <td>{{userItem.associatedBy}}</td>
-                  <td class="small"
+                  <!-- <td class="small"
                     [ngClass]="{'text-success': userItem.admissionStatus === 'DONE', 'text-warning': userItem.admissionStatus === 'PENDING', 'text-danger': userItem.admissionStatus === 'INTERESTED', 'fw-bolder': userItem.admissionStatus}">
-                    {{userItem.admissionStatus}}</td>
-                  <td class="small">{{userItem.remark}}</td>
+                    {{userItem.admissionStatus}}</td> -->
+                  <!-- <td class="small">{{userItem.remark}}</td> -->
                   <td class="small">{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
                   <!-- <td class="small">{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td> -->
                   <td> <button class="btn" (click)="openModel(userItem)">

@@ -6,11 +6,12 @@ import { ApiService } from "@core/services/api.service";
 import { HelperService } from "@core/services/helper";
 import { AyDataTableComponent } from "@shared/ay-data-table/ay-data-table.component";
 import { TableHeader } from "src/app/models/table.model";
+import { ContentHeaderComponent } from "../../../shared/content-header/content-header.component";
 
 @Component({
     selector: 'org-margdarshaks',
     standalone: true,
-    imports: [CommonModule, AyDataTableComponent],
+    imports: [CommonModule, AyDataTableComponent, ContentHeaderComponent],
     templateUrl: './margdarshaks.component.html',
     styleUrl: './margdarshaks.component.scss'
 })
@@ -42,7 +43,7 @@ export class MargdarshaksComponent {
     },
     {
       path: '',
-      name: 'Users'
+      name: 'Margdarshaks'
     },
   ];
    paginate: { currentPage: number, itemsPerPage: number, data: any[] } = { currentPage: 1, itemsPerPage: 10, data: [] };
@@ -144,6 +145,17 @@ export class MargdarshaksComponent {
         key: 'associatedBy',
         sortBy: '',
       },
+      {
+        name: 'Date',
+        sorting: true,
+        key: 'createdAt',
+        sortBy: '',
+      },
+      {
+      name: '',
+
+    },
+
     //   {
     //     name: 'DOB',
     //     sorting: true,
