@@ -102,12 +102,12 @@ export class MargdarshaksComponent {
         key: 'city',
         sortBy: '',
       },
-      {
-        name: 'DOB',
-        sorting: true,
-        key: 'dob',
-        sortBy: '',
-      },
+    //   {
+    //     name: 'DOB',
+    //     sorting: true,
+    //     key: 'dob',
+    //     sortBy: '',
+    //   },
       {
         name: 'Occupation',
         sorting: true,
