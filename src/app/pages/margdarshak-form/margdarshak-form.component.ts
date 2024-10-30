@@ -28,7 +28,7 @@ export class MargdarshakFormComponent implements OnInit {
     loading = false;
     genderOptions = ["Male", "Female", "Other"] as Array<GenderType>;
     // jobPatternOptions = ["Govt.", "Private", "Self Employed", "Clinic or Hospital"];
-    associatedByOptions = ["Rakesh Sharma", "Ankit Bijoriya", "Bapu Patil", "Rahul Vyas", "Niraj Choudhary", "Piyush Patel", "Manish Patidar"];
+    associatedByOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Niraj Choudhary", "Piyush Patel", "Manish Patidar"];
     margdarshakCategoryOptions = ["Slab-1", "Slab-2", "Slab-3", "Slab-4", "Slab-5"];
     // maritalOptions = ["Married", "Unmarried"]
     // lastClassOptions = ["10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
@@ -161,18 +161,19 @@ export class MargdarshakFormComponent implements OnInit {
     }
 
     sendConfirmation(mobileNo: any, firstName: string) {
-        this.apiService
-            .sendWpMsg(mobileNo, firstName)
-            .subscribe({
-                next: (res) => {
-                    this.alertService.success("Message sent successfully.");
-                    this.loading = false;
-                },
-                error: (err) => {
-                    this.alertService.error(err.message);
-                    this.loading = false;
-                }
-            })
+        // this.apiService
+        //     .sendWpMsg(mobileNo, firstName)
+        //     .subscribe({
+        //         next: (res) => {
+        //             this.alertService.success("Message sent successfully.");
+        //             this.loading = false;
+        //         },
+        //         error: (err) => {
+        //             this.alertService.error(err.message);
+        //             this.loading = false;
+        //         }
+        //     })
+        console.log("registered successfully");
     }
 
     registerNow() {
