@@ -25,6 +25,8 @@ export class EnquiryFormComponent implements OnInit {
 
     }
     tForm!: FormGroup;
+    data = [] as any;
+    filteredData = [] as any;
     loading = false;
     genderOptions = ["Male", "Female", "Other"] as Array<GenderType>;
     lastClassOptions = ["10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
@@ -32,7 +34,7 @@ export class EnquiryFormComponent implements OnInit {
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
     streamOptions = ["NEET", "JEE"] as Array<StreamType>;
     dataOptions = ["Academic Magzines", "Blogs", "Ex-Aayam Students", "Facebook Ads", "FM Radio", "Friends/Relative", "Google Ads", "Hoardings", "Internet", "News Paper", "Online News Articles", "Youtube Ads", "Other"];
-
+    margdarshakOptions = []
 
 
     // referredBy = '' as string;
@@ -47,6 +49,9 @@ export class EnquiryFormComponent implements OnInit {
 
 
     ngOnInit(): void {
+        this.getAllMargdarshaks();
+
+
         this.tForm = new FormGroup({
             mobile_no: new FormControl(null, [
                 Validators.required,
@@ -80,6 +85,7 @@ export class EnquiryFormComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
+            margdarshak: new FormControl("None")
         });
     }
 
@@ -152,6 +158,10 @@ export class EnquiryFormComponent implements OnInit {
         const mode = this.tForm.get('stream')?.value;
     }
 
+    changeMargdarshak() {
+        const mode = this.tForm.get('margdarshak')?.value;
+    }
+
     changeMode() {
         const mode = this.tForm.get('mode')?.value;
 
@@ -164,5 +174,23 @@ export class EnquiryFormComponent implements OnInit {
     showEnquiryForm() :void {
         window.location.reload();
     }
+
+
+    getAllMargdarshaks() {
+        this.loading = true;
+        this.apiService
+          .getAllMargdarshakss()
+          .subscribe({
+            next: (res) => {
+              this.data = res;
+              this.filteredData = res;
+              this.loading = false;
+            },
+            error: (err) => {
+              this.alertService.error(err.message);
+              this.loading = false;
+            }
+          });
+      }
 
 }

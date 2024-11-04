@@ -148,6 +148,44 @@
                     <org-field-validation-message [control]="tForm.controls['mode']"></org-field-validation-message>
                 </div>
 
+
+
+                <!-- Select margdarshak -->
+                <!-- <div class="col-12 mt-4 mb-2">
+                    <label for="stream-field" class="mb-2 text__body-dark">Select Margdarshak</label>
+                    <div class="d-flex">
+                        <select class="me-4" *ngFor="let option of filteredData">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="margdarshak" [id]="'radio-' + option"
+                                    formControlName="margdarshak" [value]="option.name"
+                                    (change)="changeMargdarshak()" />
+                                <label class="form-check-label" [for]="'radio-' + option">
+                                    {{ option.name }}
+                                </label>
+                            </div>
+                        </select>
+                    </div>
+                    <org-field-validation-message [control]="tForm.controls['stream']"></org-field-validation-message>
+                </div> -->
+
+                <!-- Select Margdarshak-->
+                <div class="col-12  mb-1">
+                    <label for="margdarshak" class="mb-2 text__body-dark">Select Margdarshak(if any)</label>
+                    <div class="me-4">
+                        <select class="form-select" name="margdarshak" formControlName="margdarshak"
+                            (change)="changeMargdarshak()">
+                            <option *ngFor="let option of filteredData" [value]="option.name">{{ option.name }}
+                            </option>
+                            <option [value]="'None'">None</option>
+                        </select>
+                    </div>
+                    <org-field-validation-message
+                        [control]="tForm.controls['margdarshak']"></org-field-validation-message>
+                </div>
+
+
+
+
                 <!-- How do you come to Know about aayam -->
                 <div class="col-12  mb-1">
                     <label for="how_do_you_come_to_know" class="mb-2 text__body-dark">How do you come to Know about

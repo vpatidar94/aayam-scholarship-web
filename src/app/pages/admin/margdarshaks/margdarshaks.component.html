@@ -1,76 +1,135 @@
 <!-- <h1>Margdarshaks List</h1> -->
-<org-content-header
-    title="Margdarshaks"
-    [breadcrumbs]="breadcrumbs"
-  ></org-content-header>
+<org-content-header title="Margdarshaks" [breadcrumbs]="breadcrumbs"></org-content-header>
 <div class="">
     <div class="row">
-      <div class="col col-12">
-        <div class="pb-4">
-          <ng-container *ngIf="loading; else ifNoData">
-            <ng-container *ngTemplateOutlet="spinner"></ng-container>
-          </ng-container>
-          <ng-template #ifNoData>
-            <ng-container *ngIf="data.length === 0; else showTableList">
-              <div class="p-4 text-center">
-                <h5>No data present.</h5>
-              </div>
-            </ng-container>
-            <ng-template #showTableList>
-              <org-ay-data-table [list]="data" [tableHeader]="thead" (updateData)="changeData($event)"
-                [searchFilterKeys]="searchFilterKeys" [searchPlaceHolder]="searchPlaceHolder">
-                <tr *ngFor="let userItem of filteredData; let i = index" tBody>
-                  <td>{{ calculateStartIndex(i)}}</td>
-                  <!-- <td>{{userItem.firstName}} {{userItem.lastName}}</td> -->
-                   <td>{{userItem.code}}</td>
-                  <td>{{userItem.name}}</td>
-                  <td>{{userItem.mobileNo}}</td>
-                  <td>{{userItem.gender}}</td>
-                  <td>{{userItem.dob | date : "MMM d, y"}}</td>
-                  <td>{{userItem.email}}</td>
-                  <td>{{userItem.address}}</td>
-                  <td>{{userItem.city}}</td>
-                  <td>{{userItem.occupation}}</td>
-                  <td>{{userItem.orgName}}</td>
-                  <td>{{userItem.margdarshakCategory}}</td>
-                  <td>{{userItem.accountNo}}</td>
-                  <td>{{userItem.ifscCode|| "NA" }}</td>
-                  <td>{{userItem.associatedBy}}</td>
-                  <!-- <td class="small"
+        <div class="col col-12">
+            <div class="pb-4">
+                <ng-container *ngIf="loading; else ifNoData">
+                    <ng-container *ngTemplateOutlet="spinner"></ng-container>
+                </ng-container>
+                <ng-template #ifNoData>
+                    <ng-container *ngIf="data.length === 0; else showTableList">
+                        <div class="p-4 text-center">
+                            <h5>No data present.</h5>
+                        </div>
+                    </ng-container>
+                    <ng-template #showTableList>
+                        <org-ay-data-table [list]="data" [tableHeader]="thead" (updateData)="changeData($event)"
+                            [searchFilterKeys]="searchFilterKeys" [searchPlaceHolder]="searchPlaceHolder">
+                            <tr *ngFor="let userItem of filteredData; let i = index" tBody>
+                                <td>{{ calculateStartIndex(i)}}</td>
+                                <!-- <td>{{userItem.firstName}} {{userItem.lastName}}</td> -->
+                                <td>{{userItem.code}}</td>
+                                <td>{{userItem.name}}</td>
+                                <td>{{userItem.mobileNo}}</td>
+                                <td>{{userItem.gender}}</td>
+                                <td>{{userItem.dob | date : "MMM d, y"}}</td>
+                                <td>{{userItem.email}}</td>
+                                <td>{{userItem.address}}</td>
+                                <td>{{userItem.city}}</td>
+                                <td>{{userItem.occupation}}</td>
+                                <td>{{userItem.orgName}}</td>
+                                <td>{{userItem.margdarshakCategory}}</td>
+                                <td>{{userItem.accountNo}}</td>
+                                <td>{{userItem.ifscCode|| "NA" }}</td>
+                                <td>{{userItem.associatedBy}}</td>
+                                <!-- <td class="small"
                     [ngClass]="{'text-success': userItem.admissionStatus === 'DONE', 'text-warning': userItem.admissionStatus === 'PENDING', 'text-danger': userItem.admissionStatus === 'INTERESTED', 'fw-bolder': userItem.admissionStatus}">
                     {{userItem.admissionStatus}}</td> -->
-                  <!-- <td class="small">{{userItem.remark}}</td> -->
-                  <td class="small">{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
-                  <!-- <td class="small">{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td> -->
-                  <td> <button class="btn" (click)="openModel(userItem)">
-                      <svg width="36px" height="36px" viewBox="-8.16 -8.16 40.32 40.32" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="0.00024000000000000003">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"
-                          transform="translate(0.120000000000001,0.120000000000001), scale(0.99)">
-                          <rect x="-8.16" y="-8.16" width="40.32" height="40.32" rx="20.16" fill="#6499aa"
-                            strokewidth="0"></rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
-                          stroke-width="0.048"></g>
-                        <g id="SVGRepo_iconCarrier">
-                          <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z"
-                            fill="#fdfcfc"></path>
-                        </g>
-                      </svg>
-                    </button></td>
-                </tr>
-              </org-ay-data-table>
-            </ng-template>
-          </ng-template>
+                                <!-- <td class="small">{{userItem.remark}}</td> -->
+                                <td class="small">{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
+                                <!-- <td class="small">{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td> -->
+                                <td> <button class="btn" (click)="openModel(userItem)">
+                                        <svg width="36px" height="36px" viewBox="-8.16 -8.16 40.32 40.32" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"
+                                            stroke-width="0.00024000000000000003">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"
+                                                transform="translate(0.120000000000001,0.120000000000001), scale(0.99)">
+                                                <rect x="-8.16" y="-8.16" width="40.32" height="40.32" rx="20.16"
+                                                    fill="#6499aa" strokewidth="0"></rect>
+                                            </g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke="#CCCCCC" stroke-width="0.048"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M21.1213 2.70705C19.9497 1.53548 18.0503 1.53547 16.8787 2.70705L15.1989 4.38685L7.29289 12.2928C7.16473 12.421 7.07382 12.5816 7.02986 12.7574L6.02986 16.7574C5.94466 17.0982 6.04451 17.4587 6.29289 17.707C6.54127 17.9554 6.90176 18.0553 7.24254 17.9701L11.2425 16.9701C11.4184 16.9261 11.5789 16.8352 11.7071 16.707L19.5556 8.85857L21.2929 7.12126C22.4645 5.94969 22.4645 4.05019 21.2929 2.87862L21.1213 2.70705ZM18.2929 4.12126C18.6834 3.73074 19.3166 3.73074 19.7071 4.12126L19.8787 4.29283C20.2692 4.68336 20.2692 5.31653 19.8787 5.70705L18.8622 6.72357L17.3068 5.10738L18.2929 4.12126ZM15.8923 6.52185L17.4477 8.13804L10.4888 15.097L8.37437 15.6256L8.90296 13.5112L15.8923 6.52185ZM4 7.99994C4 7.44766 4.44772 6.99994 5 6.99994H10C10.5523 6.99994 11 6.55223 11 5.99994C11 5.44766 10.5523 4.99994 10 4.99994H5C3.34315 4.99994 2 6.34309 2 7.99994V18.9999C2 20.6568 3.34315 21.9999 5 21.9999H16C17.6569 21.9999 19 20.6568 19 18.9999V13.9999C19 13.4477 18.5523 12.9999 18 12.9999C17.4477 12.9999 17 13.4477 17 13.9999V18.9999C17 19.5522 16.5523 19.9999 16 19.9999H5C4.44772 19.9999 4 19.5522 4 18.9999V7.99994Z"
+                                                    fill="#fdfcfc"></path>
+                                            </g>
+                                        </svg>
+                                    </button></td>
+                            </tr>
+                        </org-ay-data-table>
+                    </ng-template>
+                </ng-template>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  
-  <ng-template #spinner>
+</div>
+
+<ng-template #spinner>
     <div class="d-flex justify-content-center py-4">
-      <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+        <span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
     </div>
-  </ng-template>
-  
+</ng-template>
+
+<div class="modal" id="margdarshakModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{margdarshakStudents.firstName}} {{margdarshakStudents.lastName}}</h4>
+                <h6 class="modal-title ms-2">({{margdarshakStudents.enquiryNo}})</h6>
+                <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
+                    <div class="col-12 col-md-3  mb-1">
+                        <label for="counsellor" class="mb-2 text__body-dark">Name</label>
+                        <!-- <div class="me-4"> -->
+                        <!-- <select class="form-select" name="counsellor" formControlName="counsellor" (change)="changeCounsellor()">
+                  <option *ngFor="let option of counsellorOptions" [value]="option">{{ option }}
+                  </option>
+                </select>
+              </div>
+              <org-field-validation-message [control]="tForm.controls['counsellor']"></org-field-validation-message> -->
+                        <div *ngFor="let student of margdarshakStudents">
+                            <p>{{student.firstName}}</p>
+                            <p>{{student.dob}}</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-1">
+                        <label for="attender" class="mb-2 text__body-dark">Excecutive</label>
+                        <!-- <div class="me-4">
+                <select class="form-select" name="attender" formControlName="attender" (change)="changeAttender()">
+                  <option *ngFor="let option of attenderOptions" [value]="option">{{ option }}
+                  </option>
+                </select>
+              </div>
+              <org-field-validation-message [control]="tForm.controls['attender']"></org-field-validation-message> -->
+                    </div>
+                    <div class="col-12 col-md-3 mb-1">
+                        <label for="status" class="mb-2 text__body-dark">Admission Status</label>
+                        <!-- <div class="me-4">
+                <select class="form-select" name="status" formControlName="status" (change)="changeAdmissionStatus()">
+                  <option *ngFor="let option of statusOptions" [value]="option">{{ option }}
+                  </option>
+                </select>
+              </div>
+              <org-field-validation-message [control]="tForm.controls['status']"></org-field-validation-message> -->
+                    </div>
+                    <div class="col-12 mb-1">
+                        <label for="remark" class="mb-2 text__body-dark">Remark</label>
+                        <!-- <div class="me-4">
+                <input type="text" class="form-control" name="remark" formControlName="remark">
+              </div> -->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="saveChanges()" data-bs-dismiss="modal">Save
+                    Changes</button>
+                <button type="button" class="btn btn-danger" (click)="CloseModel()"
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
