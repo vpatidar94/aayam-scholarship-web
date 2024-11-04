@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{margdarshakStudents.firstName}} {{margdarshakStudents.lastName}}</h4>
+                <h4 class="modal-title">{{studentsList.firstName}} {{studentsList.lastName}}</h4>
                 <h6 class="modal-title ms-2">({{margdarshakStudents.enquiryNo}})</h6>
                 <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
             </div>
@@ -91,9 +91,9 @@
                 </select>
               </div>
               <org-field-validation-message [control]="tForm.controls['counsellor']"></org-field-validation-message> -->
-                        <div *ngFor="let student of margdarshakStudents">
+                        <div *ngFor="let student of studentsList">
                             <p>{{student.firstName}}</p>
-                            <p>{{student.dob}}</p>
+                            <!-- <p>{{student.dob}}</p> -->
                         </div>
                     </div>
                     <div class="col-12 col-md-3 mb-1">
