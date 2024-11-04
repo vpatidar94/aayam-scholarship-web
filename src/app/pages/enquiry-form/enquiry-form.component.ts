@@ -85,7 +85,9 @@ export class EnquiryFormComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
-            margdarshak: new FormControl("None")
+            margdarshak: new FormControl("None",[
+                Validators.required,
+            ])
         });
     }
 
@@ -118,7 +120,8 @@ export class EnquiryFormComponent implements OnInit {
         const lastName = this.tForm.value.last_name;
         const gender = this.tForm.value.gender;
         const prevClass = this.tForm.value.lastClass;  // Course as Last class field was not in thte api payload
-        const stream = this.tForm.value.stream
+        const stream = this.tForm.value.stream;
+        const margdarshak = this.tForm.value.margdarshak;
         const tVal = this.tForm.value;
         // let lastClassVal = tVal.lastClass ;
         // if (tVal.lastClass === '11' || tVal.lastClass === '12')
@@ -126,7 +129,7 @@ export class EnquiryFormComponent implements OnInit {
 
         // const Mode = this.tForm.value.mode;
         const howDoYouComeToKnow = this.tForm.value.how_do_you_come_to_know
-        const payload = { mobileNo, firstName, lastName, gender, stream, prevClass, howDoYouComeToKnow };
+        const payload = { mobileNo, firstName, lastName, gender, stream, prevClass, howDoYouComeToKnow,margdarshak };
         this.apiService
             .enquiryApi(payload)  // if want to send otp by text sms
             .subscribe({

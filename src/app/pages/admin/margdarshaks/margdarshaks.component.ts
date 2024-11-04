@@ -120,24 +120,24 @@ export class MargdarshaksComponent {
             key: 'orgName',
             sortBy: '',
         },
-        {
-            name: 'Category',
-            sorting: true,
-            key: 'margdarshakCategory',
-            sortBy: '',
-        },
-        {
-            name: 'Account No',
-            sorting: true,
-            key: 'accountNo',
-            sortBy: '',
-        },
-        {
-            name: 'IFSC Code',
-            sorting: true,
-            key: 'ifscCode',
-            sortBy: '',
-        },
+        // {
+        //     name: 'Category',
+        //     sorting: true,
+        //     key: 'margdarshakCategory',
+        //     sortBy: '',
+        // },
+        // {
+        //     name: 'Account No',
+        //     sorting: true,
+        //     key: 'accountNo',
+        //     sortBy: '',
+        // },
+        // {
+        //     name: 'IFSC Code',
+        //     sorting: true,
+        //     key: 'ifscCode',
+        //     sortBy: '',
+        // },
         {
             name: 'Associated By',
             sorting: true,
@@ -230,6 +230,12 @@ export class MargdarshaksComponent {
     changeData(e: { data: any[], paginate: any }) {
         this.paginate = e.paginate;
         this.filteredData = e.data;
+
+    }
+    changeMargdarshakData(e: { data: any[], paginate: any }) {
+        this.paginate = e.paginate;
+        this.margdarshakStudents = e.data;
+        
     }
     getAllMargdarshaks() {
         this.loading = true;
@@ -281,7 +287,7 @@ export class MargdarshaksComponent {
     //    this.studentsList=this.userData.filter(this.userData.name===this.margdarshakStudents.margdarshak)
     //    getStudentsByMargdarshak(margdarshakName: string) {
         // this.studentsList = this.userData.filter((student:any) => student.name === this.margdarshakStudents.margdarshak);
-        this.studentsList = this.margdarshakStudents.filter((student:any)=> student.margdarshak === this.userData.name)
+        this.studentsList = this.margdarshakStudents.filter((student:any)=> student.margdarshak === this.userData.name && student.admissionStatus!=='DONE')
     //   }
 
         // Prefill the form controls with the user's data
@@ -359,6 +365,15 @@ export class MargdarshaksComponent {
 
   }
   
+
+enquiryStudentList(): void {
+    this.studentsList = this.margdarshakStudents.filter((student:any)=> student.margdarshak === this.userData.name  && student.admissionStatus!=='DONE')
+}
+
+admissionStudentList(): void {
+    this.studentsList = this.margdarshakStudents.filter((student:any)=> student.margdarshak === this.userData.name  && student.admissionStatus==='DONE')
+
+}
   
 }
 

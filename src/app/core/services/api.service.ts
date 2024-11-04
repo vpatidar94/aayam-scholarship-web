@@ -133,7 +133,7 @@ export class ApiService {
 
   enquiryApi(
     payload: {
-      mobileNo: string, firstName: string, lastName: string, gender: string, stream: string, prevClass: string, howDoYouComeToKnow: string
+      mobileNo: string, firstName: string, lastName: string, gender: string, stream: string, prevClass: string, howDoYouComeToKnow: string, margdarshak:string
     }): Observable<CustomHttpResponse<any>> {
     return this.http
       .post<CustomHttpResponse<any>>(

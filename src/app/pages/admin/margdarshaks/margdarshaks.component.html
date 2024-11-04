@@ -29,15 +29,15 @@
                                 <td>{{userItem.city}}</td>
                                 <td>{{userItem.occupation}}</td>
                                 <td>{{userItem.orgName}}</td>
-                                <td>{{userItem.margdarshakCategory}}</td>
+                                <!-- <td>{{userItem.margdarshakCategory}}</td>
                                 <td>{{userItem.accountNo}}</td>
-                                <td>{{userItem.ifscCode|| "NA" }}</td>
+                                <td>{{userItem.ifscCode|| "NA" }}</td> -->
                                 <td>{{userItem.associatedBy}}</td>
                                 <!-- <td class="small"
                     [ngClass]="{'text-success': userItem.admissionStatus === 'DONE', 'text-warning': userItem.admissionStatus === 'PENDING', 'text-danger': userItem.admissionStatus === 'INTERESTED', 'fw-bolder': userItem.admissionStatus}">
                     {{userItem.admissionStatus}}</td> -->
                                 <!-- <td class="small">{{userItem.remark}}</td> -->
-                                <td class="small">{{userItem.createdAt | date : "MMM d, y, h:mm a"}}</td>
+                                <td class="small">{{userItem.createdAt | date : "MMM d, y"}}</td>
                                 <!-- <td class="small">{{userItem.updatedAt | date : "MMM d, y, h:mm a"}}</td> -->
                                 <td> <button class="btn" (click)="openModel(userItem)">
                                         <svg width="36px" height="36px" viewBox="-8.16 -8.16 40.32 40.32" fill="none"
@@ -76,57 +76,47 @@
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{studentsList.firstName}} {{studentsList.lastName}}</h4>
-                <h6 class="modal-title ms-2">({{margdarshakStudents.enquiryNo}})</h6>
+                <!-- <h4 class="modal-title">{{studentsList.firstName}} {{studentsList.lastName}}</h4>
+                <h6 class="modal-title ms-2">({{margdarshakStudents.enquiryNo}})</h6> -->
+                <button type="button" class="btn btn-secondary me-2" (click)="enquiryStudentList()">Enquiry</button>
+                <button type="button" class="btn btn-secondary" (click)="admissionStudentList()">Admission</button>
                 <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
-                    <div class="col-12 col-md-3  mb-1">
-                        <label for="counsellor" class="mb-2 text__body-dark">Name</label>
-                        <!-- <div class="me-4"> -->
-                        <!-- <select class="form-select" name="counsellor" formControlName="counsellor" (change)="changeCounsellor()">
-                  <option *ngFor="let option of counsellorOptions" [value]="option">{{ option }}
-                  </option>
-                </select>
-              </div>
-              <org-field-validation-message [control]="tForm.controls['counsellor']"></org-field-validation-message> -->
-                        <div *ngFor="let student of studentsList">
-                            <p>{{student.firstName}}</p>
-                            <!-- <p>{{student.dob}}</p> -->
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3 mb-1">
-                        <label for="attender" class="mb-2 text__body-dark">Excecutive</label>
-                        <!-- <div class="me-4">
-                <select class="form-select" name="attender" formControlName="attender" (change)="changeAttender()">
-                  <option *ngFor="let option of attenderOptions" [value]="option">{{ option }}
-                  </option>
-                </select>
-              </div>
-              <org-field-validation-message [control]="tForm.controls['attender']"></org-field-validation-message> -->
-                    </div>
-                    <div class="col-12 col-md-3 mb-1">
-                        <label for="status" class="mb-2 text__body-dark">Admission Status</label>
-                        <!-- <div class="me-4">
-                <select class="form-select" name="status" formControlName="status" (change)="changeAdmissionStatus()">
-                  <option *ngFor="let option of statusOptions" [value]="option">{{ option }}
-                  </option>
-                </select>
-              </div>
-              <org-field-validation-message [control]="tForm.controls['status']"></org-field-validation-message> -->
-                    </div>
-                    <div class="col-12 mb-1">
-                        <label for="remark" class="mb-2 text__body-dark">Remark</label>
-                        <!-- <div class="me-4">
-                <input type="text" class="form-control" name="remark" formControlName="remark">
-              </div> -->
+                    <!-- <div class="col-12 col-md-3  mb-1"> -->
+
+                    <div class="table-container">
+                        <table border="1" cellspacing="0" cellpadding="8">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Enquiry No</th>
+                                    <th>Stream</th>
+                                    <th>Contact No</th>
+                                    <th>Status</th>
+                                    <th>Class</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let student of studentsList; let i=index;">
+                                    <td>{{i+1}}</td>
+                                    <td>{{ student.firstName }}</td>
+                                    <td>{{student.enquiryNo}}</td>
+                                    <td>{{ student.stream }}</td>
+                                    <td>{{ student.mobileNo }}</td>
+                                    <td>{{ student.admissionStatus }}</td>
+                                    <td>{{ student.prevClass }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="saveChanges()" data-bs-dismiss="modal">Save
-                    Changes</button>
+                <!-- <button type="button" class="btn btn-secondary" (click)="saveChanges()" data-bs-dismiss="modal">Save
+                    Changes</button> -->
                 <button type="button" class="btn btn-danger" (click)="CloseModel()"
                     data-bs-dismiss="modal">Close</button>
             </div>
