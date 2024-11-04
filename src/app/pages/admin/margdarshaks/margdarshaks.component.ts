@@ -24,6 +24,7 @@ export class MargdarshaksComponent {
     testId = '';
     btnLoading = false;
     data = [] as any;
+    margdarshakStudentsData = [] as any;
     filteredData = [] as any;
     margdarshakStudents = [] as any;
     studentsList = [] as any;
@@ -253,7 +254,7 @@ export class MargdarshaksComponent {
           .getAllEnquiryUsers()
           .subscribe({
             next: (res) => {
-              this.data = res;
+              this.margdarshakStudentsData = res;
               this.margdarshakStudents = res;
               this.loading = false;
             },
