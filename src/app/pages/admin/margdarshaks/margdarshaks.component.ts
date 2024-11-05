@@ -28,6 +28,7 @@ export class MargdarshaksComponent {
     filteredData = [] as any;
     margdarshakStudents = [] as any;
     studentsList = [] as any;
+    margdarshakName: string = "";
     userData = [] as any;
     counsellorOptions = ["Rakesh Sharma", "Juhi Singh", "Mayank Patidar", "Sapna Pandey", "Other"];
     attenderOptions = ["Sapna Pandey", "Juhi Singh", "Aditi Rajput", "Prachi Thakur", "Other"];
@@ -283,6 +284,7 @@ export class MargdarshaksComponent {
         }
         this.userData = userItem;
         console.log("userData is",this.userData.name);
+        this.margdarshakName = this.userData.name;
 
     //    this.studentsList=this.userData.filter(this.userData.name===this.margdarshakStudents.margdarshak)
     //    getStudentsByMargdarshak(margdarshakName: string) {

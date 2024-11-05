@@ -1,0 +1,14 @@
+/* Fullscreen modal styles */
+.modal.fullscreen-modal .modal-dialog {
+    max-width: 100%;
+    margin: 0;
+    height: 100%;
+}
+
+.modal.fullscreen-modal .modal-content {
+    height: 100%;
+    border-radius: 0;
+}
+.table-container {
+    overflow-x: auto; /* Ensures horizontal scroll if needed */
+}
