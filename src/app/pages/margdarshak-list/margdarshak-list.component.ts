@@ -5,18 +5,19 @@ import { AlertService } from "@core/services/alert.service";
 import { ApiService } from "@core/services/api.service";
 import { HelperService } from "@core/services/helper";
 import { AyDataTableComponent } from "@shared/ay-data-table/ay-data-table.component";
+import { ContentHeaderComponent } from "@shared/content-header/content-header.component";
 import { TableHeader } from "src/app/models/table.model";
-import { ContentHeaderComponent } from "../../../shared/content-header/content-header.component";
+// import { ContentHeaderComponent } from "../../../shared/content-header/content-header.component";
 
 @Component({
-    selector: 'org-margdarshaks',
+    selector: 'org-margdarshak-list',
     standalone: true,
     imports: [CommonModule, AyDataTableComponent, ContentHeaderComponent,FormsModule,ReactiveFormsModule],
-    templateUrl: './margdarshaks.component.html',
-    styleUrl: './margdarshaks.component.scss'
+    templateUrl: './margdarshak-list.component.html',
+    styleUrl: './margdarshak-list.component.scss'
 })
 
-export class MargdarshaksComponent {
+export class MargdarshakListComponent {
     constructor(private apiService: ApiService, private alertService: AlertService, private helper: HelperService) { }
     title!: 'Margdarshak';
     tForm!: FormGroup;

@@ -9,6 +9,7 @@ import { RegistrationAsetComponent } from '@pages/registration-aset/registration
 import { EnquiryFormComponent } from '@pages/enquiry-form/enquiry-form.component';
 import { HealthcareFormComponent } from '@pages/healthcare-form/healthcare-form.component';
 import { MargdarshakFormComponent } from '@pages/margdarshak-form/margdarshak-form.component';
+import { MargdarshakListComponent } from '@pages/margdarshak-list/margdarshak-list.component';
 
 export const appRoutes: Routes = [
 
@@ -49,7 +50,10 @@ export const appRoutes: Routes = [
     path: "margdarshak-form",
     component: MargdarshakFormComponent
   },
-
+  {
+    path: "margdarshak-list",
+    component: MargdarshakListComponent
+  },
 
   {
     path: "admin-mayank",
