@@ -188,7 +188,38 @@ export class ApiService {
     let params = new HttpParams();
     return this.http
       .get<CustomHttpResponse<any>>(
-        CONSTANTS.API.GET_ALL_MARGDARSHAKS
+        CONSTANTS.API.GET_ALL_MARGDARSHAKS,
+      )
+      .pipe(
+        map((res) => {
+          return res?.data;
+        })
+      );
+  }
+
+   // saksham-school-form-info-api
+   sakshamSchoolInfoApi(
+    payload: {
+      schoolCode:string, schoolName: string, board: string, medium: string, email: string, address: string, city: string, district: string, tenthStrength: string, twelthStrength: string, tenthFee: string, twelthFee: string, authorizedPersonName: string, mobileNo: string, associatedBy: string
+    }): Observable<CustomHttpResponse<any>> {
+    return this.http
+      .post<CustomHttpResponse<any>>(
+        CONSTANTS.API.ADD_SAKSHAM_SCHOOL,
+        payload
+      )
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
+  }
+
+
+  getAllSakshamSchools(): Observable<any> {
+    let params = new HttpParams();
+    return this.http
+      .get<CustomHttpResponse<any>>(
+        CONSTANTS.API.GET_ALL_SAKSHAM_SCHOOLS,
       )
       .pipe(
         map((res) => {

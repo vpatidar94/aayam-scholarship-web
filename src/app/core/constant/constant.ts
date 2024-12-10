@@ -16,7 +16,7 @@ export const CONSTANTS = Object.freeze({
     // GET_ALL_TEST: '/test/getAllTest',
     GET_ALL_TEST: '/test/alltests',
     GET_ALL_MARGDARSHAKS: '/margdarshak/getAllMargdarshaks',
-
+    GET_ALL_SAKSHAM_SCHOOLS: '/sakshamSchool/getAllSakshamSchools',
     GENERATE_RANK: '/users/generate-rank',
     SEND_WP_MESSAGES: '/result/sendWpMessage',
     GET_RESULT_BY_TEST: '/users/details',
@@ -37,6 +37,7 @@ export const CONSTANTS = Object.freeze({
     ADD_ENQUIRY: '/enquiry/add',
     ADD_DOCTOR: '/doctor/add',
     ADD_MARGDARSHAK: '/margdarshak/add',
+    ADD_SAKSHAM_SCHOOL: '/margdarshak/add',
     UPDATE_ENQUIRY: '/enquiry/update',
   },
   MESSAGES: {

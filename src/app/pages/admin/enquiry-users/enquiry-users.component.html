@@ -102,6 +102,22 @@
             </div>
             <org-field-validation-message [control]="tForm.controls['status']"></org-field-validation-message>
           </div>
+          <div class="col-12 col-md-3 mb-1">
+            <label for="associatedMargdarshak" class="mb-2 text__body-dark">Associated Margdarshak</label>
+            <div class="me-4">
+              <select class="form-select" name="status" formControlName="associatedMargdarshak" (change)="changeAssociatedMargdarshak()">
+                <option *ngFor="let option of margdarshakData" [value]="option.name">{{ option.name }}
+                </option>
+              </select>
+            </div>
+            <!-- <org-field-validation-message [control]="tForm.controls['associatedMargdarshak']"></org-field-validation-message> -->
+          </div>
+          <div class="col-12 mb-1">
+            <label for="remark" class="mb-2 text__body-dark">Fee</label>
+            <div class="me-4">
+              <input type="text" class="form-control" name="remark" formControlName="fee">
+            </div>
+          </div>
           <div class="col-12 mb-1">
             <label for="remark" class="mb-2 text__body-dark">Remark</label>
             <div class="me-4">

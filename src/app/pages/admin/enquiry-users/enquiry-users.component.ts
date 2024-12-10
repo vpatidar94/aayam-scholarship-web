@@ -1,21 +1,30 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ContentHeaderComponent } from "src/app/shared/content-header/content-header.component";
-import { ApiService } from "src/app/core/services/api.service";
-import { AlertService } from "src/app/core/services/alert.service";
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CONSTANTS, UserTypeEnum } from "src/app/core/constant/constant";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ContentHeaderComponent } from "../../../shared/content-header/content-header.component";
+import { FieldValidationMessageComponent } from "../../../shared/field-validation-message/field-validation-message.component";
 import { RouterModule } from "@angular/router";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HelperService } from "src/app/core/services/helper";
-import { TableHeader } from "src/app/models/table.model";
-import { AyDataTableComponent } from "src/app/shared/ay-data-table/ay-data-table.component";
-import { FieldValidationMessageComponent } from "@shared/field-validation-message/field-validation-message.component";
+import { AyDataTableComponent } from "../../../shared/ay-data-table/ay-data-table.component";
+import { ApiService } from "../../../core/services/api.service";
+import { AlertService } from "../../../core/services/alert.service";
+import { HelperService } from "../../../core/services/helper";
+import { TableHeader } from "../../../models/table.model";
+// import { ContentHeaderComponent } from "src/app/shared/content-header/content-header.component";
+// import { ApiService } from "src/app/core/services/api.service";
+// import { AlertService } from "src/app/core/services/alert.service";
+// import { FormControl, FormGroup, Validators } from '@angular/forms';
+// import { CONSTANTS, UserTypeEnum } from "src/app/core/constant/constant";
+// import { RouterModule } from "@angular/router";
+// import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+// import { HelperService } from "src/app/core/services/helper";
+// import { TableHeader } from "src/app/models/table.model";
+// import { AyDataTableComponent } from "src/app/shared/ay-data-table/ay-data-table.component";
+// import { FieldValidationMessageComponent } from "@shared/field-validation-message/field-validation-message.component";
 
 @Component({
   selector: "org-users",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ContentHeaderComponent, FieldValidationMessageComponent, RouterModule, FormsModule, AyDataTableComponent,],
+  imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, RouterModule, FormsModule, AyDataTableComponent,],
   templateUrl: "./enquiry-users.component.html",
   styleUrls: ["./enquiry-users.component.scss"],
 })
@@ -34,10 +43,13 @@ export class EnquiryUsersComponent {
   btnLoading = false;
   data = [] as any;
   filteredData = [] as any;
+  margdarshakData = [] as any;
   userData = [] as any;
   counsellorOptions = ["Rakesh Sharma", "Juhi Singh", "Mayank Patidar", "Sapna Pandey", "Other"];
   attenderOptions = ["Sapna Pandey", "Juhi Singh", "Aditi Rajput", "Prachi Thakur", "Other"];
   statusOptions = ['DONE', 'PENDING', 'NOT_INTERESTED', 'INTERESTED'];
+  associatedMargdarshakOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Niraj Choudhary", "Piyush Patel", "Manish Patidar","Nikunj Patidar"];
+
   userType: string = '';
   searchFilterKeys = ['firstName', 'lastName', 'mobileNo', 'stream', 'prevClass', 'counsellor', 'excecutive', 'admissionStatus', 'createdAt' ];
   searchPlaceHolder = "Search by name, mobile no."
@@ -138,10 +150,13 @@ export class EnquiryUsersComponent {
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllMargdarshaks();
     this.tForm = new FormGroup({
       counsellor: new FormControl(null),
       attender: new FormControl(null),
       status: new FormControl(null),
+      associatedMargdarshak: new FormControl(null),
+      fee: new FormControl(null),
       remark: new FormControl(null),
     });
   }
@@ -169,6 +184,28 @@ export class EnquiryUsersComponent {
         }
       });
   }
+
+  getAllMargdarshaks() {
+    this.loading = true;
+    this.apiService
+        .getAllMargdarshakss()
+        .subscribe({
+            next: (res) => {
+                // this.data = res;
+                // this.filteredData = res;
+                // this.loading = false;
+                // this.particularData = this.data.filter((student:any)=>student.name===this.userName);
+                // if(this.particularData){
+                //     this.openModel(this.particularData[0])
+                // }
+                this.margdarshakData = res;
+            },
+            error: (err) => {
+                this.alertService.error(err.message);
+                this.loading = false;
+            }
+        });
+}
 
   openModel(userItem: any) {
     const modelDiv = document.getElementById('enquiryModal');
@@ -243,6 +280,10 @@ export class EnquiryUsersComponent {
   }
 
   changeAdmissionStatus() {
+
+  }
+
+  changeAssociatedMargdarshak() {
 
   }
 

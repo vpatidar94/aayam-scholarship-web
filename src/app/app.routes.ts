@@ -11,6 +11,7 @@ import { HealthcareFormComponent } from '@pages/healthcare-form/healthcare-form.
 import { MargdarshakFormComponent } from '@pages/margdarshak-form/margdarshak-form.component';
 import { MargdarshakListComponent } from '@pages/margdarshak-list/margdarshak-list.component';
 
+
 export const appRoutes: Routes = [
 
   {
@@ -162,4 +163,11 @@ export const appRoutes: Routes = [
       },
     ]
   },
+
+
+
+  // new marketing routes 
+  
+  
+  
 ];
