@@ -94,6 +94,24 @@
                     <org-field-validation-message [control]="tForm.controls['stream']"></org-field-validation-message>
                 </div>
 
+
+                 <!-- Select medium -->
+                 <div class="col-12 mt-4 mb-2">
+                    <label for="stream-field" class="mb-2 text__body-dark">Select Medium</label>
+                    <div class="d-flex">
+                        <div class="me-4" *ngFor="let option of mediumOptions">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="medium" [id]="'radio-' + option"
+                                    formControlName="medium" [value]="option" (change)="changeMedium()" />
+                                <label class="form-check-label" [for]="'radio-' + option">
+                                    {{ option }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <org-field-validation-message [control]="tForm.controls['medium']"></org-field-validation-message>
+                </div>
+
                 <!-- Select Last Class -->
                 <div class="col-12 mt-4 mb-2">
                     <label for="lastClass-field" class="mb-2 text__body-dark">Select Last Qualified Class</label>
@@ -169,7 +187,7 @@
                 </div> -->
 
                 <!-- Select Margdarshak-->
-                <div class="col-12  mb-1">
+                <!-- <div class="col-12  mb-1">
                     <label for="margdarshak" class="mb-2 text__body-dark">Select Margdarshak(if any)</label>
                     <div class="me-4">
                         <select class="form-select" name="margdarshak" formControlName="margdarshak"
@@ -181,7 +199,7 @@
                     </div>
                     <org-field-validation-message
                         [control]="tForm.controls['margdarshak']"></org-field-validation-message>
-                </div>
+                </div> -->
 
 
 

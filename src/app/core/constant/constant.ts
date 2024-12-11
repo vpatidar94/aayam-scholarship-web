@@ -17,6 +17,7 @@ export const CONSTANTS = Object.freeze({
     GET_ALL_TEST: '/test/alltests',
     GET_ALL_MARGDARSHAKS: '/margdarshak/getAllMargdarshaks',
     GET_ALL_SAKSHAM_SCHOOLS: '/sakshamSchool/getAllSakshamSchools',
+    GET_ALL_EMPLOYEES: '/employee/getAllEmployees',
     GENERATE_RANK: '/users/generate-rank',
     SEND_WP_MESSAGES: '/result/sendWpMessage',
     GET_RESULT_BY_TEST: '/users/details',
@@ -37,8 +38,12 @@ export const CONSTANTS = Object.freeze({
     ADD_ENQUIRY: '/enquiry/add',
     ADD_DOCTOR: '/doctor/add',
     ADD_MARGDARSHAK: '/margdarshak/add',
-    ADD_SAKSHAM_SCHOOL: '/margdarshak/add',
+    ADD_SAKSHAM_SCHOOL: '/sakshamSchool/add',
+    ADD_EMPLOYEE: '/employee/add',
     UPDATE_ENQUIRY: '/enquiry/update',
+    UPDATE_EMPLOYEE: '/employee/update',
+
+    
   },
   MESSAGES: {
     LOGIN_FAILURE: "Login failed",
@@ -70,6 +75,7 @@ export type GenderType = 'Male' | 'Female' | 'Other';
 export type ClassType = "9" | "10" | "11-PCM" |"11-PCB" | "12-PCM" | "11-PCB";
 export type SubjectGroupType = "PCM" | "PCB";
 export type StreamType = 'NEET' | 'JEE';
+export type MediumType = 'English' | 'Hindi';
 export type ModeType = 'online' | 'offline';
 export type ModeIndoreType = 'offline';
 

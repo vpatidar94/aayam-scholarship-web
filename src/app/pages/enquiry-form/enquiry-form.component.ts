@@ -1,22 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthHeaderComponent } from 'src/app/layout/auth-header/auth-header.component';
+// import { AuthHeaderComponent } from 'src/app/layout/auth-header/auth-header.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { VALIDATE } from 'src/app/core/constant/validate';
-import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
-import { HelperService } from 'src/app/core/services/helper';
-import { CONSTANTS, ClassType, GenderType, ModeType, OfflineTestDateType, StreamType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
-import { ApiService } from '@core/services/api.service';
-import { AlertService } from '@core/services/alert.service';
-import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
-import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
-import { CustomHeaderComponent } from '@layout/custom-header/custom-header.component';
+// import { VALIDATE } from 'src/app/core/constant/validate';
+// import { FieldValidationMessageComponent } from 'src/app/shared/field-validation-message/field-validation-message.component';
+// import { HelperService } from 'src/app/core/services/helper';
+// import { CONSTANTS, ClassType, GenderType, ModeType, OfflineTestDateType, StreamType, SubjectGroupType, TestCenterType } from 'src/app/core/constant/constant';
+import { FieldValidationMessageComponent } from '../../shared/field-validation-message/field-validation-message.component';
+import { AuthHeaderComponent } from '../../layout/auth-header/auth-header.component';
+import { DashboardHeaderComponent } from '../../layout/dashboard-header/dashboard-header.component';
+import { ExamTitleComponent } from '../../shared/exam-title/exam-title.component';
+import { CustomHeaderComponent } from '../../layout/custom-header/custom-header.component';
+import { AlertService } from '../../core/services/alert.service';
+import { ApiService } from '../../core/services/api.service';
+import { HelperService } from '../../core/services/helper';
+import { VALIDATE } from '../../core/constant/validate';
+import { ClassType, GenderType, MediumType, ModeType, StreamType, SubjectGroupType } from '../../core/constant/constant';
+// import { ApiService } from '@core/services/api.service';
+// import { AlertService } from '@core/services/alert.service';
+// import { DashboardHeaderComponent } from '@layout/dashboard-header/dashboard-header.component';
+// import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
+// import { CustomHeaderComponent } from '@layout/custom-header/custom-header.component';
 
 @Component({
     selector: 'org-enquiry-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent, ExamTitleComponent, CustomHeaderComponent],
+    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent,CustomHeaderComponent],
     templateUrl: './enquiry-form.component.html',
     styleUrls: ['./enquiry-form.component.scss'],
 })
@@ -33,6 +43,7 @@ export class EnquiryFormComponent implements OnInit {
     modeOptions = ["offline"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
     streamOptions = ["NEET", "JEE"] as Array<StreamType>;
+    mediumOptions = ["English", "Hindi"] as Array<MediumType>;
     dataOptions = ["Academic Magzines", "Blogs", "Ex-Aayam Students", "Facebook Ads", "FM Radio", "Friends/Relative", "Google Ads", "Hoardings", "Internet", "News Paper", "Online News Articles", "Youtube Ads", "Other"];
     margdarshakOptions = []
 
@@ -70,6 +81,9 @@ export class EnquiryFormComponent implements OnInit {
             stream: new FormControl(null, [
                 Validators.required,
             ]),
+            medium: new FormControl(null, [
+                Validators.required,
+            ]),
             lastClass: new FormControl(null, [
                 Validators.required,
             ]),
@@ -85,9 +99,9 @@ export class EnquiryFormComponent implements OnInit {
             verify_otp: new FormControl(null
 
             ),
-            margdarshak: new FormControl("None",[
-                Validators.required,
-            ])
+            // margdarshak: new FormControl("None",[
+            //     Validators.required,
+            // ])
         });
     }
 
@@ -121,7 +135,9 @@ export class EnquiryFormComponent implements OnInit {
         const gender = this.tForm.value.gender;
         const prevClass = this.tForm.value.lastClass;  // Course as Last class field was not in thte api payload
         const stream = this.tForm.value.stream;
-        const margdarshak = this.tForm.value.margdarshak;
+        const medium = this.tForm.value.medium;
+        const margdarshak = "";
+        const fee = "";
         const tVal = this.tForm.value;
         // let lastClassVal = tVal.lastClass ;
         // if (tVal.lastClass === '11' || tVal.lastClass === '12')
@@ -129,7 +145,7 @@ export class EnquiryFormComponent implements OnInit {
 
         // const Mode = this.tForm.value.mode;
         const howDoYouComeToKnow = this.tForm.value.how_do_you_come_to_know
-        const payload = { mobileNo, firstName, lastName, gender, stream, prevClass, howDoYouComeToKnow,margdarshak };
+        const payload = { mobileNo, firstName, lastName, gender, stream, medium,prevClass, howDoYouComeToKnow,margdarshak,fee };
         this.apiService
             .enquiryApi(payload)  // if want to send otp by text sms
             .subscribe({
@@ -159,6 +175,9 @@ export class EnquiryFormComponent implements OnInit {
 
     changeStream() {
         const mode = this.tForm.get('stream')?.value;
+    }
+    changeMedium() {
+        const mode = this.tForm.get('medium')?.value;
     }
 
     changeMargdarshak() {
