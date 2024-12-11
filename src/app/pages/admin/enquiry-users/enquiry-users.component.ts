@@ -48,7 +48,7 @@ export class EnquiryUsersComponent {
   counsellorOptions = ["Rakesh Sharma", "Juhi Singh", "Mayank Patidar", "Sapna Pandey", "Other"];
   attenderOptions = ["Sapna Pandey", "Juhi Singh", "Aditi Rajput", "Prachi Thakur", "Other"];
   statusOptions = ['DONE', 'PENDING', 'NOT_INTERESTED', 'INTERESTED'];
-  associatedMargdarshakOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Niraj Choudhary", "Piyush Patel", "Manish Patidar","Nikunj Patidar"];
+  associatedMargdarshakOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Neeraj Choudhary", "Piyush Patel", "Manish Patidar","Nikunj Patidar"];
 
   userType: string = '';
   searchFilterKeys = ['firstName', 'lastName', 'mobileNo', 'stream', 'prevClass', 'counsellor', 'excecutive', 'admissionStatus', 'createdAt' ];

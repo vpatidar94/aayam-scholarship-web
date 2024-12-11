@@ -28,7 +28,7 @@ export class MargdarshakFormComponent implements OnInit {
     loading = false;
     genderOptions = ["Male", "Female", "Other"] as Array<GenderType>;
     // jobPatternOptions = ["Govt.", "Private", "Self Employed", "Clinic or Hospital"];
-    associatedByOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Niraj Choudhary", "Piyush Patel", "Manish Patidar","Nikunj Patidar"];
+    associatedByOptions = ["Rakesh Sharma", "Ankit Bijoria", "Bapu Patil", "Rahul Vyas", "Neeraj Choudhary", "Piyush Patel", "Manish Patidar","Nikunj Patidar"];
     margdarshakCategoryOptions = ["Slab-1", "Slab-2", "Slab-3", "Slab-4", "Slab-5"];
     // maritalOptions = ["Married", "Unmarried"]
     // lastClassOptions = ["10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
