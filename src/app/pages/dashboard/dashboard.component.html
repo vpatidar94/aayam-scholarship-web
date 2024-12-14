@@ -8,7 +8,24 @@
     </div>
 
     <div class="px-2 py-1 mb-1">
-      <h4 class="text-center py-2 text-grey mb-4"><span class="text-primary"><app-exam-title/></span> Scholarship Test</h4>
+      <h4 class="text-center py-2 text-grey mb-4"><span class="text-primary"><app-exam-title /></span> Scholarship Test
+      </h4>
+      <div class="card text-center card__test" *ngIf="data.data?.result.length==0">
+        <div class="card-header">
+          <h5 class="card-title mb-1">TEST DATE</h5>
+        </div>
+        <div class="card-body py-1">
+          <div>
+            <div>
+              <p class="card-title card__content__title"></p>
+              <p class="card-title card__content__title">Your <app-exam-title /> Scholarship
+                test will take place on <span class="text__action__primary">{{data.data?.testDate| date:
+                  'dd-MM-yyyy'}}</span></p>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
 
       <!-- ************TO BE SHOWN ON TEST DATE START***********************-->
       <div class="card text-center card__test" *ngIf="data.data?.result.length!==0">
@@ -66,11 +83,12 @@
                 </tr>
               </tbody>
             </table>
-            <hr/>
+            <hr />
             <h6 class="card-text">
               <!-- Scholarship and Prize Distribution will be announced later -->
-              To know your scholarship 
-              <a href="https://aayamcareerinstitute.com/scholarship">visit our website</a> or <a href="tel:0731-4058393">contact us</a>
+              To know your scholarship
+              <a href="https://aayamcareerinstitute.com/scholarship">visit our website</a> or <a
+                href="tel:0731-4058393">contact us</a>
             </h6>
 
           </div>
@@ -83,18 +101,17 @@
     </div>
 
     <div class="px-2 py-1">
-      <div class="card text-center card__test mb-2"
-      *ngIf="showButton">
-      <hr />
-      <div class="card-body py-1">
-        <div class="d-flex justify-content-center w-100">
-          <div>
-            <p class="card-title text-primary"> BEST OF LUCK ! </p>
+      <div class="card text-center card__test mb-2" *ngIf="showButton">
+        <hr />
+        <div class="card-body py-1">
+          <div class="d-flex justify-content-center w-100">
+            <div>
+              <p class="card-title text-primary"> BEST OF LUCK ! </p>
+            </div>
           </div>
         </div>
+        <hr />
       </div>
-      <hr />
-    </div>
       <!-- START BTN TO BE USED FURTHER -->
       <button *ngIf="showButton" type="button" class="ibtn ibtn__primary w-100 mb-3"
         (click)="redirectToInstruction(data.data.stream)">
@@ -103,7 +120,7 @@
       <!-- END OF START BTN TO BE USED FURTHER -->
 
       <!-- ************TO BE SHOWN ON TEST DATE END***********************-->
-      <div class="card text-center card__test mt-2" *ngIf="data.data?.mode =='offline'">
+      <div class="card text-center card__test mt-2" *ngIf="data.data?.mode =='offline' && data.data?.result.length>=1">
         <hr />
         <div class="d-flex flex-row justify-content-around align-items-center">
           <div class="d-flex flex-column">
@@ -195,8 +212,7 @@
               </div>
             </a>
             <!-- ans key link for 14-01-2024 students -->
-            <a class="w-30" *ngIf="data.data?.testDate =='14-01-2024'" [href]="getAnsKeyLink_14(data.data?.stream)"
-              target="_blank" rel="noreferrer">
+            <a class="w-30">
               <div class="text-center m-1">
                 <svg width="48" height="48" viewBox="-9.6 -9.6 43.20 43.20" xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff" stroke="#ffffff" stroke-width="0.00024000000000000003">
@@ -220,7 +236,8 @@
         <hr />
       </div>
 
-      <div class="card text-center card__test" *ngIf="data.data?.mode =='offline'">
+      <!-- admit card -->
+      <!-- <div class="card text-center card__test" *ngIf="data.data?.mode =='offline'">
         <hr />
         <div class="card-body py-1">
           <div class="d-flex flex-column w-100">
@@ -251,7 +268,7 @@
           </div>
         </div>
         <hr />
-      </div>
+      </div> -->
 
 
 
@@ -263,8 +280,9 @@
         <div class="d-flex justify-content-center w-100">
           <div>
             <p class="card-title card__content__title"></p>
-            <p class="card-title card__content__title">Your <app-exam-title/> Scholarship
-              test will take place on <span class="text__action__primary">{{data.data?.testDate| date: 'dd-MM-yyyy'}}</span></p>
+            <p class="card-title card__content__title">Your <app-exam-title /> Scholarship
+              test will take place on <span class="text__action__primary">{{data.data?.testDate| date:
+                'dd-MM-yyyy'}}</span></p>
           </div>
         </div>
       </div>
@@ -447,7 +465,8 @@
         <p class="mb-0">7.Candidates are advised to carry only the following items with them into the examination
           venue:
           a) Personal transparent water bottle,
-          b)Admit Card downloaded from the <app-exam-title/> Scholarship website (a clear print out on A4 size paper)</p>
+          b)Admit Card downloaded from the <app-exam-title /> Scholarship website (a clear print out on A4 size paper)
+        </p>
         <p class="mb-0">8.Candidates should put their signature and paste the Photograph at the appropriate place.
           They
           should ensure that their Left-Hand Thumb Impression is clear and not smudged.</p>

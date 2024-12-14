@@ -15,7 +15,7 @@ import { ExamTitleComponent } from '@shared/exam-title/exam-title.component';
 @Component({
     selector: 'org-registration-aset',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, AuthHeaderComponent, DashboardHeaderComponent, ExamTitleComponent],
+    imports: [CommonModule, ReactiveFormsModule, FieldValidationMessageComponent, /* AuthHeaderComponent,*/ DashboardHeaderComponent, ExamTitleComponent],
     templateUrl: './registration-aset.component.html',
     styleUrls: ['./registration-aset.component.scss'],
 })
@@ -28,7 +28,7 @@ export class RegistrationAsetComponent implements OnInit {
     tForm!: FormGroup;
     loading = false;
     streamOptions = [ "10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
-    modeOptions = ["online", "offline"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
+    modeOptions = ["offline"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
    // testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
@@ -36,12 +36,12 @@ export class RegistrationAsetComponent implements OnInit {
     offlineDateOptions = [
         {
             date:
-                "21 April, 2024",
-            value: "2024-04-21"
+                "22 December, 2024",
+            value: "2024-12-22"
         },
     {
-        date: "28 April, 2024",
-        value: "2024-04-28"
+        date: "29 December, 2024",
+        value: "2024-12-29"
     }] as Array<any>;
 
 
@@ -144,11 +144,13 @@ export class RegistrationAsetComponent implements OnInit {
                 Validators.required,
             ]),
 
-            mode: new FormControl('online', [
+            mode: new FormControl('offline', [
                 Validators.required,
             ]),
 
-            offline_test_date: new FormControl('21-04-2024'),
+            offline_test_date: new FormControl(null,  [
+                Validators.required,
+            ]),
             // online_test_date: new FormControl(null),
             online_test_date: new FormControl(''),
             test_center: new FormControl(null),
