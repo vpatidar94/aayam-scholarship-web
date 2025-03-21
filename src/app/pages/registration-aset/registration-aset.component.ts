@@ -27,22 +27,44 @@ export class RegistrationAsetComponent implements OnInit {
     }
     tForm!: FormGroup;
     loading = false;
-    streamOptions = [ "10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
-    modeOptions = ["offline"] as Array<ModeType>;   // modeOptions = ["online", "offline"] as Array<ModeType>;  for jeet
+    streamOptions = ["10", "11", "12"] as Array<ClassType>;    // also include "9" for jeet
+    // modeOptions = ["offline"] as Array<ModeType>;   
+    modeOptions = ["online", "offline"] as Array<ModeType>;  //for jeet
     subjectOptions = ["PCB", "PCM"] as Array<SubjectGroupType>;
-   // testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
+    // testCenterOptions = ["St. Arnold's School (Lalaram Nagar Indore)", "Annie Besant School (Precanco Colony, Annapurna Road,Indore)", "Prestige Institute of Engineering(Scheme 74 Vijay nagar, Indore)"] as Array<TestCenterType>;
 
 
     offlineDateOptions = [
+        // {
+        //     date:
+        //         "22 December, 2024",
+        //     value: "2024-12-22"
+        // },
+        // {
+        //     date: "29 December, 2024",
+        //     value: "2024-12-29"
+        // }
         {
             date:
-                "22 December, 2024",
-            value: "2024-12-22"
+                "23 March, 2025",
+            value: "2025-03-23"
         },
-    {
-        date: "29 December, 2024",
-        value: "2024-12-29"
-    }] as Array<any>;
+        {
+            date:
+                "30 March, 2025",
+            value: "2025-03-30"
+        },
+        {
+            date:
+                "06 April, 2025",
+            value: "2025-04-06"
+        },
+        {
+            date:
+                "13 April, 2025",
+            value: "2025-04-13"
+        },
+    ] as Array<any>;
 
 
     // onlineDateOptions = [
@@ -148,7 +170,7 @@ export class RegistrationAsetComponent implements OnInit {
                 Validators.required,
             ]),
 
-            offline_test_date: new FormControl(null,  [
+            offline_test_date: new FormControl(null, [
                 Validators.required,
             ]),
             // online_test_date: new FormControl(null),
@@ -159,10 +181,10 @@ export class RegistrationAsetComponent implements OnInit {
             ),
         });
 
-         // Disable the control if the date is out of range
-    if (this.isDateOutOfRange()) {
-        this.tForm.get('online_test_date')?.disable();
-      }
+        // Disable the control if the date is out of range
+        if (this.isDateOutOfRange()) {
+            this.tForm.get('online_test_date')?.disable();
+        }
 
     }
 
@@ -204,7 +226,7 @@ export class RegistrationAsetComponent implements OnInit {
                 // }
 
             }
-            
+
             this.apiService
                 // .sendOtp( mobileNo, newOtp)  // uncomment if want to send otp by whatsapp
                 .sendSmsOtp(mobileNo, this.testCenterId, mode)  // if want to send otp by text sms
@@ -444,21 +466,25 @@ export class RegistrationAsetComponent implements OnInit {
 
     navigateToLogin() {
         this.router.navigate(['/login']);
-      }
+    }
 
-      getMinDate(): string {
+    getMinDate(): string {
         const today = new Date();
         return today.toISOString().split('T')[0]; // Get today's date in the format 'yyyy-mm-dd'
-      }
-    
-      getMaxDate(): string {
-        const maxDate = new Date('2024-04-30');
+    }
+
+    getMaxDate(): string {
+        // const maxDate = new Date('2024-04-30');
+        const maxDate = new Date('2025-04-30');
+
         return maxDate.toISOString().split('T')[0]; // Get April 30, 2024, in the format 'yyyy-mm-dd'
-      }
-    
-      isDateOutOfRange(): boolean {
+    }
+
+    isDateOutOfRange(): boolean {
         const currentDate = new Date();
-        const maxDate = new Date('2024-04-30');
+        // const maxDate = new Date('2024-04-30');
+        const maxDate = new Date('2025-04-30');
+
         return currentDate > maxDate;
-      }
+    }
 }

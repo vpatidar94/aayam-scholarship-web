@@ -3,7 +3,8 @@
     </org-dashboard-header>
 
     <div class="registration__card px-4 py-4" *ngIf="!showMessage">
-        <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary"><app-exam-title/></span> Test Registration</h4>
+        <h4 class="text-center py-4 text-grey mb-4"><span class="text-primary"><app-exam-title /></span> Test
+            Registration</h4>
         <div *ngIf="!showRegistrationForm">
             <form class="row g-3" [formGroup]="tForm" (ngSubmit)="onSubmit()">
 
@@ -252,9 +253,10 @@
                 <div class="card-body py-1">
                     <div class="d-flex w-100">
                         <div>
-                            <p class="card-title card__content__title note-style">The registration for the <app-exam-title/>
-                                Scholarship test has been closed.  Registered students kindly <span
-                                class="green-style">login </span> from below login link
+                            <p class="card-title card__content__title note-style">The registration for the
+                                <app-exam-title />
+                                Scholarship test has been closed. Registered students kindly <span
+                                    class="green-style">login </span> from below login link
                             </p>
 
                         </div>
