@@ -46,23 +46,23 @@ export class RegistrationAsetComponent implements OnInit {
         // }
         {
             date:
-                "23 March, 2025",
-            value: "2025-03-23"
+                "27 April, 2025",
+            value: "2025-04-27"
         },
         {
             date:
-                "30 March, 2025",
-            value: "2025-03-30"
+                "04 May, 2025",
+            value: "2025-05-04"
         },
         {
             date:
-                "06 April, 2025",
-            value: "2025-04-06"
+                "11 May, 2025",
+            value: "2025-05-11"
         },
         {
             date:
-                "13 April, 2025",
-            value: "2025-04-13"
+                "18 May, 2025",
+            value: "2025-05-18"
         },
     ] as Array<any>;
 
